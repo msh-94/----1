@@ -18,6 +18,6 @@ function proAdd() {
     const pinfoInput = document.querySelector('#pinfoInput')
     const pimgInput = document.querySelector('#pimgInput')
 
-    const 
+    const pname = pnameInput.value;
 }
 
