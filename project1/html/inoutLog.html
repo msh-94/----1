@@ -17,11 +17,11 @@
         }
     </style>
 </head>
-<body>
+<body> 
     <div id="wrap"> <!-- wrap -->
         <div class="container">
             <div style="text-align: center;">
-                <strong style="font-size: 50px;"> Admin </strong>
+                <strong style="font-size: 50px;"> 입출고 관리 페이지 </strong>
             </div>
             오늘날짜 : <div></div>
         </div> <!-- title -->
@@ -35,13 +35,11 @@
             </div>
             <div class="container" style="margin-top: 30px;"> <!-- main -->
                 <div class="row6"> <!-- 제품 등록 -->
-                    <h3> 입출고 등록 영역 </h3>
-                    <select>
-                        <option value="1"> 아이스크림 </option> <option value="2"> 과자 </option> <option value="3"> 라면 </option>
-                    </select>
+                    <h3> 입출고 등록 영역 </h3>                    
                     제품명 : <input type="text" />
-                    가격 : <input type="number" />
-                    사진 : <input type="file" accept="image/*" />                    
+                    수량 : <input type="number" />
+                    날짜 : <input type="date"/>
+                    출고 사유 : <textarea></textarea>                                        
                     <button> 등록 </button>
                 </div>
                 <div>
@@ -49,20 +47,46 @@
                         <h3> 입출고 로그 영역 </h3>
                         <thead>
                             <tr>
-                                <th> 이미지 </th>
-                                <th> 제품코드 </th>
+                                <th> 로그번호 </th>
+                                <th> 입/출고 </th>
                                 <th> 제품명 </th>
-                                <th> 가격 </th> 
+                                <th> 수량 </th>
+                                <th> 날짜 </th>
+                                <th> 입출고 사유 </th>
                                 <th> 비고 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="outTbody">
                             <tr>
-                                <td> <img src="http://placehold.co/100x100"/></td>
+                                <td> 1 </td>
+                                <td> 입고 </td>
+                                <td> 돼지바 </td>
+                                <td> 300 </td>
+                                <td> 2025-06-27 </td>
+                                <td> 재고 보충 </td>
+                                <td> <button> 수정 </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table class="container">
+                        <thead>
+                            <tr>
+                                <th> 제품코드 </th>
+                                <th> 제품명 </th>
+                                <th> 총 수량 </th>
+                                <th> 재고 여유 </th>
+                                <th> 비고 </th>
+                            </tr>
+                        </thead>
+                        <tbody id="inTbody">
+                            <tr>
                                 <td> 1 </td>
                                 <td> 돼지바 </td>
-                                <td> </td>
-                                <td></td>
+                                <td> 300 </td>
+                                <td> <strong style="color: green; "> 여유 </strong> </td>
+                                <td> <button onclick=""> 주문 </button></td>
                             </tr>
                         </tbody>
                     </table>
