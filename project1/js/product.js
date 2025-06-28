@@ -77,6 +77,7 @@ function productPrint(){
                 </tr>`
     } // for end
     productTbody.innerHTML = html;
+    today()
 }// 제품 출력 함수 끝
 
 // 제품 삭제 함수

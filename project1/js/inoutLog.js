@@ -107,6 +107,7 @@ function logPrint(){
         }// for2 end
     }// for1 end
     outTbody.innerHTML = html;
+    today()
 }// 로그 출력함수 끝
 
 // 입출고사유 수정 함수
@@ -128,5 +129,5 @@ function inoutEdit(logco){
 
 // 제품 재고 현황 함수
 function productCheck(){
-    
+
 }
