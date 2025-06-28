@@ -26,7 +26,7 @@
             <div style="text-align: center;">
                 <strong style="font-size: 50px;"> Admin </strong>
             </div>
-            오늘날짜 : <div></div>
+            오늘날짜 : <span id="nowDate"></span>
         </div> <!-- title -->
         <div class="container" style="display: flex;"> <!-- content-->
             <div class="row-4" style="margin-top: 30px;"> <!-- side bar -->
@@ -37,16 +37,16 @@
                 </ul>
             </div>
             <div class="row-8" style="margin-top: 30px; margin-left: 100px;"> <!-- main -->
-                <div class=""> <!-- 제품 등록 -->
+                <div > <!-- 제품 등록 -->
                     <h3> 제품 등록 영역 </h3>                    
-                    제품명 : <input type="text" />
-                    가격 : <input type="number" />
-                    사진 : <input type="file" accept="image/*" />                    
-                    <button> 등록 </button>
+                    제품명 : <input type="text" id="pName" />
+                    가격 : <input type="number" id="pPrice"/>
+                    사진 : <input type="file" accept="image/*" id="pImg" />                    
+                    <button onclick="productAdd()"> 등록 </button>
                 </div>
                 <div>
                     <table class="container"> <!-- 제품 목록 -->
-                        <h3> 제품 등록 영역 </h3>
+                        <h3> 제품 목록 영역 </h3>
                         <thead>
                             <tr>
                                 <th> 이미지 </th>
@@ -56,14 +56,14 @@
                                 <th> 비고 </th> 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="productTbody">
                             <tr>
                                 <td> <img src="http://placehold.co/100x100"/></td>
                                 <td> 1 </td>
                                 <td> 돼지바 </td>
                                 <td> 500 </td>
-                                <td> <button onclick=""> 수정 </button> 
-                                    <button onclick=""> 삭제 </button>
+                                <td> <button onclick="productEdit()"> 수정 </button> 
+                                    <button onclick="productDelete()"> 삭제 </button>
                                 </td>
                             </tr>
                         </tbody>
