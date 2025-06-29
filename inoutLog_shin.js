@@ -197,9 +197,18 @@ function inoutEdit(logco) {
 
 
 stockList ();
-function stockList (){
+function stockList(searchTerm = ''){
     
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');
+
+    if (searchTerm) {
+        const key = searchTerm.toLowerCase();          // 비교 편하게 전부 소문자
+
+
+        productList = productList.filter(p =>
+        p.pName.toLowerCase().includes(key)          // 부분 문자열 포함 여부
+        );
+    }
 
     //const productList = document.querySelector('#productList');
     const stockTable = document.querySelector('#inTbody');                    // productListTable 선언 후 productTbody dom객체화
@@ -223,8 +232,29 @@ function stockList (){
     }
 
     stockTable.innerHTML = html;                                                  // productListTable html에 넣기
+
+
     //showProductList();
 }
+
+/* ==================== 검색창 이벤트 연결 ==================== */
+document.addEventListener('DOMContentLoaded', () => {
+  // ① 검색 input DOM 객체
+  const searchInput = document.querySelector('#stockSearchInput');
+
+  // ② 입력될 때마다 필터링 호출
+  if (searchInput) {
+    searchInput.addEventListener('input', e => {
+      const keyword = e.target.value.trim(); // 앞뒤 공백 제거
+      stockList(keyword);                    // 필터링된 테이블 렌더
+    });
+  }
+
+  // ③ 첫 페이지 로드 시 전체 재고 테이블 한 번 그리기
+  stockList();
+});
+
+
 
 LackBoard();
 function LackBoard(){
