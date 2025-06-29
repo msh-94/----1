@@ -67,24 +67,25 @@ function boardEdit(){
         else{ normalCnt++ }
         //  카운터의 합은 qtyTotal 과 반드시 같음!
     }
-
+    
+    const qtyTotalResult = qtyTotal - damageCnt; 
 
     for(let i = 0; i < productList.length; i++){
         const pArray = productList[i] ;
         
         if(selectno == pArray.pno){
-            pArray.pAmount += qtyTotal;
+            pArray.pAmount += qtyTotalResult;
 
             let logco = inoutLog.length === 0 ? 1 : inoutLog[inoutLog.length -1 ].logco + 1;
             
             inoutLog.push({ logco , pno : Number(selectno) , inOut : '입고' ,
-            pName : pArray.pName , amount : normalCnt , area : `${reasonV} ( 정상품 )` , date : dateV  });
+            pName : pArray.pName , amount : qtyTotal , area : `${reasonV}` , date : dateV  });
             
             logco++;
 
             if(damageCnt > 0){
-                inoutLog.push({ logco : logco++ , pno : Number(selectno) , inOut : '입고' ,
-                pName : pArray.pName , amount : damageCnt , area : `${reasonV} ( 파손품 )` , date : dateV  });
+                inoutLog.push({ logco : logco++ , pno : Number(selectno) , inOut : '출고' ,
+                pName : pArray.pName , amount : damageCnt , area : `${reasonV} ( 파손 및 불량 )` , date : dateV  });
             }
             
             localStorage.setItem('productList' , JSON.stringify(productList));
@@ -96,9 +97,12 @@ function boardEdit(){
 
     if (window.opener){
         window.opener.stockList?.();
-        window.opener.logListAdd?.(); }
+        window.opener.logListAdd?.();
+        window.opener.LackBoard();                        
+    }
 
-     alert(`입고 완료!\n - 정상 : ${normalCnt}\n - 파손 : ${damageCnt}`);
+    alert(`입고 완료!\n - 정상 : ${normalCnt}\n - 파손 : ${damageCnt}`);
     window.close();                      // 팝업이라면 닫아 주기   
 }
+
 

@@ -67,6 +67,12 @@ function outAdd(){
             error = false;
 
             productList[i].pAmount -= amountV ;
+
+            if(productList[i].pAmount < 0){
+                alert('입력한 재고가 음수입니다. 다시 입력하세요.');
+                return;
+            }
+
             localStorage.setItem( 'productList', JSON.stringify(productList) );
             stockList ();
             break;
@@ -93,6 +99,7 @@ function outAdd(){
     date.value = '';                                                                // value값 초기화
     area.value = ''; 
     logListAdd();
+    LackBoard();
     return;                                                                             // 함수종료
 
 }
@@ -180,7 +187,8 @@ function inoutEdit(logco) {
             alert('[성공] 수정 되었습니다.');                          // 수정 성공 알림
             
             stockList();     // 재고 테이블 다시 그리기
-            logListAdd();                                                           // productAddList 제품출력함수 렌더링                 
+            logListAdd();                                                           // productAddList 제품출력함수 렌더링
+            LackBoard();                 
             return;                                                                     // 함수 종료하기
         }
     }
@@ -203,8 +211,8 @@ function stockList (){
         
         let amountAlert , color = ''; 
         
-        if(proArray.pAmount > 100 ){ amountAlert = '여유' ; color ='green';}
-        else if(proArray.pAmount > 50){ amountAlert = '적정' ; color ='gold';}
+        if(proArray.pAmount >= 100 ){ amountAlert = '여유' ; color ='green';}
+        else if(proArray.pAmount >= 50){ amountAlert = '적정' ; color ='gold';}
         else{amountAlert = '부족' ; color ='red';}
 
         html += `<tr>   
@@ -216,6 +224,30 @@ function stockList (){
 
     stockTable.innerHTML = html;                                                  // productListTable html에 넣기
     //showProductList();
+}
+
+LackBoard();
+function LackBoard(){
+    
+    let productList = JSON.parse(localStorage.getItem('productList') || '[]' );
+
+    const lackTbody = document.querySelector('#lackTbody');
+
+    let html ='';                                                                       // html 선언
+    
+    for(let i = 0 ; i < productList.length ; i++){                                         // productList 배열 순회
+        const proArray = productList[i];                                                // proArray로 간소화하기
+        if(proArray.pAmount < 50){
+            html += `<tr>   
+                    <td> ${proArray.pno} </td> <td> ${proArray.pName} </td> <td> ${proArray.pAmount}개 </td> 
+                    <td><button onclick="orderBtn(${proArray.pno})"> 주문 </button></td>
+                </tr>`         
+        }
+    }
+
+    lackTbody.innerHTML = html;                                                  // productListTable html에 넣기
+    //showProductList();
+
 }
 
 function orderBtn(pno) {
