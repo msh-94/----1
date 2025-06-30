@@ -187,7 +187,7 @@ function inoutEdit(logco) {                                                     
             localStorage.setItem('inoutLog', JSON.stringify(inoutLog));                             // localStorage에 inoutLog 넣어주기
             alert('[성공] 수정 되었습니다.');                                                         // 수정 성공 알림
             
-            stockList();                                                                            // 재고 리스트 렌더링
+            stockList(keyword);                                                                            // 재고 리스트 렌더링
             logListAdd();                                                                           // 입출고 로그 출력함수 렌더링
             LackBoard();                                                                            // 재고 부족 알림 Board 렌더링            
             return;                                                                                 // 함수 종료하기
@@ -203,7 +203,7 @@ stockList ();                                                                   
 function stockList(searchTerm = ''){                        // 제품 재고 출력 함수  (SearchTerm = '') 이거는 매개변수(SearchTerm)이 없으면 기본이 ()이거란 소리임  
     
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');                     // productList localStorage에서 가져오기
-    // 검색하는 함수 부ㅜㄴ
+    // 검색하는 함수 부분
     if (searchTerm) {                                                                             // 만약 입력값이 있다면?
         const key = searchTerm.toLowerCase();                                                     // 매개변수의 값을 비교 편하게 전부 소문자로 바꿔주는 값을 key로 지정
 
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         sortSelect.addEventListener('change', e => {                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             sortOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
 
-            stockList(keyword);                                           // 그걸 stockList 매개변수로 다시 렌더링해준다.
+            stockList(keyword);                                         // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword 변수 넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
         });
     }    
 });                            
