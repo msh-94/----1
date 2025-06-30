@@ -55,6 +55,8 @@ function productAdd(){
     alert(`등록 되었습니다.`);
     setProduct(productList);
     productPrint();
+    document.querySelector('#pName').value = '';
+    document.querySelector('#pPrice').value = '';
 } // 제품 등록 함수 끝
 
 // 제품 출력 함수
