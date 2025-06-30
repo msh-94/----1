@@ -260,7 +260,7 @@ function stockList(searchTerm = ''){                        // 제품 재고 출
 
 document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤트 , 함수)는 특정 이벤트가 발생하면 해당 함수를 실행하라는 뜻
             // DOMcontentLoaded는 HTML 문서 안 모든 DOM객체들이 로드 되면 실행하는 이벤트, 
-                // () => {}는 {} 안에 있는 함수 실행이라는 뜻 , 즉 이벤트가 발생하면 {} 안에 있는 코드들을 실행한다는 것임.
+            // () => {}는 {} 안에 있는 함수 실행이라는 뜻 , 즉 이벤트가 발생하면 {} 안에 있는 코드들을 실행한다는 것임.
   
     const searchInput = document.querySelector('#stockSearchInput');      // 검색 input창을 DOM 객체화 한 것
 
