@@ -144,7 +144,3 @@ let firstNumber = lastNumber - (pageCount - 1) // 1
 const next = lastNumber + 1 // 6
 const prev = firstNumber - 1 // 0
 
-// 1~5만큼 페이지네이션 그려줌
-for (let i = firstNumber; i <= lastNumber; i++) {
-  html += `<button class="pageNumber" id="page_${i}">${i}</button>`
-}
