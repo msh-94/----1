@@ -28,7 +28,7 @@ function dateFunc(){                // 시계함수
 setInterval( dateFunc , 1000 );
 
 
-
+var keyword = '';               // 검색한 값 전역변수 - 이벤트리스너에서 활용 됨,       var를 쓴 이유 쿼리스트링 해야해서 통신을 해야하기 때문에 let 보다는 var가 좋다고 gpt가 말해줌 ,,
 
 
 function outAdd(){                                          // 로그 배열 추가하는 함수 outAdd()
@@ -60,10 +60,11 @@ function outAdd(){                                          // 로그 배열 추
     }
     
     let error = true;                                                       // error 변수 정의
+    let pno = '';                                                           // pno 정의
 
     for(let i = 0; i < productList.length; i++){                            // product 리스트 배열 순회
         if(nameV == productList[i].pName){                                  // nameV랑 productList 에 있는 pName과 같다면?
-            let pno = productList[i].pno;                                       // pro는 productList[i].pno를 간소화한 것
+            pno = productList[i].pno;                                   // pro는 productList[i].pno를 간소화한 것
             error = false;                                                  // error 변수 false로 바꾸기
 
             productList[i].pAmount -= amountV ;                             // productList 에서 pAmount 빼주기 : 출고한 양은 수량에서 빼줘야함.
@@ -74,7 +75,7 @@ function outAdd(){                                          // 로그 배열 추
             }
 
             localStorage.setItem( 'productList', JSON.stringify(productList) ); // 유효성 검사가 끝났다면 productList 배열 다시 localStorage에 저장해주기
-            stockList ();                                                       // 재고 리스트 렌더링
+            stockList (keyword);                                                       // 재고 리스트 렌더링
             break;                                                              // break;
         }
     }
@@ -92,7 +93,7 @@ function outAdd(){                                          // 로그 배열 추
     // localStorage에 넣기
     localStorage.setItem( 'inoutLog', JSON.stringify(inoutLog) );                         // localStorage에 inoutLog 배열 넣어서 저장
     
-    alert('제품이 등록되었습니다.');                                                      // 성공 알림
+    alert('출고 등록이 완료 되었습니다.');                                                      // 성공 알림
 
     pName.value = '';                                                               // value값 초기화
     amount.value = '';                                                              // value값 초기화
@@ -195,12 +196,14 @@ function inoutEdit(logco) {                                                     
     alert("해당 로그를 찾을 수 없습니다.");                                                           // 만약 오류나면 실패 알림
 }
 
+let sortOption = 'nameDesc';            // 정렬 변수 초기값 정해주기 : nameDesc는 제품번호 내림차순임 -> html value값 확인해보면 됨
+
 
 stockList ();                                                                                       // 제품 재고 확인 함수 새로고침시 렌더링
 function stockList(searchTerm = ''){                        // 제품 재고 출력 함수  (SearchTerm = '') 이거는 매개변수(SearchTerm)이 없으면 기본이 ()이거란 소리임  
     
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');                     // productList localStorage에서 가져오기
-
+    // 검색하는 함수 부ㅜㄴ
     if (searchTerm) {                                                                             // 만약 입력값이 있다면?
         const key = searchTerm.toLowerCase();                                                     // 매개변수의 값을 비교 편하게 전부 소문자로 바꿔주는 값을 key로 지정
 
@@ -210,6 +213,20 @@ function stockList(searchTerm = ''){                        // 제품 재고 출
         );                                    // 즉 그냥 filter해서 검색에 빠삐코를 친다면 빠만 쳐도 빠삐코라는 pName에 빠가 들어가니까 그것만 true가 됨
     }                                         // 그리고 그 true된 것들만 product 배열에 넣어서 그것만 보여주겠단 것  
 
+    
+    // 정렬 하는 함수 부분
+    productList.sort((a, b) => { // productList 배열에서 임의 a, b 두 값을 비교하는 sort함수 실행, a b를 비교해서 값이 양수값이 나오면 그 둘의 배열 위치를 바꾸는 함수식. for문과 비슷         
+        // sortOption이라는 변수가 nameDesc라면 (pno 내림차순, 즉 기본정렬)
+        // (a의 .pno)- (b의 pno), 예를 들어 a.pno가 1이고 b.pno가 2이면 1 - 2 이니까 -1이 뜨니 음수니까 배열을 교체하지 않음 그래서 1 2로 배열되게 함
+        
+        if(sortOption){                 // sortOption이 존재한다면? sortOption은 stockList함수 위에 존재함 참고 바람.
+            if(sortOption== 'stockDesc'){ return b.pAmount - a.pAmount ;}   // 만약 stockDesc (재고 내림차순) 이라면 (b재고량 - a재고량)해줌 , a재고량이 10, b재고량이 30일 때 30 - 10 = 20이니 b( 30, a보다 큰 수 )가 앞으로 감 이런 원리. 
+            else if(sortOption == 'stockAsc'){return a.pAmount - b.pAmount ;}   // 이건 stockAsc , 즉 재고 오름차순
+            else if(sortOption == 'nameDesc'){return a.pno - b.pno ;}           // 이건 pno 내림차순
+            else if(sortOption == 'nameAsc'){return b.pno -a.pno ;}             // 이건 pno 오름차순
+        }                                                                       // 참고로 sort 함수는 리턴값이 꼭 필요함.
+    });                             
+ 
     //const productList = document.querySelector('#productList');
     const stockTable = document.querySelector('#inTbody');               // stockTable 선언 후 inTbody dom객체화
  
@@ -237,22 +254,38 @@ function stockList(searchTerm = ''){                        // 제품 재고 출
     //showProductList();
 }
 
-/* ==================== 검색창 이벤트 연결부분 ==================== */
+
+
+// ==================== 검색창 이벤트 연결부분, 그리고 정렬부분  ==================== //
+
 document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤트 , 함수)는 특정 이벤트가 발생하면 해당 함수를 실행하라는 뜻
             // DOMcontentLoaded는 HTML 문서 안 모든 DOM객체들이 로드 되면 실행하는 이벤트, 
                 // () => {}는 {} 안에 있는 함수 실행이라는 뜻 , 즉 이벤트가 발생하면 {} 안에 있는 코드들을 실행한다는 것임.
   
     const searchInput = document.querySelector('#stockSearchInput');      // 검색 input창을 DOM 객체화 한 것
 
+    // 검색창 뜨는 부분임
+    if (searchInput){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
+        searchInput.addEventListener('input', e => {                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
+        keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
+        stockList(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
+        });
+    }
+    
+    // 정렬 버튼 바뀌는 부분임
+    const sortSelect = document.querySelector('#sortSelect');           // 정렬 버튼을 DOM 객체화 한 것
+    
+    if (sortSelect){                                                    // 만약 sortSelect가 있다면? 즉 dom객체가 있다면? 
+        
+        sortSelect.addEventListener('change', e => {                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
+            sortOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
 
-  if (searchInput) {                                                     // 만약 검색 input(value값) 요소가 존재한다면?
-    searchInput.addEventListener('input', e => {                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
-      const keyword = e.target.value.trim();                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
-      stockList(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
-    });
-  }                            
-});
+            stockList(keyword);                                           // 그걸 stockList 매개변수로 다시 렌더링해준다.
+        });
+    }    
+});                            
 
+// ==================================== 끝 =========================================== //
 
 
 LackBoard();                                                                            // LackBoard 새로고침과 동시에 출력
