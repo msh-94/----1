@@ -127,7 +127,24 @@ function inoutEdit(logco){
     }// for end
 }// 입출고사유 수정함수 끝
 
-// 제품 재고 현황 함수
-function productCheck(){
+// ======================================== 페이지네이션 ===================================== //
+const currentPage = 1;    // 현재페이지
+const totalCount = 200;   // 총자료수
+const pageCount = 10;     // 화면에 나타날 페이지 갯수
+const limit = 5;          // 한페이지당 나타날 데이터 갯수
+let totalPage = Math.ceil(totalCount/limit);        // 총 페이지갯수 구하기
+let pageGroup = Math.ceil(currentPage/pageCount);   // 현재 페이지의 그룹 구하기
 
+let lastNumber = pageGroup * pageCount // 5
+if (lastNumber > totalPage) {
+  lastNumber = totalPage
+}
+let firstNumber = lastNumber - (pageCount - 1) // 1
+
+const next = lastNumber + 1 // 6
+const prev = firstNumber - 1 // 0
+
+// 1~5만큼 페이지네이션 그려줌
+for (let i = firstNumber; i <= lastNumber; i++) {
+  html += `<button class="pageNumber" id="page_${i}">${i}</button>`
 }
