@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
 
 
   if (searchInput) {                                                     // 만약 검색 input(value값) 요소가 존재한다면?
-    searchInput.addEventListener('input', e => {                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e 객체를 가진 함수 실행함
+    searchInput.addEventListener('input', e => {                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
       const keyword = e.target.value.trim();                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
       stockList(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
     });
