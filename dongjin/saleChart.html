@@ -12,11 +12,11 @@
             border: 1px solid red;
         }
 
-        #wrap {
+        #wrap { /* 반응형 만드려고 위드 하이트값 바꿈!! */
             border: 1px solid red;
-                max-width: 100%;
-    min-height: 100vh;
-    margin: 0 auto;
+            max-width: 100%;
+            min-height: 100vh;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -25,7 +25,7 @@
     <div id="wrap"> <!-- wrap -->
         <div class="container">
             <div style="text-align: center;">
-                <strong style="font-size: 50px;"> Admin </strong>
+                <strong style="font-size: 50px;"> 판매 차트 페이지 </strong>
             </div>
             today : <span id="nowDate"></span>
         </div> <!-- title -->
@@ -38,16 +38,18 @@
                 </ul>
             </div>
             <div class="row-8" style="margin-top: 30px; margin-left: 100px;"> <!-- main -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <div> <!-- 제품 등록 -->
-                    <h3> 제품 등록 영역 </h3>
-                    제품명 : <input type="text" id="pName" />
-                    가격 : <input type="number" id="pPrice" />
-                    사진 : <input type="file" accept="image/*" id="pImg" />
-                    <button onclick="productAdd()"> 등록 </button>
-                </div>
-                <div>
+                    <h3> 월별 판매 순위 차트 </h3>
+                    <div class="container"> 
+                        <canvas id="jan24Input"></canvas>
+                    </div>
+
+                </div> <!-- 월별 판매 순위-->
+
+                <div> <!-- 차트 분기 시작 -->
                     <table class="container"> <!-- 제품 목록 -->
-                        <h3> 제품 목록 영역 </h3>
+                        <h3> 분기별 판매 순위 차트 </h3>
                         <thead>
                             <tr>
                                 <th> 이미지 </th>
@@ -73,8 +75,9 @@
             </div>
         </div>
     </div>
+        <script src="saleChart.js"></script>
     <script src="productList.js"></script>
-    <script src="saleData.js"></script>
+    <script src="sales_data.json"></script>
 
 </body>
 
