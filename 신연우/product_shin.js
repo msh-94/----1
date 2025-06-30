@@ -1,7 +1,7 @@
 
 
 
-function productAdd(){ console.log('productAdd');                                           // 1. 제품 등록함수
+function productAdd(){ console.log('productAdd');                                           // 제품 등록함수 productAdd
     
     // 마크업객체 가져오기
     const pName = document.querySelector('#pName');         console.log(pName);             // 제품명 DOM 객체화
@@ -13,7 +13,7 @@ function productAdd(){ console.log('productAdd');                               
     const name = pName.value.trim();                                    // value 값 가져오기
     const price = pPrice.value.trim();                                  // value 값 가져오기
     const Image = pImg.files[0];                                        // value 값 가져오기
-    const img = Image ? URL.createObjectURL(Image) :'https://placehold.co/100x100';   // value 값 가져오기
+    const img = Image ? URL.createObjectURL(Image) :'https://placehold.co/100x100';   // value 값 가져오기 이미지 가져오는데 없으면 100x100 그림 가져온다는 뜻
 
     // localStorage에서 productList 배열 가져오기
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');  // productList JSON.parse해서 호출하기 || 없다면 '[]' 배열추가 
@@ -51,15 +51,14 @@ function productAdd(){ console.log('productAdd');                               
     localStorage.setItem( 'productList', JSON.stringify(productList) );                         // localStorage에 producList 넣어서 저장
     localStorage.setItem('lastPno', String(lastPno));                                           // lastPno 저장 
     
-    alert('제품이 등록되었습니다.');                                                      // 성공 표시
+    alert('제품이 등록되었습니다.');                                                        // 성공 표시
 
-    pName.value = '';                                                               // value값 초기화
-    pPrice.value = '';                                                                // value값 초기화
-    pImg.value = '';                                                                // value값 초기화
+    pName.value = '';                                                                   // value값 초기화
+    pPrice.value = '';                                                                  // value값 초기화
+    pImg.value = '';                                                                    // value값 초기화
 
-    
     productAddList();                                                                   // 제품 표시줄 렌더링
-    stockList ();
+    stockList ();                                                                       // 재고 리스트 렌더링
     
     return;                                                                             // 함수종료
 }
