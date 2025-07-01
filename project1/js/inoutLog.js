@@ -128,23 +128,18 @@ function inoutEdit(logco){
 }// 입출고사유 수정함수 끝
 
 // ======================================== 페이지네이션 ===================================== //
-const currentPage = 1;    // 현재페이지
-const totalCount = 200;   // 총자료수
-const pageCount = 10;     // 화면에 나타날 페이지 갯수
-const limit = 5;          // 한페이지당 나타날 데이터 갯수
-let totalPage = Math.ceil(totalCount/limit);        // 총 페이지갯수 구하기
-let pageGroup = Math.ceil(currentPage/pageCount);   // 현재 페이지의 그룹 구하기
-
-let lastNumber = pageGroup * pageCount // 5
-if (lastNumber > totalPage) {
-  lastNumber = totalPage
-}
-let firstNumber = lastNumber - (pageCount - 1) // 1
-
-const next = lastNumber + 1 // 6
-const prev = firstNumber - 1 // 0
-
-// 1~5만큼 페이지네이션 그려줌
-for (let i = firstNumber; i <= lastNumber; i++) {
-  html += `<button class="pageNumber" id="page_${i}">${i}</button>`
-}
+let inoutLog = getInoutLog();
+console.log(inoutLog);
+const COUNT_PER_PAGE = 5; // 한 페이지 당 최대 5개의 요소를 보여줄 것
+// 필요한 페이지 번호 수 구하기
+const getTotalPageCount = () => {
+  return Math.ceil(inoutLog.length / COUNT_PER_PAGE);
+};
+// 페이지 번호 버튼 동적으로 생성ㅇ하기
+const numberButtonWrapper = document.querySelector('.number-button-wrapper');
+const setPageButtons = () => {
+  numberButtonWrapper.innerHTML = ''; // 페이지 번호 wrapper 내부를 비워줌
+  for (let i = 1; i <= getTotalPageCount(); i++) {
+    numberButtonWrapper.innerHTML += `<span class="number-button"> ${i} </span`;
+  }
+};
