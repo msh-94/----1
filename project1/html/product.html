@@ -9,21 +9,53 @@
         * {
             margin: 0;
             padding: 0;
-            border: 1px solid red;
+           
         }
+        
 
         #wrap {
             border: 1px solid red;
             width: 1910px;
             height: 940px;
         }
-        a{ text-decoration: none; color: black;}
-        .page{ text-align: center; width: 50%;}
-        .pageModel{
-            list-style: none; display: inline-block;
-            padding-left: 200px; margin-top: 20px;
+        #page{
+            text-align: center;
+            width: 50%;
         }
-        .pageModel li{ display: inline; text-align: center;}
+        .pagination{
+            list-style: none;            
+            padding-left: 250px;
+            margin-top: 20px;
+        }
+        .pagination li{            
+            text-align: center;
+            
+        }
+        .pagination a{
+            float: left; display: block;
+            font-size: 14px; text-decoration: none;
+            padding: 5px 12px; color: #96a0ad;
+            line-height: 1.5;
+        }
+        .first{margin-right: 15px;}
+        .last{ margin-left: 15px;}
+        .first:hover , .last:hover , .left:hover , .right:hover{ color: #2e9cdf;}
+        .pagination a.active{ cursor: default; color: #ffffff;}
+        .pagination a:active{ outline: none;}
+        .num{
+            margin-left: 3px; padding: 0;
+            width: 30px; height: 30px;
+            line-height: 30px; -moz-border-radius: 100%;
+            -webkit-border-radius: 100%; border-radius: 100%;
+        }
+        .num:hover{ background-color: #2e9cdf; color: #ffffff;}
+        .num.active , .num:active{ background-color: #2e9cdf; cursor: pointer;}
+        .arrow-left{
+            width: 0; height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid blue;
+        }
     </style>
 </head>
 
@@ -38,17 +70,17 @@
         <div class="container" style="display: flex;"> <!-- content-->
             <div class="row-4" style="margin-top: 30px;  width: 200px;"> <!-- side bar -->
                 <ul>
-                    <li><a href=""> 제품 관리 </a></li>
-                    <li><a href=""> 제품 로그 </a></li>
-                    <li><a href=""> 제품 차트 </a></li>
+                    <li> 제품 관리 </li>
+                    <li> 제품 로그 </li>
+                    <li> 제품 차트 </li>
                 </ul>
             </div>
             <div class="row-8" style="margin-top: 30px; margin-left: 100px;"> <!-- main -->
-                <div > <!-- 제품 등록 -->
-                    <h3> 제품 등록 영역 </h3>                    
+                <div> <!-- 제품 등록 -->
+                    <h3> 제품 등록 영역 </h3>
                     제품명 : <input type="text" id="pName" />
-                    가격 : <input type="number" id="pPrice"/>
-                    사진 : <input type="file" accept="image/*" id="pImg" />                    
+                    가격 : <input type="number" id="pPrice" />
+                    사진 : <input type="file" accept="image/*" id="pImg" />
                     <button onclick="productAdd()"> 등록 </button>
                 </div>
                 <div>
@@ -60,36 +92,32 @@
                                 <th> 제품코드 </th>
                                 <th> 제품명 </th>
                                 <th> 가격 </th>
-                                <th> 비고 </th> 
+                                <th> 비고 </th>
                             </tr>
                         </thead>
                         <tbody id="productTbody">
                             <tr>
-                                <td> <img src="http://placehold.co/100x100"/></td>
+                                <td> <img src="http://placehold.co/100x100" /></td>
                                 <td> 1 </td>
                                 <td> 돼지바 </td>
                                 <td> 500 </td>
-                                <td> <button onclick="productEdit()"> 수정 </button> 
+                                <td> <button onclick="productEdit()"> 수정 </button>
                                     <button onclick="productDelete()"> 삭제 </button>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
-                    <div class="Page">
-                        <ul class="pageModel">
-                            <li><a href="">이전 페이지</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">4</a></li>
-                            <li><a href="">5</a></li>
-                            <li><a href="">6</a></li>
-                            <li><a href="">7</a></li>
-                            <li><a href="">8</a></li>
-                            <li><a href="">9</a></li>
-                            <li><a href="">10</a></li>
-                            <li><a href="">></a></li>
-                            <li><a href="">마지막 페이지</a></li>
+                    </table>                    
+                    <div id="page">
+                        <ul class="pagination" style="display: flex;">
+                            <li> <a href="#" class="first"> << </a></li>
+                            <li> <a href="#" class="arrow left"> < </a></li>
+                            <li> <a href="#" class="num"> 1 </a></li>
+                            <li> <a href="#" class="num"> 2 </a></li>
+                            <li> <a href="#" class="num"> 3 </a></li>
+                            <li> <a href="#" class="num"> 4 </a></li>
+                            <li> <a href="#" class="num"> 5 </a></li>
+                            <li> <a href="#" class="arrow right"> > </a></li>
+                            <li> <a href="#" class="last"> >> </a></li>
                         </ul>
                     </div>
                 </div>
