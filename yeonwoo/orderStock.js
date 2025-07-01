@@ -77,12 +77,12 @@ function boardEdit(){                                                           
             let logco = inoutLog.length === 0 ? 1 : inoutLog[inoutLog.length -1 ].logco + 1;    // logco 번호 할당함 
             
             inoutLog.push({ logco , pno : Number(selectno) , inOut : '입고' ,                   // 입고된 건 입력한 수량값으로 넣어줌 inoutLog에 
-            pName : pArray.pName , amount : qtyTotal , area : `${reasonV}` , date : dateV  });                                                                            
+             amount : qtyTotal , area : `${reasonV}` , date : dateV  });                                                                            
 
             if(damageCnt > 0){                                                                  // 만약 파손제품이 존재한다면 즉시 환불처리
                 logco++;                                                                        // 그래서 출고로 넣고 이유에는 파손 및 불량을 넣어줌 로그는 두개로 들어가니 logco++, 증감 시켜줌
                 inoutLog.push({ logco : logco++ , pno : Number(selectno) , inOut : '출고' ,
-                pName : pArray.pName , amount : damageCnt , area : `${reasonV} ( 파손 및 불량 )` , date : dateV  });
+                 amount : damageCnt , area : `${reasonV} ( 파손반품 )` , date : dateV  });
             }
             
             localStorage.setItem('productList' , JSON.stringify(productList));                  // productList에 변경값 넣어줌
@@ -98,7 +98,7 @@ function boardEdit(){                                                           
         window.opener.LackBoard?.();                        
     }
 
-    alert(`입고 완료!\n - 정상 : ${normalCnt}\n - 파손 : ${damageCnt}`);                        // 정상제품 파손제품 알려주고 
+    alert(`입고 완료!\n - 정상품 : ${normalCnt}\n - 파손품 : ${damageCnt}`);                        // 정상제품 파손제품 알려주고 
     window.close();                                                                           // 팝업이라면 닫아줌    
 }
 

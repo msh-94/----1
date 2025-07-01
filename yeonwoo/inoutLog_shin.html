@@ -14,7 +14,6 @@
         #wrap {
             border: 1px solid red;
             width: 1910px;
-            height: 940px;
         }
         
     </style>
@@ -29,15 +28,15 @@
             today : <span id="nowDate"></span>
         </div> <!-- title -->
         <div class="container" style="display: flex;"> <!-- content-->
-            <div class="row-4" style="margin-top: 30px; width: 200px;"> <!-- side bar -->
+            <div class="row-4" style="margin-top: 30px; width: 300px;"> <!-- side bar -->
                 <ul>
                     <li> 제품 관리 </li>
                     <li> 제품 로그 </li>
                     <li> 제품 차트 </li>
                 </ul>
                 <div>
-                <div id=""> 부족 재고 알림창 </div>
-                <table id="">  
+                <div id="lackStockList" > 부족 재고 알림창 </div>
+                <table id="" style="width: 290px;">  
                     <thead id="">
                         <tr>
                             <th> 제품코드 </th>
@@ -70,6 +69,7 @@
                 <div>
                     <table class="container"> <!-- 입출고 로그 목록 -->
                         <h3> 입출고 로그 영역 </h3>
+                        <input id="LogSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
                         <thead>
                             <tr>
                                 <th> 로그번호 </th>

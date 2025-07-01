@@ -84,7 +84,7 @@ function outAdd(){                                          // 로그 배열 추
     
 
     // 객체 obj생성
-    const obj = { logco , pno : pno , inOut : '출고' , pName : nameV , amount : Number(amountV) , area : areaV , date : dateV }          // obj 객체에 value값 넣기
+    const obj = { logco , pno : pno , inOut : '출고' , amount : Number(amountV) , area : areaV , date : dateV }          // obj 객체에 value값 넣기
     
 
     // 객체화한거 배열에 추가
@@ -107,18 +107,37 @@ function outAdd(){                                          // 로그 배열 추
 
 
 logListAdd();                                                                       // 시작할 때 떠야하니까 렌더링
-function logListAdd(){                                                              // logListAdd == 입출고 로그 출력함수                  
+function logListAdd(searchTerm = ''){                                                              // logListAdd == 입출고 로그 출력함수                  
 
     let inoutLog = JSON.parse(localStorage.getItem('inoutLog') || '[]');            // inoutLog JSON.parse해서 호출하기 || 없다면 '[]' 배열추가 
-
+    let productList = JSON.parse(localStorage.getItem('productList') || '[]');      // productList JSON.parse해서 호출하기 || 없다면 '[]' 배열추가 
 
     const inputLogTable = document.querySelector('#outTbody');                      // inputLogTable 선언 후 outTbody dom객체화
+
+    if(searchTerm) {                                                                             // 만약 입력값이 있다면?
+        const key = searchTerm.toLowerCase();                                                     // 매개변수의 값을 비교 편하게 전부 소문자로 바꿔주는 값을 key로 지정
+
+
+        const pNameToPnoInoutLog = productList.filter(p => // productList 배열 객체(p)를 하나씩 순회하면서, 객체의 pName 소문자로 바꾸고 다 검사 , 검색한 값이 pName인지 포함(includes)하는지
+        p.pName.toLowerCase().includes(key)   //포함된다면 true값 안 포함하면 false값 , true 값만 filter(함수)해서 배열 재생성, 그리고 그중에서 .map(p => p.pno) 즉 productList.pno만 쏙 뺴서
+        ).map(p => p.pno);                    // pNameToPnoInoutLog 배열을 다시 만든다 라는 뜻.
+
+        inoutLog = inoutLog.filter(log => pNameToPnoInoutLog.includes(log.pno));    // inoutLog 배열을 다시 그리는데 기존 배열에
+    }   
+
 
     let html ='' ;                                                                  // html 선언
     for(let i = 0 ; i < inoutLog.length ; i++){                                     // inoutLog 배열 순회
         const Log = inoutLog[i];                                                    // Log로 간소화하기
+        let pro ='';                                                                // pro 변수 지정
+        for(let j =0; j < productList.length; j++ ){                                // productList 배열 순회
+            if(Log.pno == productList[j].pno){                                      // inoutLog의 i번째 배열에서 pno랑 productList j번째 배열에서 pno랑 같으면
+                pro = productList[j]                                                // 그 배열을 pro에 대입
+                break;                                                              // 반복문 종료
+            }
+        }
         html += `<tr>   
-                        <td> ${Log.logco} </td> <td> ${Log.inOut} </td> <td> ${Log.pName} </td> 
+                        <td> ${Log.logco} </td> <td> ${Log.inOut} </td> <td> ${pro.pName} </td> 
                         <td> ${Log.amount} </td> <td> ${Log.date} </td> <td> ${Log.area} </td>
                         <td><button onclick="inoutEdit(${Log.logco})"> 수정 </button>  
                 </tr>`                                                                  // 입력함수에서 받은 값 html 추가하기 
@@ -204,14 +223,14 @@ function stockList(searchTerm = ''){                        // 제품 재고 출
     
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');                     // productList localStorage에서 가져오기
     // 검색하는 함수 부분
-    if (searchTerm) {                                                                             // 만약 입력값이 있다면?
+    if(searchTerm) {                                                                             // 만약 입력값이 있다면?
         const key = searchTerm.toLowerCase();                                                     // 매개변수의 값을 비교 편하게 전부 소문자로 바꿔주는 값을 key로 지정
 
 
         productList = productList.filter(p => // productList 배열의 각 객체(p)를 하나씩 순회함, 객체의 pName을 다 검사 하는데, toLowerCase인 소문자로 다 바꿔서 검사함(소문자로 다 바꿔서 비교가 쉽게)
-        p.pName.toLowerCase().includes(key)   // key 즉, 매개변수(검색한 값)이 pName에 포함되어있는지(includes함수), 포함되어 있다면 filter(함수)를 해서 true로 나타내고 없으면 false로 나타낸다.
-        );                                    // 즉 그냥 filter해서 검색에 빠삐코를 친다면 빠만 쳐도 빠삐코라는 pName에 빠가 들어가니까 그것만 true가 됨
-    }                                         // 그리고 그 true된 것들만 product 배열에 넣어서 그것만 보여주겠단 것  
+        p.pName.toLowerCase().includes(key)   // key 즉, 매개변수(검색한 값)이 pName에 포함되어있는지(includes함수), 포함되어 있다면 true로 나타내고 없으면 false로 나타낸다. filter는 배열을 재배치하는 거.
+        );                                  // 즉 그냥 filter해서 검색에 빠삐코를 친다면 빠만 쳐도 빠삐코라는 pName에 빠가 들어가니까 그것만 true가 됨
+    }                                         // 그리고 그 true된 것들만 filter해서 배열을 다시 만든걸 productList에 넣어주고 보여줌 
 
     
     // 정렬 하는 함수 부분
@@ -263,21 +282,29 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
             // () => {}는 {} 안에 있는 함수 실행이라는 뜻 , 즉 이벤트가 발생하면 {} 안에 있는 코드들을 실행한다는 것임.
   
     const searchInput = document.querySelector('#stockSearchInput');      // 검색 input창을 DOM 객체화 한 것
+    const LogSearchInput = document.querySelector('#LogSearchInput');     // 검색 input창을 DOM 객체화 한 것
 
-    // 검색창 뜨는 부분임
-    if (searchInput){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
-        searchInput.addEventListener('input', e => {                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
+    // stockList 검색창 뜨는 부분임
+    if( searchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
+        searchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
         keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
         stockList(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
+        });
+    }
+    // logListAdd 검색창 뜨는 부분임
+    if( LogSearchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
+        LogSearchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
+        keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
+        logListAdd(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 위랑 동일
         });
     }
     
     // 정렬 버튼 바뀌는 부분임
     const sortSelect = document.querySelector('#sortSelect');           // 정렬 버튼을 DOM 객체화 한 것
     
-    if (sortSelect){                                                    // 만약 sortSelect가 있다면? 즉 dom객체가 있다면? 
+    if( sortSelect ){                                                    // 만약 sortSelect가 있다면? 즉 dom객체가 있다면? 
         
-        sortSelect.addEventListener('change', e => {                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
+        sortSelect.addEventListener('change', e =>{                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             sortOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
 
             stockList(keyword);                                         // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword 변수 넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
@@ -313,5 +340,5 @@ function LackBoard(){                                                           
 
 function orderBtn(pno) {                                                        // 주문 버튼 함수
   const url = `orderStock.html?no=${pno}`;                                      // url 쿼리스트링 만드는 거임 no = pno로 가시오
-  window.open(url, '_blank', 'width=800,height=600');                           // window를 오픈하겠습니다,  _blank =새 탭  , width height지정은 팝업창 생성
+  window.open(url, '_blank', 'width=800,height=600');                           // window를 오픈하겠습니다,  _blank =새 탭  , width와 height 지정은 팝업창 생성
 }
