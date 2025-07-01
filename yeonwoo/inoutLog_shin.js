@@ -28,7 +28,7 @@ function dateFunc(){                // 시계함수
 setInterval( dateFunc , 1000 );
 
 
-var keyword = '';               // 검색한 값 전역변수 - 이벤트리스너에서 활용 됨,       var를 쓴 이유 쿼리스트링 해야해서 통신을 해야하기 때문에 let 보다는 var가 좋다고 gpt가 말해줌 ,,
+
 
 
 function outAdd(){                                          // 로그 배열 추가하는 함수 outAdd()
@@ -198,7 +198,8 @@ function inoutEdit(logco) {                                                     
             
             //////////////////////////////////////////////////////
 
-            let ReasonEdit = prompt('입출고 사유를 입력하세요.' , inoutLog[i].area );                   // 입출고 사유 물어보는 prompt 함수 실행
+            let ReasonEdit = prompt('입출고 사유를 입력하세요.' , inoutLog[i].area );                 
+            // 입출고 사유 물어보는 prompt 함수 실행
             if (ReasonEdit.trim() === '') return;                                                   // 아무 것도 입력 안하면 함수 종료
             inoutLog[i].area = ReasonEdit.trim();                                                   // 함수의 입출사유 prompt 받은 값 넣기 .trim()은 공백 제거
             
@@ -215,17 +216,61 @@ function inoutEdit(logco) {                                                     
     alert("해당 로그를 찾을 수 없습니다.");                                                           // 만약 오류나면 실패 알림
 }
 
+function ShowLiEventner(totalProArray){ // ul htmlinner 함수
+
+    const totalPages = Math.ceil(totalProArray / stockPerPage);
+
+    const ul = document.querySelector('#stockPaginator');
+
+    let html = '';
+
+    const add = function(pageNumber , Show = pageNumber ){  // pageNumber은 이동하는 페이지  Show는 실제로 보여주는 1 2 3 4 페이지부분
+        html += `<li ${pageNumber === stockCurrentPage ? 'class="active"' : ''}>
+                    <a href = "#" onclick="clickPage(${(pageNumber)});return false;">
+                    ${Show}
+                    </a>
+                </li>`
+    }
+
+    add(Math.max(1, stockCurrentPage - 1), '‹');
+    
+    for(let p = 1; p <= totalPages; p++) add(p);
+
+    add(Math.min(totalPages, stockCurrentPage + 1), '›');
+
+    ul.innerHTML = html;
+}
+
+
+function clickPage(page){
+    
+    stockCurrentPage = page ;                                                                       //
+    
+    stockList( keyword , page );                                                                    //
+
+}
+
+
+
+//======================================= 전역 변수 모음집 =======================================//
+
+
+var keyword = '';                       // 검색한 값 전역변수 - 이벤트리스너에서 활용 됨,       var를 쓴 이유 쿼리스트링 해야해서 통신을 해야하기 때문에 let 보다는 var가 좋다고 gpt가 말해줌 ,,
 let sortOption = 'nameDesc';            // 정렬 변수 초기값 정해주기 : nameDesc는 제품번호 내림차순임 -> html value값 확인해보면 됨
+let stockCurrentPage = 1;               // 현재 페이지 번호 (1부터 시작)
+const stockPerPage   = 10;              // 페이지당 최대 행 수   
+
+
+//===============================================================================================//
 
 
 stockList ();                                                                                       // 제품 재고 확인 함수 새로고침시 렌더링
-function stockList(searchTerm = ''){                        // 제품 재고 출력 함수  (SearchTerm = '') 이거는 매개변수(SearchTerm)이 없으면 기본이 ()이거란 소리임  
+function stockList(searchTerm = '' , page = 1){                        // 제품 재고 출력 함수  (SearchTerm = '') 이거는 매개변수(SearchTerm)이 없으면 기본이 ()이거란 소리임  
     
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');                     // productList localStorage에서 가져오기
     // 검색하는 함수 부분
     if(searchTerm) {                                                                             // 만약 입력값이 있다면?
         const key = searchTerm.toLowerCase();                                                     // 매개변수의 값을 비교 편하게 전부 소문자로 바꿔주는 값을 key로 지정
-
 
         productList = productList.filter(p => // productList 배열의 각 객체(p)를 하나씩 순회함, 객체의 pName을 다 검사 하는데, toLowerCase인 소문자로 다 바꿔서 검사함(소문자로 다 바꿔서 비교가 쉽게)
         p.pName.toLowerCase().includes(key)   // key 즉, 매개변수(검색한 값)이 pName에 포함되어있는지(includes함수), 포함되어 있다면 true로 나타내고 없으면 false로 나타낸다. filter는 배열을 재배치하는 거.
@@ -240,19 +285,26 @@ function stockList(searchTerm = ''){                        // 제품 재고 출
         
         if(sortOption){                 // sortOption이 존재한다면? sortOption은 stockList함수 위에 존재함 참고 바람.
             if(sortOption== 'stockDesc'){ return b.pAmount - a.pAmount ;}   // 만약 stockDesc (재고 내림차순) 이라면 (b재고량 - a재고량)해줌 , a재고량이 10, b재고량이 30일 때 30 - 10 = 20이니 b( 30, a보다 큰 수 )가 앞으로 감 이런 원리. 
-            else if(sortOption == 'stockAsc'){return a.pAmount - b.pAmount ;}   // 이건 stockAsc , 즉 재고 오름차순
-            else if(sortOption == 'nameDesc'){return a.pno - b.pno ;}           // 이건 pno 내림차순
-            else if(sortOption == 'nameAsc'){return b.pno -a.pno ;}             // 이건 pno 오름차순
-        }                                                                       // 참고로 sort 함수는 리턴값이 꼭 필요함.
-    });                             
- 
+            else if(sortOption == 'stockAsc'){return a.pAmount - b.pAmount ;}    // 이건 stockAsc , 즉 재고 오름차순
+            else if(sortOption == 'nameAsc'){return b.pno -a.pno ;}              // 이건 pno 내림차순
+            else if(sortOption == 'nameDesc'){return a.pno -b.pno ;}             // 이건 pno 오름차순
+        }                                                                        // 참고로 sort 함수는 리턴값이 꼭 필요함.
+    });
+    
+
+
+    const totalProArray = productList.length;                                   // totalProArray는 제품리스트 총 갯수임
+    const firstShowIndex = (page - 1)*stockPerPage ;
+    const PageProducList = productList.splice(firstShowIndex , firstShowIndex + stockPerPage);
+
+    
     //const productList = document.querySelector('#productList');
     const stockTable = document.querySelector('#inTbody');               // stockTable 선언 후 inTbody dom객체화
  
     let html ='' ;                                                                       // html 선언
     
-    for(let i = 0 ; i < productList.length ; i++){                                       // productList 배열 순회
-        const proArray = productList[i];                                                // proArray로 간소화하기
+    for(let i = 0 ; i < PageProducList.length ; i++){                                       //
+        const proArray = PageProducList[i];                                                // 
         
         let amountAlert , color = '';                                                   // 부족 적정 여유에 따라 색을 다르게 부여할 거니까 변수 지정
         
@@ -269,6 +321,7 @@ function stockList(searchTerm = ''){                        // 제품 재고 출
 
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
 
+    ShowLiEventner(totalProArray);
 
     //showProductList();
 }
@@ -288,15 +341,16 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
     if( searchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
         searchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
         keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
-        stockList(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
+        stockCurrentPage = 1 ; 
+        stockList(keyword , 1);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
         });
     }
     
     // logListAdd 검색창 뜨는 부분임
-    if( LogSearchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
-        LogSearchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
-        keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
-        logListAdd(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 //위랑 동일//
+    if( LogSearchInput ){                                                    // 만약 검색 input(value값) 요소가 존재한다면?
+        LogSearchInput.addEventListener('input', e =>{                       // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
+        keyword = e.target.value.trim() ;                                    // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
+        logListAdd(keyword);                                            // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 //위랑 동일//
         });
     }
     
@@ -307,8 +361,8 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         
         sortSelect.addEventListener('change', e =>{                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             sortOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
-
-            stockList(keyword);                                         // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword 변수 넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
+            stockCurrentPage = 1 ;
+            stockList(keyword , 1 );                                         // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword 변수 넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
         });
     }    
 });                            
