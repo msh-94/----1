@@ -13,7 +13,7 @@
         }
          a {
             text-decoration: none;
-            color: black;
+            color: white;
             font-size: 30px;
             font-weight: bold;
             line-height: 100px;
@@ -23,6 +23,7 @@
             
             width: 1910px;
             height: 940px;
+           
 
         }
 
@@ -73,37 +74,80 @@
             text-align: center;
             border: 1px solid #ddd;
         }
-        .upSize{ margin-top: 20px;}
+        .upSize{ margin-top: 20px;} /* div 간격*/
+        li{color: white;} /* 좌측 사이드바 리스트 색상 */
+        /* 등록버튼 */
+        .btnAdd {
+            padding: 12px 25px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background-color: gray;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        /*  수정버튼 삭제버튼 공통 */
+        .btnDelete, .btnEdit {
+            font-size: 15px;
+            padding: 7px 12px;
+            margin: 0 4px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        /* 수정 버튼 */
+        .btnEdit {
+            color: #4c6ef5;
+            background-color: #edf2ff;
+            border-color: #dbe4ff;            
+        }
+        /* 삭제 버튼 */
+        .btnDelete {
+            color: #f03e3e;
+            background-color: #fff5f5;
+            border-color: #ffe3e3;
+        }
+        #wrap input , #wrap textarea{
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        
+        
     </style>
 </head>
 
 <body>
     <div id="wrap"> <!-- wrap -->
         <div class="container">
-            <div style="text-align: center;">
-                <strong style="font-size: 50px;"> Admin </strong>
-            </div>
-            오늘날짜 : <span id="nowDate"></span>
+            <div style="text-align: center; background-color: #1E2940; padding-bottom: 20px;">
+                <strong style="font-size: 50px; color: white;"> 제품 관리 페이지 </strong>
+            </div>            
         </div> <!-- title -->
         <div class="container" style="display: flex;"> <!-- content-->
-            <div class="row-4" style="margin-top: 30px;  width: 200px;"> <!-- side bar -->
+            <div class="row-4" style="width: 250px; color: white;  background-color: #1E2940"> <!-- side bar -->
+                <span style="margin-left: 20px;"> 오늘날짜 : </span><span id="nowDate"></span>
                 <ul>
                     <li><a href="#"> 제품 관리 </a></li>
                     <li><a href="#"> 입출고 로그 </a></li>
                     <li><a href="#"> 제품 차트 </a></li>
                 </ul>
             </div>
-            <div class="row-8" style="margin-top: 30px; margin-left: 100px;"> <!-- main -->
+            <div class="row-8" style="margin-top: 30px; margin-left: 50px; background-color: white;"> <!-- main -->
                 <div> <!-- 제품 등록 -->
-                    <h3> 제품 등록 영역 </h3>
+                    <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 제품 등록 영역 </h3> </div>
+                    
                     제품명 : <input type="text" id="pName" />
                     가격 : <input type="number" id="pPrice" />
                     사진 : <input type="file" accept="image/*" id="pImg" />
-                    <button onclick="productAdd()"> 등록 </button>
+                    <button class="btnAdd" onclick="productAdd()"> 등록 </button>
                 </div>
                 <div  class="upSize">
                     <table class="container"> <!-- 제품 목록 -->
-                        <h3> 제품 목록 영역 </h3>
+                        <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 제품 목록 영역 </h3> </div>
                         <thead>
                             <tr>
                                 <th> 이미지 </th>

@@ -223,7 +223,7 @@ function renderInoutLogItems() {
                                 <td> ${iol.amount} </td>
                                 <td> ${iol.date} </td> <!-- 날짜를 표시 -->
                                 <td> ${iol.area || '미지정'} </td> <!-- 지역 (값이 없을 경우 '미지정' 표시) -->
-                                <td> <button onclick="inoutEdit(${iol.logco})">수정</button> </td>
+                                <td> <button class="btnEdit" onclick="inoutEdit(${iol.logco})">수정</button> </td>
                             </tr>
                             `;
 

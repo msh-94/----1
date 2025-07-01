@@ -19,7 +19,7 @@
 
         a {
             text-decoration: none;
-            color: black;
+            color: white;
             font-size: 30px;
             font-weight: bold;
             line-height: 100px;
@@ -73,37 +73,70 @@
             border: 1px solid #ddd;
         }
         .upSize{ margin-top: 20px;}
+        li{color: white;}
+        /*  출력 버튼  */
+        .btnAdd {
+            padding: 12px 25px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background-color: gray;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        /*   수정 버튼   */
+        .btnEdit {
+            color: #4c6ef5;
+            background-color: #edf2ff;
+            border-color: #dbe4ff;  
+            font-size: 15px;
+            padding: 7px 12px;
+            margin: 0 4px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid transparent;
+            cursor: pointer;          
+        }
+        #wrap input , #wrap textarea{
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
     </style>
 </head>
 
 <body>
     <div id="wrap"> <!-- wrap -->
         <div class="container">
-            <div style="text-align: center;">
-                <strong style="font-size: 50px;"> 입출고 관리 페이지 </strong>
+            <div style="text-align: center; background-color: #1E2940; padding-bottom: 20px;">
+                
+                <strong style="font-size: 50px; color: white;"> 입출고 관리 페이지 </strong>
             </div>
-            오늘날짜 : <span id="nowDate"></span>
+           
         </div> <!-- title -->
         <div class="container" style="display: flex;"> <!-- content-->
-            <div class="row-4" style="margin-top: 30px; width: 200px;"> <!-- side bar -->
+            <div class="row-4" style=" width: 250px; background-color: #1E2940; color: white;"> <!-- side bar -->
+                <span style="margin-left: 20px;"> 오늘날짜 : </span><span id="nowDate"></span>
                 <ul>
                     <li><a href=""> 제품 관리 </a></li>
                     <li><a href=""> 입출고 로그 </a></li>
                     <li><a href=""> 제품 차트 </a></li>
                 </ul>
             </div>
-            <div class="row-8" style="margin-top: 30px; margin-left: 100px; "> <!-- main -->
+            <div class="row-8" style="margin-top: 30px; margin-left: 50px; width: 1000px;"> <!-- main -->
                 <div class=""> <!-- 출고 등록  -->
-                    <h3> 입출고 등록 영역 </h3>
+                    <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 입출고 등록 영역 </h3> </div>
                     제품명 : <input type="text" id="pName" />
                     수량 : <input type="number" id="amount" />
                     날짜 : <input type="date" id="date" />
                     출고 사유 : <textarea id="area"></textarea>
-                    <button onclick="outAdd()"> 출고 </button>
+                    <button class="btnAdd" onclick="outAdd()"> 출고 </button>
                 </div>
                 <div class="upSize">
                     <table class="container"> <!-- 입출고 로그 목록 -->
-                        <h3> 입출고 로그 영역 </h3>
+                        <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 입출고 로그 영역 </h3> </div>
                         <thead>
                             <tr>
                                 <th> 로그번호 </th>
@@ -131,7 +164,7 @@
                 </div>
                 <div  class="upSize">
                     <table class="container">
-                        <h3> 재고 확인 영역 </h3>
+                        <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 재고 확인 영역 </h3> </div>
                         <thead>
                             <tr>
                                 <th> 제품코드 </th>
