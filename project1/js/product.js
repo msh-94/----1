@@ -54,33 +54,34 @@ function productAdd() {
     productList.push(obj);
     alert(`등록 되었습니다.`);
     setProduct(productList);
-    productPrint();
+    // productPrint();
+    renderItems();
     document.querySelector('#pName').value = '';
     document.querySelector('#pPrice').value = '';
 } // 제품 등록 함수 끝
 
 // 제품 출력 함수
-productPrint();
-function productPrint() {
-    const productTbody = document.querySelector('#productTbody');
-    let productList = getProduct();
-    let html = '';
-    //
-    for (let i = 0; i < productList.length; i++) {
-        let pro = productList[i]
-        html += `<tr>
-                    <td> <img src="${pro.pimg}"/></td>
-                    <td> ${pro.pno} </td>
-                    <td> ${pro.pname} </td>
-                    <td> ${pro.pprice} </td>
-                    <td> <button onclick="productEdit(${pro.pno})"> 수정 </button> 
-                        <button onclick="productDelete(${pro.pno})"> 삭제 </button>
-                    </td>
-                </tr>`
-    } // for end
-    productTbody.innerHTML = html;
-    today()
-}// 제품 출력 함수 끝
+// productPrint();
+// function productPrint() {
+//     const productTbody = document.querySelector('#productTbody');
+//     let productList = getProduct();
+//     let html = '';
+//     //
+//     for (let i = 0; i < productList.length; i++) {
+//         let pro = productList[i]
+//         html += `<tr>
+//                     <td> <img src="${pro.pimg}"/></td>
+//                     <td> ${pro.pno} </td>
+//                     <td> ${pro.pname} </td>
+//                     <td> ${pro.pprice} </td>
+//                     <td> <button onclick="productEdit(${pro.pno})"> 수정 </button> 
+//                         <button onclick="productDelete(${pro.pno})"> 삭제 </button>
+//                     </td>
+//                 </tr>`
+//     } // for end
+//     productTbody.innerHTML = html;
+//     today()
+// }// 제품 출력 함수 끝
 
 // 제품 삭제 함수
 function productDelete(pno) {
@@ -91,7 +92,8 @@ function productDelete(pno) {
             productList.splice(i, 1);
             alert(' 제품이 삭제 되었습니다. ');
             setProduct(productList);
-            productPrint();
+            // productPrint();
+            renderItems();
             return;
         }// if end
     } // for end
@@ -108,7 +110,8 @@ function productEdit(pno) {
             pro.pprice = prompt('수정할 금액을 입력해주세요.');
             setProduct(productList);
             alert('수정 성공');
-            productPrint();
+            // productPrint();
+            renderItems();
             return;
         }// if end
     } // for end
@@ -116,11 +119,115 @@ function productEdit(pno) {
 } // 제품 수정함수 끝
 
 // ============================= 페이지네이션 =================================== //
-const itemsPerPage = 5;     // 1개의 페이지에 나타날 자료수
-const pagesPerGroup = 10;   // 1그룹의 페이지수
-let currentPage = 1;        //  현재페이지  
-let productList = getProduct(); // 페이지네이션 할 자료들
-const totalPage = Math.ceil(productList.length/itemsPerPage);   // 총 페이지 수
-const productTbody = document.querySelector('#productTbody');   // 출력할 위치 가져오기 
-const prevBtn = document.querySelector('.prev-button'); // 이전 버튼 
-const nextBtn = document.querySelector('.next-button'); // 다음 버튼
+let productList = getProduct();
+const itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
+const pagesPerGroup = 10; // 한 페이지 그룹에 보여줄 페이지 수
+
+let currentPage = 1; // 현재 페이지
+let currentGroup = 1; // 현재 그룹
+
+const totalItems = productList.length; // 전체 아이템 수
+const totalPages = Math.ceil(totalItems / itemsPerPage); // 전체 페이지 수
+
+// 샘플 데이터를 로컬스토리지에 저장 (로컬스토리지에 데이터가 없을 때만)
+if (productList.length === 0) {
+    productList = Array.from({ length: 50 }, (_, i) => ({
+        pno: i + 1,
+        pname: `상품 ${i + 1}`,
+        pimg: `http://placehold.co/100x100`,
+        pprice: (i + 1) * 100,
+    }));
+    localStorage.setItem('productList', JSON.stringify(productList));
+}
+
+// 페이지 번호와 그룹을 동적으로 생성
+function renderPagination() {
+    const pageGroupElement = document.getElementById('page-group');
+    pageGroupElement.innerHTML = ''; // 기존 페이지 목록 초기화
+
+    const startPage = (currentGroup - 1) * pagesPerGroup + 1;
+    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
+
+    for (let i = startPage; i <= endPage; i++) {
+        const pageItem = document.createElement('div');
+        pageItem.classList.add('page-item');
+        pageItem.textContent = i;
+
+        if (i === currentPage) {
+            pageItem.classList.add('active');
+        }
+
+        pageItem.addEventListener('click', () => {
+            currentPage = i;
+            renderPagination();
+            renderItems();
+        });
+
+        pageGroupElement.appendChild(pageItem);
+    }
+
+    // 이전 버튼과 다음 버튼을 활성화/비활성화
+    document.getElementById('prev-btn').disabled = currentPage === 1;
+    document.getElementById('next-btn').disabled = currentPage === totalPages;
+}
+
+// 페이지 변경 함수
+function changePage(direction) {
+    currentPage += direction;
+
+    if (currentPage < 1) {
+        currentPage = 1;
+    } else if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+
+    // 현재 그룹을 조정
+    const groupStartPage = (currentGroup - 1) * pagesPerGroup + 1;
+    const groupEndPage = Math.min(groupStartPage + pagesPerGroup - 1, totalPages);
+    if (currentPage > groupEndPage) {
+        currentGroup++;
+    } else if (currentPage < groupStartPage) {
+        currentGroup--;
+    }
+
+    renderPagination();
+    renderItems();
+}
+
+// 현재 페이지에 맞는 아이템을 테이블의 tbody에 출력하는 함수
+ renderItems()
+function renderItems() {
+  const tableBody = document.getElementById('productTbody');  // id가 'productTbody'인 tbody를 선택
+  tableBody.innerHTML = ''; // 기존 테이블 내용 초기화
+  
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+  const pageItems = productList.slice(startIndex, endIndex);
+
+  pageItems.forEach(pro => {
+    const row = document.createElement('tr'); // 새로운 테이블 행(tr) 생성
+    
+    // 상품 이미지, 번호, 이름, 가격, 수정 및 삭제 버튼을 포함한 HTML 문자열
+    const rowContent = `
+      <td> <img src="${pro.pimg}" width="50" height="50" alt="${pro.pname}"/> </td>
+      <td> ${pro.pno} </td>
+      <td> ${pro.pname} </td>
+      <td> ${pro.pprice}원 </td>
+      <td> 
+        <button onclick="productEdit(${pro.pno})">수정</button>
+        <button onclick="productDelete(${pro.pno})">삭제</button>
+      </td>
+    `;
+    
+    // 행에 HTML 문자열 삽입
+    row.innerHTML = rowContent;
+    
+    // 생성된 행을 tbody에 추가
+    tableBody.appendChild(row);
+    today();
+  });
+}
+
+// 페이지 초기화
+renderPagination();
+renderItems();
