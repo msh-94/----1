@@ -50,7 +50,7 @@ function setInoutLog(inoutLog) {
 function outAdd() {
     const pname = document.querySelector('#pName').value;
     const amount = document.querySelector('#amount').value;
-    const date = document.querySelector('#date').value;
+    const date = document.querySelector('#date').value; 
     const area = document.querySelector('#area').value;
     //
     let productList = getProduct();
