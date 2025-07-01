@@ -6398,7 +6398,7 @@ function showOnlyContainer(targetId) {
 // 버튼 호버를 통해 차트 보여주는 함수
 function showChart(chartIdToShow) {
     // 모든 canvas 숨기기
-    const canvases = document.querySelectorAll('#ChartContainer canvas , branchChartContainer canvas');
+    const canvases = document.querySelectorAll('#ChartContainer canvas , #branchChartContainer canvas');
     canvases.forEach(c => c.style.display = 'none');
 
     // 특정 canvas만 보이기
