@@ -116,29 +116,8 @@ function productEdit(pno) {
 } // 제품 수정함수 끝
 
 // ============================= 페이지네이션 =================================== //
-
-
-pageNation()
-function pageNation() {
-    let productList = getProduct();
-    const page = document.querySelector('.page');
-    let html = '';
-    const currentPage = 1;  //  현재 페이지
-    const totalCount = productList;  // 총 자료수
-    const pageContent = 5;  // 한 페이지의 나타날 자료수
-    const pageCount = 5;    //  한 화면에 보이는 페이지개수
-    let totalPage = Math.ceil(totalCount / pageContent); // 총 페이지수
-    let pageGroup = Math.ceil(currentPage / pageCount); // 현재 페이지 그룹 찾기
-    let first = ((pageGroup - 1) * pageCount) + 1;  // 현재 페이지그룹의 첫번째
-    let last = pageGroup * pageCount;   // 현재 페이지그룹의 마지막
-    if (last > totalPage) {
-        last = totalPage
-    }   // 페이지그룹의 마지막이 총 페이지 수보다 높으면 마지막페이지가 총페이지
-    const next = last + 1;  // 다음 페이지그룹
-    const prev = first - 1  // 이전 페이지그룹
-    for (let i = first; i <= last; i++) {
-        html += `<li>${i}</li>`
-    }
-    page.innerHTML = html;
-
-}
+const itemsPerPage = 5;     // 1개의 페이지에 나타날 자료수
+const pagesPerGroup = 10;   // 1그룹의 페이지수
+let currentPage = 1;        //  현재페이지  
+let productList = getProduct(); // 페이지네이션 할 자료들
+const totalPage = Math.ceil(productList.length/itemsPerPage) // 총 페이지 수
