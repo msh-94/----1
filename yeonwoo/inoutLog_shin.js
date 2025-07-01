@@ -256,8 +256,8 @@ function clickPage(page){
 
 
 var keyword = '';                       // 검색한 값 전역변수 - 이벤트리스너에서 활용 됨,       var를 쓴 이유 쿼리스트링 해야해서 통신을 해야하기 때문에 let 보다는 var가 좋다고 gpt가 말해줌 ,,
-let sortOption = 'nameDesc';            // 정렬 변수 초기값 정해주기 : nameDesc는 제품번호 내림차순임 -> html value값 확인해보면 됨
-let stockCurrentPage = 1;               // 현재 페이지 번호 (1부터 시작)
+let sortOption = 'nameAsc';            // 정렬 변수 초기값 정해주기 : nameDesc는 제품번호 내림차순임 -> html value값 확인해보면 됨
+var stockCurrentPage = 1;               // 현재 페이지 번호 (1부터 시작)
 const stockPerPage   = 10;              // 페이지당 최대 행 수   
 
 
@@ -286,8 +286,8 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
         if(sortOption){                 // sortOption이 존재한다면? sortOption은 stockList함수 위에 존재함 참고 바람.
             if(sortOption== 'stockDesc'){ return b.pAmount - a.pAmount ;}   // 만약 stockDesc (재고 내림차순) 이라면 (b재고량 - a재고량)해줌 , a재고량이 10, b재고량이 30일 때 30 - 10 = 20이니 b( 30, a보다 큰 수 )가 앞으로 감 이런 원리. 
             else if(sortOption == 'stockAsc'){return a.pAmount - b.pAmount ;}    // 이건 stockAsc , 즉 재고 오름차순
-            else if(sortOption == 'nameAsc'){return b.pno -a.pno ;}              // 이건 pno 내림차순
-            else if(sortOption == 'nameDesc'){return a.pno -b.pno ;}             // 이건 pno 오름차순
+            else if(sortOption == 'nameDesc'){return b.pno -a.pno ;}              // 이건 pno 내림차순
+            else if(sortOption == 'nameAsc'){return a.pno -b.pno ;}             // 이건 pno 오름차순
         }                                                                        // 참고로 sort 함수는 리턴값이 꼭 필요함.
     });
     
