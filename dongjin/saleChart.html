@@ -27,6 +27,14 @@
             min-height: 80vh;
             /* 출력을 위한 최소높이 */
         }
+
+        #branchChartContainer {
+            /* 차트 안 보이는 게 기본값 */
+            display: none;
+            transition: all 0.3s ease;
+            min-height: 80vh;
+            /* 출력을 위한 최소높이 */
+        }
     </style>
 </head>
 
@@ -103,7 +111,7 @@
                             <button id="fth24ToggleBtn">24년 4분기 차트 보기</button>
                             <button id="fst25ToggleBtn">25년 1분기 차트 보기</button>
                             <button id="snd25ToggleBtn">25년 2분기 차트 보기</button>
-                            <div id="ChartContainer">
+                            <div id="branchChartContainer">
                                 <canvas id="fst24Input" width="400" height="400" style="display: none;"></canvas>
                                 <canvas id="snd24Input" width="400" height="400" style="display: none;"></canvas>
                                 <canvas id="trd24Input" width="400" height="400" style="display: none;"></canvas>
