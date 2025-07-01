@@ -6384,49 +6384,44 @@ let saleData = {
 }
 
 
-
-// 데이터 전처리
-// 가로축 : 아이스크림이름(pno) 넣기
-let pno = [];
-
-// 판매량 배열
-let psell = [];
-
-
-// 1월 정보 입력
-function jan24Info() {
-    const keys = Object.keys(saleData); // 세일데이터 속성값을 상수화
-    // for문으로 속성 찾기 객체 선언
-    for (let i = 0; i <= keys.length - 1; i++) {
-        const key = keys[i]; // 키들의 인덱스를 key
-        if (key.startsWith('d2401')) {   // 문자열 d2401로 시작하는 배열 찾기
-            console.log('saleData[key]', saleData[key]); // ✅ 구조 점검
-            console.log('psell before:', saleData[key].psell); // ✅ 값 점검
-            pno.push(saleData[key].pno);       // pno push
-            psell.push(Number(saleData[key].psell));    // 판매량 push
-            console.log(psell);
-        }
-    }
-    return { pno, psell }; // d2401에 해당하는 pno와 psell을 출력한다.
-
-}
-
 // 1월 차트 출력하기
 
 jan24Chart();
 function jan24Chart() {
+    // 세일데이터 속성값을 상수화
+    const keys = Object.keys(saleData);
+    // 데이터 전처리
+    // pno 같은 값 합산용 객체
+    const saleMap = {};
 
-    const { pno, psell } = jan24Info(); // 객체화된 정보를 함수로 불러온다(get).
+    // 입력된 1월 데이터 집어넣기 
+    for (let i = 0; i <= keys.length - 1; i++) {
+        const key = keys[i]; // 속성값 인덱스를 상수 선언
+        if (key.startsWith('d2401')) {   // 문자열 d2401로 시작하는 배열 찾기
+            const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
+            for (let j = 0; j <= array.length - 1; j++) {
+                const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
+                if (saleMap[item.pno]) {
+                    saleMap[item.pno] += item.psell;
+                } else {
+                    saleMap[item.pno] = item.psell;
+                }
 
-    // 1월 정보 호출하기
+            }
+        }
+    }
 
-    // pno 대신에 pName 넣을 수 있도록 빈 변수 생성
+    // saleMap -> pno, psell, pName 배열로 변환
+    const pno = Object.keys(saleMap).map(Number);   // 문자열 숫자를 숫자형으로 변환
+    const psell = Object.values(saleMap);           // 합산 수량
+
+    // pno pName으로 바꿔쓸 수 있도록 빈 배열 생성
     const pName = [];
     // 출력함수 : chartInfo의 pno가 productList의 pName과 같다면, pno 대신 pName 출력
     // pno와 같은 pName있는지 for문으로 순회하면서 찾기
     for (let i = 0; i <= pno.length - 1; i++) {
         // pName 값 집어넣을 빈 변수 found 만들기
-        let found = '';
+        let found = '알 수 없음';
         for (let j = 0; j <= productList.length - 1; j++) {
             if (productList[j].pno == pno[i]) {    // 24년 1월의 pno가 프로덕트 인덱스의 pno와 같을 경우
                 found = productList[j].pName;   // 빈 변수 pName에 제품명 넣기
@@ -6439,29 +6434,184 @@ function jan24Chart() {
     // 차트 출력할 위치 지정하기
     const ctx = document.querySelector('#jan24Input');
 
+    // 차트 색상 바꾸는 상수
+    const barColors = psell.map(value => {
+        if (value >= 40) return 'rgb(0, 38, 255)';
+        else if (value >= 30) return 'rgb(0, 30, 197)';
+        else if (value >= 20) return 'rgb(0, 20, 134)';
+        else if (value >= 10) return 'rgb(0, 14, 94)';
+        else if (value >= 5) return 'rgb(0, 6, 43)';   // 파랑 (적게 팔림)
+        else return 'rgb(0, 0, 0)';
+    });
+
     // 차트 그리기
     new Chart(ctx, {
-        type: 'bar',
+        type: 'doughnut',
         data: {
             labels: pName,
             datasets: [{
-                label: '판매량',
-                data: psell
+                label: '1월 총 판매량',
+                data: psell,
+                backgroundColor: barColors,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '판매 개수'
+                    }
                 }
             }
         }
+    });
+
+    // 숨겨놓은 차트 버튼 호버하면 출력하기
+
+    const btn = document.getElementById('janToggleBtn');
+    const chartBox = document.getElementById('ChartContainer');
+
+    // 마우스를 올리면 차트 보여줌
+    btn.addEventListener('mouseenter', () => {
+        chartBox.style.display = 'block';
+    });
+
+    // 마우스를 벗어나면 차트 숨김
+    btn.addEventListener('mouseleave', () => {
+        chartBox.style.display = 'none';
+    });
+
+    // 차트 영역 위로 마우스를 옮긴 경우에도 유지
+    chartBox.addEventListener('mouseenter', () => {
+        chartBox.style.display = 'block';
+    });
+
+    chartBox.addEventListener('mouseleave', () => {
+        chartBox.style.display = 'none';
     });
 
 }
 
 
 // const feb24
+
+// 24년 2월 차트 출력하기
+
+feb24Chart();
+function feb24Chart() {
+    // 세일데이터 속성값을 상수화
+    const keys = Object.keys(saleData);
+    // 데이터 전처리
+    // pno 같은 값 합산용 객체
+    const saleMap = {};
+
+    // 입력된 1월 데이터 집어넣기 
+    for (let i = 0; i <= keys.length - 1; i++) {
+        const key = keys[i]; // 속성값 인덱스를 상수 선언
+        if (key.startsWith('d2402')) {   // 문자열 d2402로 시작하는 배열 찾기
+            const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
+            for (let j = 0; j <= array.length - 1; j++) {
+                const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
+                if (saleMap[item.pno]) {
+                    saleMap[item.pno] += item.psell;
+                } else {
+                    saleMap[item.pno] = item.psell;
+                }
+
+            }
+        }
+    }
+
+    // saleMap -> pno, psell, pName 배열로 변환
+    const pno = Object.keys(saleMap).map(Number);   // 문자열 숫자를 숫자형으로 변환
+    const psell = Object.values(saleMap);           // 합산 수량
+
+    // pno pName으로 바꿔쓸 수 있도록 빈 배열 생성
+    const pName = [];
+    // 출력함수 : chartInfo의 pno가 productList의 pName과 같다면, pno 대신 pName 출력
+    // pno와 같은 pName있는지 for문으로 순회하면서 찾기
+    for (let i = 0; i <= pno.length - 1; i++) {
+        // pName 값 집어넣을 빈 변수 found 만들기
+        let found = '알 수 없음';
+        for (let j = 0; j <= productList.length - 1; j++) {
+            if (productList[j].pno == pno[i]) {    // 24년 1월의 pno가 프로덕트 인덱스의 pno와 같을 경우
+                found = productList[j].pName;   // 빈 변수 pName에 제품명 넣기
+                break;
+            }
+        }
+        pName.push(found);  // 객체에 pName 집어넣기
+    }
+
+    // 차트 출력할 위치 지정하기
+    const ctx = document.querySelector('#feb24Input');
+
+    // 차트 색상 바꾸는 상수
+    const barColors = psell.map(value => {
+        if (value >= 40) return 'rgb(0, 38, 255)';
+        else if (value >= 30) return 'rgb(0, 30, 197)';
+        else if (value >= 20) return 'rgb(0, 20, 134)';
+        else if (value >= 10) return 'rgb(0, 14, 94)';
+        else if (value >= 5) return 'rgb(0, 6, 43)';   // 파랑 (적게 팔림)
+        else return 'rgb(0, 0, 0)';
+    });
+
+    // 차트 그리기
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: pName,
+            datasets: [{
+                label: '2월 총 판매량',
+                data: psell,
+                backgroundColor: barColors,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '판매 개수'
+                    }
+                }
+            }
+        }
+    });
+
+    // 숨겨놓은 차트 버튼 호버하면 출력하기
+
+    const btn = document.getElementById('febToggleBtn');
+    const chartBox = document.getElementById('ChartContainer');
+
+    // 마우스를 올리면 차트 보여줌
+    btn.addEventListener('mouseenter', () => {
+        chartBox.style.display = 'block';
+    });
+
+    // 마우스를 벗어나면 차트 숨김
+    btn.addEventListener('mouseleave', () => {
+        chartBox.style.display = 'none';
+    });
+
+    // 차트 영역 위로 마우스를 옮긴 경우에도 유지
+    chartBox.addEventListener('mouseenter', () => {
+        chartBox.style.display = 'block';
+    });
+
+    chartBox.addEventListener('mouseleave', () => {
+        chartBox.style.display = 'none';
+    });
+
+}
 
 // const mar24
 

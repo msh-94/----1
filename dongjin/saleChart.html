@@ -19,6 +19,14 @@
             min-height: 100vh;
             margin: 0 auto;
         }
+
+        #ChartContainer {
+            /* 차트 안 보이는 게 기본값 */
+            display: none;
+            transition: all 0.3s ease;
+            min-height: 80vh;
+            /* 출력을 위한 최소높이 */
+        }
     </style>
 </head>
 
@@ -43,7 +51,27 @@
                 <div> <!-- 제품 등록 -->
                     <h3> 월별 판매 순위 차트 </h3>
                     <div class="container">
-                        <canvas id="jan24Input" width="400" height="400"> </canvas>
+                        <button id="janToggleBtn">24년 1월 차트 보기</button>
+                        <button id="febToggleBtn">24년 2월 차트 보기</button>
+                        <div id="ChartContainer">
+                            <canvas id="jan24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="feb24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="mar24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="apr24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="jun24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="jul24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="aug24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="sep24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="oct24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="nov24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="dec24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="jan25Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="feb25Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="mar25Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="mar25Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="apr25Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="jun25Input" width="400" height="400" style="display: none;"></canvas>
+                        </div>
                     </div>
 
                 </div> <!-- 월별 판매 순위-->
