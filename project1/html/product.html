@@ -9,83 +9,145 @@
         * {
             margin: 0;
             padding: 0;
-           
+
+        }
+         a {
+            text-decoration: none;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 100px;
         }
         
-
         #wrap {
-            border: 1px solid red;
+            
             width: 1910px;
             height: 940px;
+           
+
         }
-        #page{
-            text-align: center;
-            width: 50%;
+
+        #pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .pagination{
-            list-style: none;            
-            padding-left: 250px;
+
+        .pagination-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .pagination-btn:disabled {
+            background-color: #ccc;
+        }
+
+        .page-group {
+            display: flex;
+        }
+
+        .page-item {
+            padding: 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .page-item.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
-        .pagination li{            
+
+        th,
+        td {
+            padding: 10px;
             text-align: center;
-            
+            border: 1px solid #ddd;
         }
-        .pagination a{
-            float: left; display: block;
-            font-size: 14px; text-decoration: none;
-            padding: 5px 12px; color: #96a0ad;
-            line-height: 1.5;
+        .upSize{ margin-top: 20px;} /* div 간격*/
+        li{color: white;} /* 좌측 사이드바 리스트 색상 */
+        /* 등록버튼 */
+        .btnAdd {
+            padding: 12px 25px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background-color: gray;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
-        .first{margin-right: 15px;}
-        .last{ margin-left: 15px;}
-        .first:hover , .last:hover , .left:hover , .right:hover{ color: #2e9cdf;}
-        .pagination a.active{ cursor: default; color: #ffffff;}
-        .pagination a:active{ outline: none;}
-        .num{
-            margin-left: 3px; padding: 0;
-            width: 30px; height: 30px;
-            line-height: 30px; -moz-border-radius: 100%;
-            -webkit-border-radius: 100%; border-radius: 100%;
+        /*  수정버튼 삭제버튼 공통 */
+        .btnDelete, .btnEdit {
+            font-size: 15px;
+            padding: 7px 12px;
+            margin: 0 4px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid transparent;
+            cursor: pointer;
         }
-        .num:hover{ background-color: #2e9cdf; color: #ffffff;}
-        .num.active , .num:active{ background-color: #2e9cdf; cursor: pointer;}
-        .arrow-left{
-            width: 0; height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 10px solid blue;
+        /* 수정 버튼 */
+        .btnEdit {
+            color: #4c6ef5;
+            background-color: #edf2ff;
+            border-color: #dbe4ff;            
         }
+        /* 삭제 버튼 */
+        .btnDelete {
+            color: #f03e3e;
+            background-color: #fff5f5;
+            border-color: #ffe3e3;
+        }
+        #wrap input , #wrap textarea{
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+        
+        
     </style>
 </head>
 
 <body>
     <div id="wrap"> <!-- wrap -->
         <div class="container">
-            <div style="text-align: center;">
-                <strong style="font-size: 50px;"> Admin </strong>
-            </div>
-            오늘날짜 : <span id="nowDate"></span>
+            <div style="text-align: center; background-color: #1E2940; padding-bottom: 20px;">
+                <strong style="font-size: 50px; color: white;"> 제품 관리 페이지 </strong>
+            </div>            
         </div> <!-- title -->
         <div class="container" style="display: flex;"> <!-- content-->
-            <div class="row-4" style="margin-top: 30px;  width: 200px;"> <!-- side bar -->
+            <div class="row-4" style="width: 250px; color: white;  background-color: #1E2940"> <!-- side bar -->
+                <span style="margin-left: 20px;"> 오늘날짜 : </span><span id="nowDate"></span>
                 <ul>
-                    <li> 제품 관리 </li>
-                    <li> 제품 로그 </li>
-                    <li> 제품 차트 </li>
+                    <li><a href="#"> 제품 관리 </a></li>
+                    <li><a href="#"> 입출고 로그 </a></li>
+                    <li><a href="#"> 제품 차트 </a></li>
                 </ul>
             </div>
-            <div class="row-8" style="margin-top: 30px; margin-left: 100px;"> <!-- main -->
+            <div class="row-8" style="margin-top: 30px; margin-left: 50px; background-color: white;"> <!-- main -->
                 <div> <!-- 제품 등록 -->
-                    <h3> 제품 등록 영역 </h3>
+                    <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 제품 등록 영역 </h3> </div>
+                    
                     제품명 : <input type="text" id="pName" />
                     가격 : <input type="number" id="pPrice" />
                     사진 : <input type="file" accept="image/*" id="pImg" />
-                    <button onclick="productAdd()"> 등록 </button>
+                    <button class="btnAdd" onclick="productAdd()"> 등록 </button>
                 </div>
-                <div>
+                <div  class="upSize">
                     <table class="container"> <!-- 제품 목록 -->
-                        <h3> 제품 목록 영역 </h3>
+                        <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 제품 목록 영역 </h3> </div>
                         <thead>
                             <tr>
                                 <th> 이미지 </th>
@@ -96,29 +158,18 @@
                             </tr>
                         </thead>
                         <tbody id="productTbody">
-                            <tr>
-                                <td> <img src="http://placehold.co/100x100" /></td>
-                                <td> 1 </td>
-                                <td> 돼지바 </td>
-                                <td> 500 </td>
-                                <td> <button onclick="productEdit()"> 수정 </button>
-                                    <button onclick="productDelete()"> 삭제 </button>
-                                </td>
-                            </tr>
+                            
                         </tbody>
-                    </table>                    
-                    <div id="page">
-                        <ul class="pagination" style="display: flex;">
-                            <li> <a href="#" class="first"> << </a></li>
-                            <li> <a href="#" class="arrow left"> < </a></li>
-                            <li> <a href="#" class="num"> 1 </a></li>
-                            <li> <a href="#" class="num"> 2 </a></li>
-                            <li> <a href="#" class="num"> 3 </a></li>
-                            <li> <a href="#" class="num"> 4 </a></li>
-                            <li> <a href="#" class="num"> 5 </a></li>
-                            <li> <a href="#" class="arrow right"> > </a></li>
-                            <li> <a href="#" class="last"> >> </a></li>
-                        </ul>
+                    </table>
+
+                    <div id="pagination"  class="upSize">
+                        <button id="prev-btn" class="pagination-btn" onclick="changePage(-1)">이전</button>
+
+                        <div id="page-group" class="page-group">
+                            <!-- 페이지 번호가 여기에 동적으로 생성됩니다. -->
+                        </div>
+
+                        <button id="next-btn" class="pagination-btn" onclick="changePage(1)">다음</button>
                     </div>
                 </div>
             </div>
