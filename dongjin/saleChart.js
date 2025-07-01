@@ -6383,8 +6383,7 @@ let saleData = {
     ]
 }
 
-// 위치 찾기
-const jan24Input = document.querySelector('#jan24Input')
+
 
 // 데이터 전처리
 // 가로축 : 아이스크림이름(pno) 넣기
@@ -6393,58 +6392,108 @@ let pno = [];
 // 판매량 배열
 let psell = [];
 
-// for문으로 속성 찾기 객체 선언
-const object = Object.keys(saleData);
 
-for(let i = 0; i <= obj.length - 1; i++){
-    const obj = object[i];
-    if(obj.startsWith('d2401')) {   // 문자열 d2401로 시작하는 배열 찾기
-        const 
-    } 
+// 1월 정보 입력
+function jan24Info() {
+    const keys = Object.keys(saleData); // 세일데이터 속성값을 상수화
+    // for문으로 속성 찾기 객체 선언
+    for (let i = 0; i <= keys.length - 1; i++) {
+        const key = keys[i]; // 키들의 인덱스를 key
+        if (key.startsWith('d2401')) {   // 문자열 d2401로 시작하는 배열 찾기
+            console.log('saleData[key]', saleData[key]); // ✅ 구조 점검
+            console.log('psell before:', saleData[key].psell); // ✅ 값 점검
+            pno.push(saleData[key].pno);       // pno push
+            psell.push(Number(saleData[key].psell));    // 판매량 push
+            console.log(psell);
+        }
+    }
+    return { pno, psell }; // d2401에 해당하는 pno와 psell을 출력한다.
+
+}
+
+// 1월 차트 출력하기
+
+jan24Chart();
+function jan24Chart() {
+
+    const { pno, psell } = jan24Info(); // 객체화된 정보를 함수로 불러온다(get).
+
+    // 1월 정보 호출하기
+
+    // pno 대신에 pName 넣을 수 있도록 빈 변수 생성
+    const pName = [];
+    // 출력함수 : chartInfo의 pno가 productList의 pName과 같다면, pno 대신 pName 출력
+    // pno와 같은 pName있는지 for문으로 순회하면서 찾기
+    for (let i = 0; i <= pno.length - 1; i++) {
+        // pName 값 집어넣을 빈 변수 found 만들기
+        let found = '';
+        for (let j = 0; j <= productList.length - 1; j++) {
+            if (productList[j].pno == pno[i]) {    // 24년 1월의 pno가 프로덕트 인덱스의 pno와 같을 경우
+                found = productList[j].pName;   // 빈 변수 pName에 제품명 넣기
+                break;
+            }
+        }
+        pName.push(found);  // 객체에 pName 집어넣기
+    }
+
+    // 차트 출력할 위치 지정하기
+    const ctx = document.querySelector('#jan24Input');
+
+    // 차트 그리기
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: pName,
+            datasets: [{
+                label: '판매량',
+                data: psell
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
 }
 
 
-new chart(jan24, {
-    type: 'line',
-    data {
-    labels: pno,
+// const feb24
 
-}
-})
+// const mar24
 
-const feb24
+// const apr24
 
-const mar24
+// const jun24
 
-const apr24
+// const jul24
 
-const jun24
+// const aug24
 
-const jul24
+// const sep24
 
-const aug24
+// const oct24
 
-const sep24
+// const nov24
 
-const oct24
+// const dec24
 
-const nov24
+// const jan25
 
-const dec24
+// const feb25
 
-const jan25
+// const mar25
 
-const feb25
+// const apr25
 
-const mar25
-
-const apr25
-
-const jun25
+// const jun25
 
 
 
 
 
-// 출력함수 : pno가 pname과 같다면, pno 대신 pname 출력
+
 

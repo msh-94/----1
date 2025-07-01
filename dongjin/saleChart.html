@@ -12,7 +12,8 @@
             border: 1px solid red;
         }
 
-        #wrap { /* 반응형 만드려고 위드 하이트값 바꿈!! */
+        #wrap {
+            /* 반응형 만드려고 위드 하이트값 바꿈!! */
             border: 1px solid red;
             max-width: 100%;
             min-height: 100vh;
@@ -41,8 +42,8 @@
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <div> <!-- 제품 등록 -->
                     <h3> 월별 판매 순위 차트 </h3>
-                    <div class="container"> 
-                        <canvas id="jan24Input"></canvas>
+                    <div class="container">
+                        <canvas id="jan24Input" width="400" height="400"> </canvas>
                     </div>
 
                 </div> <!-- 월별 판매 순위-->
@@ -75,9 +76,8 @@
             </div>
         </div>
     </div>
-        <script src="saleChart.js"></script>
     <script src="productList.js"></script>
-    <script src="sales_data.json"></script>
+    <script src="saleChart.js"></script>
 
 </body>
 

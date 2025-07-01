@@ -19,5 +19,7 @@ function proAdd() {
     const pimgInput = document.querySelector('#pimgInput')
 
     const pname = pnameInput.value;
+    const pprice = ppriceInput.value;
+    // const pinfo = 
 }
 
