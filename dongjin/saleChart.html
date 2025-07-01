@@ -94,29 +94,25 @@
                 </div> <!-- 월별 판매 순위-->
 
                 <div> <!-- 차트 분기 시작 -->
-                    <table class="container"> <!-- 제품 목록 -->
+                    <div class="container"> <!-- 제품 목록 -->
                         <h3> 분기별 판매 순위 차트 </h3>
-                        <thead>
-                            <tr>
-                                <th> 이미지 </th>
-                                <th> 제품코드 </th>
-                                <th> 제품명 </th>
-                                <th> 가격 </th>
-                                <th> 비고 </th>
-                            </tr>
-                        </thead>
-                        <tbody id="productTbody">
-                            <tr>
-                                <td> <img src="http://placehold.co/100x100" /></td>
-                                <td> 1 </td>
-                                <td> 돼지바 </td>
-                                <td> 500 </td>
-                                <td> <button onclick="productEdit()"> 수정 </button>
-                                    <button onclick="productDelete()"> 삭제 </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="container">
+                            <button id="fst24ToggleBtn">24년 1분기 차트 보기</button>
+                            <button id="snd24ToggleBtn">24년 2분기 차트 보기</button>
+                            <button id="trd24ToggleBtn">24년 3분기 차트 보기</button>
+                            <button id="fth24ToggleBtn">24년 4분기 차트 보기</button>
+                            <button id="fst25ToggleBtn">25년 1분기 차트 보기</button>
+                            <button id="snd25ToggleBtn">25년 2분기 차트 보기</button>
+                            <div id="ChartContainer">
+                                <canvas id="fst24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="snd24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="trd24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="fth24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="fst25Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="snd25Input" width="400" height="400" style="display: none;"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

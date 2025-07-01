@@ -7951,8 +7951,8 @@ function jan25Chart() {
 }
 
 // const feb25
-aug24Chart();
-function aug24Chart() {
+feb25Chart();
+function feb25Chart() {
     // 세일데이터 속성값을 상수화
     const keys = Object.keys(saleData);
     // 데이터 전처리
@@ -7962,7 +7962,7 @@ function aug24Chart() {
     // 입력된 1월 데이터 집어넣기 
     for (let i = 0; i <= keys.length - 1; i++) {
         const key = keys[i]; // 속성값 인덱스를 상수 선언
-        if (key.startsWith('d2408')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
+        if (key.startsWith('d2502')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
             const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
             for (let j = 0; j <= array.length - 1; j++) {
                 const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
@@ -7997,7 +7997,7 @@ function aug24Chart() {
     }
 
     // 차트 출력할 위치 지정하기
-    const ctx = document.querySelector('#aug24Input');  // 월 바꿔주기
+    const ctx = document.querySelector('#feb25Input');  // 월 바꿔주기
 
     // 차트 색상 바꾸는 상수
     const barColors = psell.map(value => {
@@ -8015,7 +8015,7 @@ function aug24Chart() {
         data: {
             labels: pName,
             datasets: [{
-                label: '8월 총 판매량',             // 월 바꿔주기
+                label: '25년 2월 총 판매량',             // 월 바꿔주기
                 data: psell,
                 backgroundColor: barColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -8038,7 +8038,7 @@ function aug24Chart() {
 
     // 숨겨놓은 차트 버튼 호버하면 출력하기
 
-    const btn = document.getElementById('augToggleBtn');    // 월 바꿔주기
+    const btn = document.getElementById('feb25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
     // 마우스를 올리면 차트 보여줌
@@ -8057,8 +8057,8 @@ function aug24Chart() {
     });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('augToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
-        showChart('aug24Input');    // 월 바꿔주기
+    document.getElementById('feb25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+        showChart('feb25Input');    // 월 바꿔주기
     });
 
     // 마우스를 벗어나면 ChartContainer 전체 숨김
@@ -8069,8 +8069,8 @@ function aug24Chart() {
 }
 
 // const mar25
-aug24Chart();
-function aug24Chart() {
+mar25Chart();
+function mar25Chart() {
     // 세일데이터 속성값을 상수화
     const keys = Object.keys(saleData);
     // 데이터 전처리
@@ -8080,7 +8080,7 @@ function aug24Chart() {
     // 입력된 1월 데이터 집어넣기 
     for (let i = 0; i <= keys.length - 1; i++) {
         const key = keys[i]; // 속성값 인덱스를 상수 선언
-        if (key.startsWith('d2408')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
+        if (key.startsWith('d2503')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
             const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
             for (let j = 0; j <= array.length - 1; j++) {
                 const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
@@ -8115,7 +8115,7 @@ function aug24Chart() {
     }
 
     // 차트 출력할 위치 지정하기
-    const ctx = document.querySelector('#aug24Input');  // 월 바꿔주기
+    const ctx = document.querySelector('#mar25Input');  // 월 바꿔주기
 
     // 차트 색상 바꾸는 상수
     const barColors = psell.map(value => {
@@ -8133,7 +8133,7 @@ function aug24Chart() {
         data: {
             labels: pName,
             datasets: [{
-                label: '8월 총 판매량',             // 월 바꿔주기
+                label: '25년 3월 총 판매량',             // 월 바꿔주기
                 data: psell,
                 backgroundColor: barColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -8156,7 +8156,7 @@ function aug24Chart() {
 
     // 숨겨놓은 차트 버튼 호버하면 출력하기
 
-    const btn = document.getElementById('augToggleBtn');    // 월 바꿔주기
+    const btn = document.getElementById('mar25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
     // 마우스를 올리면 차트 보여줌
@@ -8175,8 +8175,8 @@ function aug24Chart() {
     });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('augToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
-        showChart('aug24Input');    // 월 바꿔주기
+    document.getElementById('mar25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+        showChart('mar25Input');    // 월 바꿔주기
     });
 
     // 마우스를 벗어나면 ChartContainer 전체 숨김
@@ -8187,8 +8187,8 @@ function aug24Chart() {
 }
 
 // const apr25
-aug24Chart();
-function aug24Chart() {
+apr25Chart();
+function apr25Chart() {
     // 세일데이터 속성값을 상수화
     const keys = Object.keys(saleData);
     // 데이터 전처리
@@ -8198,7 +8198,7 @@ function aug24Chart() {
     // 입력된 1월 데이터 집어넣기 
     for (let i = 0; i <= keys.length - 1; i++) {
         const key = keys[i]; // 속성값 인덱스를 상수 선언
-        if (key.startsWith('d2408')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
+        if (key.startsWith('d2504')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
             const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
             for (let j = 0; j <= array.length - 1; j++) {
                 const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
@@ -8233,7 +8233,7 @@ function aug24Chart() {
     }
 
     // 차트 출력할 위치 지정하기
-    const ctx = document.querySelector('#aug24Input');  // 월 바꿔주기
+    const ctx = document.querySelector('#apr25Input');  // 월 바꿔주기
 
     // 차트 색상 바꾸는 상수
     const barColors = psell.map(value => {
@@ -8274,7 +8274,7 @@ function aug24Chart() {
 
     // 숨겨놓은 차트 버튼 호버하면 출력하기
 
-    const btn = document.getElementById('augToggleBtn');    // 월 바꿔주기
+    const btn = document.getElementById('apr25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
     // 마우스를 올리면 차트 보여줌
@@ -8293,8 +8293,8 @@ function aug24Chart() {
     });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('augToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
-        showChart('aug24Input');    // 월 바꿔주기
+    document.getElementById('apr25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+        showChart('apr25Input');    // 월 바꿔주기
     });
 
     // 마우스를 벗어나면 ChartContainer 전체 숨김
@@ -8305,8 +8305,8 @@ function aug24Chart() {
 }
 
 // const may25
-aug24Chart();
-function aug24Chart() {
+may25Chart();
+function may25Chart() {
     // 세일데이터 속성값을 상수화
     const keys = Object.keys(saleData);
     // 데이터 전처리
@@ -8316,7 +8316,7 @@ function aug24Chart() {
     // 입력된 1월 데이터 집어넣기 
     for (let i = 0; i <= keys.length - 1; i++) {
         const key = keys[i]; // 속성값 인덱스를 상수 선언
-        if (key.startsWith('d2408')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
+        if (key.startsWith('d2505')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
             const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
             for (let j = 0; j <= array.length - 1; j++) {
                 const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
@@ -8351,7 +8351,7 @@ function aug24Chart() {
     }
 
     // 차트 출력할 위치 지정하기
-    const ctx = document.querySelector('#aug24Input');  // 월 바꿔주기
+    const ctx = document.querySelector('#may25Input');  // 월 바꿔주기
 
     // 차트 색상 바꾸는 상수
     const barColors = psell.map(value => {
@@ -8369,7 +8369,7 @@ function aug24Chart() {
         data: {
             labels: pName,
             datasets: [{
-                label: '8월 총 판매량',             // 월 바꿔주기
+                label: '25년 5월 총 판매량',             // 월 바꿔주기
                 data: psell,
                 backgroundColor: barColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -8392,7 +8392,7 @@ function aug24Chart() {
 
     // 숨겨놓은 차트 버튼 호버하면 출력하기
 
-    const btn = document.getElementById('augToggleBtn');    // 월 바꿔주기
+    const btn = document.getElementById('may25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
     // 마우스를 올리면 차트 보여줌
@@ -8411,8 +8411,8 @@ function aug24Chart() {
     });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('augToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
-        showChart('aug24Input');    // 월 바꿔주기
+    document.getElementById('may25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+        showChart('may25Input');    // 월 바꿔주기
     });
 
     // 마우스를 벗어나면 ChartContainer 전체 숨김
@@ -8423,8 +8423,8 @@ function aug24Chart() {
 }
 
 // const jun25
-aug24Chart();
-function aug24Chart() {
+jun25Chart();
+function jun25Chart() {
     // 세일데이터 속성값을 상수화
     const keys = Object.keys(saleData);
     // 데이터 전처리
@@ -8434,7 +8434,7 @@ function aug24Chart() {
     // 입력된 1월 데이터 집어넣기 
     for (let i = 0; i <= keys.length - 1; i++) {
         const key = keys[i]; // 속성값 인덱스를 상수 선언
-        if (key.startsWith('d2408')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
+        if (key.startsWith('d2506')) {   // 문자열 d2401로 시작하는 배열 찾기   // 월 바꿔주기
             const array = saleData[key]; // JSON의 속성값 인덱스를 배열 지정
             for (let j = 0; j <= array.length - 1; j++) {
                 const item = array[j];  // pno 같은 것을 분류하기 위해 item 상수 선언
@@ -8469,7 +8469,7 @@ function aug24Chart() {
     }
 
     // 차트 출력할 위치 지정하기
-    const ctx = document.querySelector('#aug24Input');  // 월 바꿔주기
+    const ctx = document.querySelector('#jun25Input');  // 월 바꿔주기
 
     // 차트 색상 바꾸는 상수
     const barColors = psell.map(value => {
@@ -8487,7 +8487,7 @@ function aug24Chart() {
         data: {
             labels: pName,
             datasets: [{
-                label: '8월 총 판매량',             // 월 바꿔주기
+                label: '25년 6월 총 판매량',             // 월 바꿔주기
                 data: psell,
                 backgroundColor: barColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -8510,7 +8510,7 @@ function aug24Chart() {
 
     // 숨겨놓은 차트 버튼 호버하면 출력하기
 
-    const btn = document.getElementById('augToggleBtn');    // 월 바꿔주기
+    const btn = document.getElementById('jun25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
     // 마우스를 올리면 차트 보여줌
@@ -8529,8 +8529,8 @@ function aug24Chart() {
     });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('augToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
-        showChart('aug24Input');    // 월 바꿔주기
+    document.getElementById('jun25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+        showChart('jun25Input');    // 월 바꿔주기
     });
 
     // 마우스를 벗어나면 ChartContainer 전체 숨김
@@ -8540,7 +8540,13 @@ function aug24Chart() {
 
 }
 
+// fstBranch
 
+// sndBranch
+
+// trdBranch
+
+// fthBranch
 
 
 
