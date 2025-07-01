@@ -122,8 +122,8 @@ function logListAdd(searchTerm = ''){                                           
         p.pName.toLowerCase().includes(key)   //포함된다면 true값 안 포함하면 false값 , true 값만 filter(함수)해서 배열 재생성, 그리고 그중에서 .map(p => p.pno) 즉 productList.pno만 쏙 뺴서
         ).map(p => p.pno);                    // pNameToPnoInoutLog 배열을 다시 만든다 라는 뜻.
 
-        inoutLog = inoutLog.filter(log => pNameToPnoInoutLog.includes(log.pno));    // inoutLog 배열을 다시 그리는데 기존 배열에
-    }   
+        inoutLog = inoutLog.filter(log => pNameToPnoInoutLog.includes(log.pno)); // inoutLog 배열은 검색한 제품이름만 남아있는 배열 중 pno만 남겨둔 pNameToPnoInoutLog 배열을 돌면서 같은 pno가 포함( = 일치 ) (아래까지)
+    }                                                           // 되는 값만 다시 inoutLog에 재배치함 즉, productList에서 검색일치한 pName에서 pno만 남겨서 로그배열 pno랑 비교해서 같은 거만 남겨서 검색하겠단 뜻.
 
 
     let html ='' ;                                                                  // html 선언
@@ -291,11 +291,12 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         stockList(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
         });
     }
+    
     // logListAdd 검색창 뜨는 부분임
     if( LogSearchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
         LogSearchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
         keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
-        logListAdd(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 위랑 동일
+        logListAdd(keyword);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 //위랑 동일//
         });
     }
     
