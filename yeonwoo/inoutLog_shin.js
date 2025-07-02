@@ -262,26 +262,25 @@ function ShowLiEventner(totalArray, currentPage, perPage, onPageClick, type) {
 
     if (type === 'stock'){
         document.querySelector('#stock-page-item').innerHTML = html;
-        document.getElementById('stock-prev-btn').disabled = (currentPage === 1);
-        document.getElementById('stock-next-btn').disabled = (currentPage === totalPages);
-    } else if (type === 'log'){
+        document.getElementById('stock-prev-btn').disabled = (stockCurrentPage === 1);
+        document.getElementById('stock-next-btn').disabled = (stockCurrentPage === totalPages);
+    }
+    if (type === 'log'){
         document.querySelector('#log-page-item').innerHTML = html;
-        document.getElementById('log-prev-btn').disabled = (currentPage === 1);
-        document.getElementById('log-next-btn').disabled = (currentPage === totalPages);
+        document.getElementById('log-prev-btn').disabled = (logCurrentPage === 1);
+        document.getElementById('log-next-btn').disabled = (logCurrentPage === totalPages);
     }
 }
 
 
-function clickPage(page , onPageClick){   // 클릭페이지(매개변수) 함수, 저기 위에 html에 그린 것중에 저게 있음, 약간 수정하는 함수에 매개변수 받아서 하는 그런 느낌
-    
-    stockCurrentPage = page ;       // 현재 페이지 번호에 클릭한 페이지 번호로 바꿔주고
-    logCurrentPage = page ;
-    
+function clickPage(page , onPageClick){   
     if(onPageClick == 'stockList'){
-        stockList( keyword , page );    //  stockList 호출함, keyword는 당연히 검색값이랑 정렬값 유지한채 그 페이지를 보여주겠다는 뜻임
+        stockCurrentPage = page;
+        stockList(keyword , page);    
     }
     if(onPageClick == 'logListAdd'){
-        logListAdd( keyword, page );
+        logCurrentPage = page;
+        logListAdd(keyword, page);
     }  
 }
 
