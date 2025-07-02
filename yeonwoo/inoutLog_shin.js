@@ -216,37 +216,38 @@ function inoutEdit(logco) {                                                     
     alert("해당 로그를 찾을 수 없습니다.");                                                           // 만약 오류나면 실패 알림
 }
 
-function ShowLiEventner(totalProArray){ // ul htmlinner 함수
+function ShowLiEventner(totalProArray){         // ul innerHTML 페이지네이션해주는 함수 매개변수는 총 productList
 
-    const totalPages = Math.ceil(totalProArray / stockPerPage);
+    const totalPages = Math.ceil(totalProArray / stockPerPage); // totalPages 즉, 전체 페이지목록은 Math.ceil(계산해서 계산값 올림처리) , 총배열갯수 나누기 페이지당 배열갯수 ex) 21/10 == 2.1이면 3페이지 할당
 
-    const ul = document.querySelector('#stockPaginator');
+    const ul = document.querySelector('#stockPaginator');   // ul이라는 dom객체화하기
 
-    let html = '';
+    let html = '';                                          // html 지정해주기
 
-    const add = function(pageNumber , Show = pageNumber ){  // pageNumber은 이동하는 페이지  Show는 실제로 보여주는 1 2 3 4 페이지부분
-        html += `<li ${pageNumber === stockCurrentPage ? 'class="active"' : ''}>
+    const add = function(pageNumber , Show = pageNumber ){   // add이름을 가진 함수 (pageNumber은 이동하는 페이지넘버  Show는 실제로 보여주는 < 1 2 3 4 > 페이지부분)
+        html += `<li ${pageNumber === stockCurrentPage ? 'class="active"' : ''}>   
                     <a href = "#" onclick="clickPage(${(pageNumber)});return false;">
                     ${Show}
-                    </a>
-                </li>`
-    }
+                    </a> 
+                </li>`// 어려워보이지만 <li><a herf ='#' onclick="clickpage(클릭할 페이지); return false(= 실제론 안들어가지는 return false 줌)> 실제로 뜰 페이지 <1 2 3>이런거  " </li> 라는 html을 그려줌
+    }               //  ${pageNumber === stockCurrentPage ? 'class="active"' : ''} 는 삼항연산자로서 클릭할 페이지가 현재 페이지라면 class에 active라는 css를 주라고 한거임 실제로 css에 active라는 클래스가 꾸며져있음
+                    // 여기서 active에 준 건 bold 굵게 강조한 것
 
-    add(Math.max(1, stockCurrentPage - 1), '‹');
+    add(Math.max(1, stockCurrentPage - 1), '‹');    // add()함수 실행 Math.max는 둘 중 큰거 가져오겠단 거임 '‹' 이 버튼을 생성한다. 누르면 어디로 가냐고? 이전페이지, 그치만 1의 이전페이지는 없으니 1로 최솟값을 가지겠다라는뜻
     
-    for(let p = 1; p <= totalPages; p++) add(p);
+    for(let p = 1; p <= totalPages; p++) add(p);    // p를 전체 페이지목록수만큼 숫자로 준다.
 
-    add(Math.min(totalPages, stockCurrentPage + 1), '›');
+    add(Math.min(totalPages, stockCurrentPage + 1), '›');   // '›'이버튼을 누르면 다음페이지를 이동하는데 이건 Math.min 둘 중 작은 걸 갖겠다. 최대로 이동할 페이지는 전체페이지까지라는 뜻
 
-    ul.innerHTML = html;
+    ul.innerHTML = html;        // html 에 innerHTML해주기
 }
 
 
-function clickPage(page){
+function clickPage(page){   // 클릭페이지(매개변수) 함수, 저기 위에 html에 그린 것중에 저게 있음, 약간 수정하는 함수에 매개변수 받아서 하는 그런 느낌
     
-    stockCurrentPage = page ;                                                                       //
+    stockCurrentPage = page ;       // 현재 페이지 번호에 클릭한 페이지 번호로 바꿔주고
     
-    stockList( keyword , page );                                                                    //
+    stockList( keyword , page );    //  stockList 호출함, keyword는 당연히 검색값이랑 정렬값 유지한채 그 페이지를 보여주겠다는 뜻임
 
 }
 
@@ -292,10 +293,10 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
     });
     
 
-
-    const totalProArray = productList.length;                                   // totalProArray는 제품리스트 총 갯수임
-    const firstShowIndex = (page - 1)*stockPerPage ;
-    const PageProducList = productList.splice(firstShowIndex , firstShowIndex + stockPerPage);
+    // 페이지네이션 동적으로 페이지 그리는 부분
+    const totalProArray = productList.length;                         // totalProArray는 제품리스트 총 배열 갯수임
+    const ShowIndex = (page - 1)*stockPerPage ;        // 페이지마다 보여줄 배열들 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터 해야겠지?
+    const PageProducList = productList.splice(ShowIndex , ShowIndex + stockPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
 
     
     //const productList = document.querySelector('#productList');
@@ -303,8 +304,8 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
  
     let html ='' ;                                                                       // html 선언
     
-    for(let i = 0 ; i < PageProducList.length ; i++){                                       //
-        const proArray = PageProducList[i];                                                // 
+    for(let i = 0 ; i < PageProducList.length ; i++){                                       // pageProductList = 페이지네이션으로부터 자른 배열들 순회
+        const proArray = PageProducList[i];                                                //  proArray로 간소화
         
         let amountAlert , color = '';                                                   // 부족 적정 여유에 따라 색을 다르게 부여할 거니까 변수 지정
         
@@ -321,7 +322,7 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
 
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
 
-    ShowLiEventner(totalProArray);
+    ShowLiEventner(totalProArray);            // 이건 페이지네이션 동적으로 productList갯수에 따라 페이지 <12345> 만들어줄 함수, 매개변수는 당연히 제품리스트 총 배열 갯수를 매개변수로 함 
 
     //showProductList();
 }
@@ -341,8 +342,8 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
     if( searchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
         searchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
         keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
-        stockCurrentPage = 1 ; 
-        stockList(keyword , 1);                                                // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
+        stockCurrentPage = 1 ;                                              // 검색할 때 마다 페이지네이션 페이지 1로 새로고침
+        stockList(keyword , 1);                                        // 그런 input값과 페이지네이션 1값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
         });
     }
     
@@ -362,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         sortSelect.addEventListener('change', e =>{                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             sortOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
             stockCurrentPage = 1 ;
-            stockList(keyword , 1 );                                         // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword 변수 넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
+            stockList(keyword , 1 );                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
         });
     }    
 });                            
