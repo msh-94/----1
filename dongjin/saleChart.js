@@ -6405,7 +6405,6 @@ function showChart(chartIdToShow) {
     const target = document.getElementById(chartIdToShow);
     if (target) target.style.display = 'block';
 
-
 }
 
 function dateFunc() {                // 시계함수
@@ -6519,29 +6518,29 @@ function jan24Chart() {
     const btn = document.getElementById('janToggleBtn');        // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('janToggleBtn').addEventListener('mouseenter', () => {
+    document.getElementById('janToggleBtn').addEventListener('click', () => {
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('jan24Input');        // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -6642,29 +6641,29 @@ function feb24Chart() {
     const btn = document.getElementById('febToggleBtn');        // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 보여주는 함수 불러오기
-    document.getElementById('febToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('febToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('feb24Input');        // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -6767,29 +6766,29 @@ function mar24Chart() {
     const btn = document.getElementById('marToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('marToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('marToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('mar24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -6889,29 +6888,29 @@ function apr24Chart() {
     const btn = document.getElementById('aprToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('aprToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('aprToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('apr24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7010,29 +7009,29 @@ function may24Chart() {
     const btn = document.getElementById('mayToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('mayToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('mayToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('may24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7130,29 +7129,29 @@ function jun24Chart() {
     const btn = document.getElementById('junToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('junToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('junToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('jun24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7249,29 +7248,29 @@ function jul24Chart() {
     const btn = document.getElementById('julToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('julToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('julToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('jul24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7368,29 +7367,29 @@ function aug24Chart() {
     const btn = document.getElementById('augToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('augToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('augToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('aug24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7488,29 +7487,29 @@ function sep24Chart() {
     const btn = document.getElementById('sepToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('sepToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('sepToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('sep24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7607,29 +7606,29 @@ function oct24Chart() {
     const btn = document.getElementById('octToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('octToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('octToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('oct24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7726,29 +7725,29 @@ function nov24Chart() {
     const btn = document.getElementById('novToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('novToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('novToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('nov24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7845,29 +7844,29 @@ function dec24Chart() {
     const btn = document.getElementById('decToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('decToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('decToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('dec24Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -7964,29 +7963,29 @@ function jan25Chart() {
     const btn = document.getElementById('jan25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('jan25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('jan25ToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('jan25Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -8083,29 +8082,29 @@ function feb25Chart() {
     const btn = document.getElementById('feb25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('feb25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('feb25ToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('feb25Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -8202,29 +8201,29 @@ function mar25Chart() {
     const btn = document.getElementById('mar25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('mar25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('mar25ToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('mar25Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -8321,29 +8320,29 @@ function apr25Chart() {
     const btn = document.getElementById('apr25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('apr25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('apr25ToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('apr25Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -8440,29 +8439,29 @@ function may25Chart() {
     const btn = document.getElementById('may25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('may25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('may25ToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('may25Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -8559,29 +8558,29 @@ function jun25Chart() {
     const btn = document.getElementById('jun25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.getElementById('ChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('jun25ToggleBtn').addEventListener('mouseenter', () => {  // 월 바꿔주기
+    document.getElementById('jun25ToggleBtn').addEventListener('click', () => {  // 월 바꿔주기
         showOnlyContainer('ChartContainer');        // 해당 차트컨테이너만 열리게하는 함수
         showChart('jun25Input');    // 월 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.getElementById('ChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.getElementById('ChartContainer').addEventListener('click', () => {
         document.getElementById('ChartContainer').style.display = 'none';
     });
 
@@ -8680,29 +8679,29 @@ function fst24Chart() {
     const btn = document.getElementById('fst24ToggleBtn');    // 월 바꿔주기
     const chartBox = document.querySelector('#branchChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('fst24ToggleBtn').addEventListener('mouseenter', () => {  // 분기 바꿔주기
+    document.getElementById('fst24ToggleBtn').addEventListener('click', () => {  // 분기 바꿔주기
         showOnlyContainer('branchChartContainer'); // 이 차트컨테이너만 열리게 하는 함수
         showChart('fst24Input');    // 분기 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.querySelector('#branchChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.querySelector('#branchChartContainer').addEventListener('click', () => {
         document.querySelector('#branchChartContainer').style.display = 'none';
     });
 
@@ -8799,29 +8798,29 @@ function snd24Chart() {
     const btn = document.getElementById('snd24ToggleBtn');    // 분기 바꿔주기
     const chartBox = document.querySelector('#branchChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('snd24ToggleBtn').addEventListener('mouseenter', () => {  // 분기 바꿔주기
+    document.getElementById('snd24ToggleBtn').addEventListener('click', () => {  // 분기 바꿔주기
         showOnlyContainer('branchChartContainer'); // 이 차트컨테이너만 열리게 하는 함수
         showChart('snd24Input');    // 분기 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.querySelector('#branchChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.querySelector('#branchChartContainer').addEventListener('click', () => {
         document.querySelector('#branchChartContainer').style.display = 'none';
     });
 
@@ -8919,29 +8918,29 @@ function trd24Chart() {
     const btn = document.getElementById('trd24ToggleBtn');    // 월 바꿔주기
     const chartBox = document.querySelector('#branchChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('trd24ToggleBtn').addEventListener('mouseenter', () => {  // 분기 바꿔주기
+    document.getElementById('trd24ToggleBtn').addEventListener('click', () => {  // 분기 바꿔주기
         showOnlyContainer('branchChartContainer'); // 이 차트컨테이너만 열리게 하는 함수
         showChart('trd24Input');    // 분기 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.querySelector('#branchChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.querySelector('#branchChartContainer').addEventListener('click', () => {
         document.querySelector('#branchChartContainer').style.display = 'none';
     });
 
@@ -9039,29 +9038,29 @@ function fth24Chart() {
     const btn = document.getElementById('fth24ToggleBtn');    // 월 바꿔주기
     const chartBox = document.querySelector('#branchChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('fth24ToggleBtn').addEventListener('mouseenter', () => {  // 분기 바꿔주기
+    document.getElementById('fth24ToggleBtn').addEventListener('click', () => {  // 분기 바꿔주기
         showOnlyContainer('branchChartContainer'); // 이 차트컨테이너만 열리게 하는 함수
         showChart('fth24Input');    // 분기 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.querySelector('#branchChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.querySelector('#branchChartContainer').addEventListener('click', () => {
         document.querySelector('#branchChartContainer').style.display = 'none';
     });
 
@@ -9159,29 +9158,29 @@ function fst25Chart() {
     const btn = document.getElementById('fst25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.querySelector('#branchChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('fst25ToggleBtn').addEventListener('mouseenter', () => {  // 분기 바꿔주기
+    document.getElementById('fst25ToggleBtn').addEventListener('click', () => {  // 분기 바꿔주기
         showOnlyContainer('branchChartContainer'); // 이 차트컨테이너만 열리게 하는 함수
         showChart('fst25Input');    // 분기 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.querySelector('#branchChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.querySelector('#branchChartContainer').addEventListener('click', () => {
         document.querySelector('#branchChartContainer').style.display = 'none';
     });
 
@@ -9279,29 +9278,29 @@ function snd25Chart() {
     const btn = document.getElementById('snd25ToggleBtn');    // 월 바꿔주기
     const chartBox = document.querySelector('#branchChartContainer');
 
-    // 마우스를 올리면 차트 보여줌
-    btn.addEventListener('mouseenter', () => {
+    // 마우스를 클릭하면 차트 보여줌
+    btn.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 위로 마우스를 옮긴 경우에도 유지
-    chartBox.addEventListener('mouseenter', () => {
+    chartBox.addEventListener('click', () => {
         chartBox.style.display = 'block';
     });
 
     // 차트 영역 밖으로 마우스 옮기면 사라지기
-    chartBox.addEventListener('mouseleave', () => {
-        chartBox.style.display = 'none';
-    });
+    // chartBox.addEventListener('click', () => {
+    //     chartBox.style.display = 'none';
+    // });
 
     // 호버로 차트 불러오는 함수 호출
-    document.getElementById('snd25ToggleBtn').addEventListener('mouseenter', () => {  // 분기 바꿔주기
+    document.getElementById('snd25ToggleBtn').addEventListener('click', () => {  // 분기 바꿔주기
         showOnlyContainer('branchChartContainer'); // 이 차트컨테이너만 열리게 하는 함수
         showChart('snd25Input');    // 분기 바꿔주기
     });
 
-    // 마우스를 벗어나면 ChartContainer 전체 숨김
-    document.querySelector('#branchChartContainer').addEventListener('mouseleave', () => {
+    // 마우스를 클릭하면 ChartContainer 전체 숨김
+    document.querySelector('#branchChartContainer').addEventListener('click', () => {
         document.querySelector('#branchChartContainer').style.display = 'none';
     });
 
