@@ -220,26 +220,24 @@ function ShowLiEventner(totalProArray){         // ul innerHTML 페이지네이�
 
     const totalPages = Math.ceil(totalProArray / stockPerPage); // totalPages 즉, 전체 페이지목록은 Math.ceil(계산해서 계산값 올림처리) , 총배열갯수 나누기 페이지당 배열갯수 ex) 21/10 == 2.1이면 3페이지 할당
 
-    const ul = document.querySelector('#stockPaginator');   // ul이라는 dom객체화하기
-
+    const ul = document.querySelector('#page-item');   // ul이라는 dom객체화하기
     let html = '';                                          // html 지정해주기
 
-    const add = function(pageNumber , Show = pageNumber ){   // add이름을 가진 함수 (pageNumber은 이동하는 페이지넘버  Show는 실제로 보여주는 < 1 2 3 4 > 페이지부분)
+    const add = function(pageNumber){   // add이름을 가진 함수 (pageNumber은 이동하는 페이지넘버)
         html += `<li ${pageNumber === stockCurrentPage ? 'class="active"' : ''}>   
                     <a href = "#" onclick="clickPage(${(pageNumber)});return false;">
-                    ${Show}
+                    ${pageNumber}
                     </a> 
                 </li>`// 어려워보이지만 <li><a herf ='#' onclick="clickpage(클릭할 페이지); return false(= 실제론 안들어가지는 return false 줌)> 실제로 뜰 페이지 <1 2 3>이런거  " </li> 라는 html을 그려줌
     }               //  ${pageNumber === stockCurrentPage ? 'class="active"' : ''} 는 삼항연산자로서 클릭할 페이지가 현재 페이지라면 class에 active라는 css를 주라고 한거임 실제로 css에 active라는 클래스가 꾸며져있음
                     // 여기서 active에 준 건 bold 굵게 강조한 것
 
-    add(Math.max(1, stockCurrentPage - 1), '이전');    // add()함수 실행 Math.max는 둘 중 큰거 가져오겠단 거임 '‹' 이 버튼을 생성한다. 누르면 어디로 가냐고? 이전페이지, 그치만 1의 이전페이지는 없으니 1로 최솟값을 가지겠다라는뜻
-    
-    for(let p = 1; p <= totalPages; p++) add(p);    // p를 전체 페이지목록수만큼 숫자로 준다.
 
-    add(Math.min(totalPages, stockCurrentPage + 1), '다음');   // '›'이버튼을 누르면 다음페이지를 이동하는데 이건 Math.min 둘 중 작은 걸 갖겠다. 최대로 이동할 페이지는 전체페이지까지라는 뜻
+    for(let p = 1; p <= totalPages; p++) add(p);    // p를 전체 페이지목록수만큼 숫자로 준다. 
 
     ul.innerHTML = html;        // html 에 innerHTML해주기
+
+    
 }
 
 
