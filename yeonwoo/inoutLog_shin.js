@@ -149,7 +149,7 @@ function logListAdd(searchTerm = '', page = 1){                                 
     // 페이지네이션 동적으로 페이지 그리는 부분
     const totalLogArray = inoutLog.length;                         // totalProArray는 제품리스트 총 배열 갯수임
     const ShowIndex = (page - 1)*logPerPage ;        // 페이지마다 보여줄 배열들 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터 해야겠지?
-    const PageinoutLog = inoutLog.splice(ShowIndex , ShowIndex + logPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
+    const PageinoutLog = inoutLog.slice(ShowIndex , ShowIndex + logPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
 
 
 
@@ -173,7 +173,7 @@ function logListAdd(searchTerm = '', page = 1){                                 
     }
 
     inputLogTable.innerHTML = html;                                                  // inputLogTable html에 innerHTML 하기
-    ShowLiEventner (totalArray =totalLogArray, currnetPage = logCurrentPage , perPage = logPerPage , onPageClick = logListAdd );
+    ShowLiEventner ( totalLogArray , logCurrentPage , logPerPage , logListAdd , 'log' );
 }
 
 
@@ -245,39 +245,44 @@ function inoutEdit(logco) {                                                     
     alert("해당 로그를 찾을 수 없습니다.");                                                           // 만약 오류나면 실패 알림
 }
 
-function ShowLiEventner(totalArray , totalLogArray){         // ul innerHTML 페이지네이션해주는 함수 매개변수는 총 productList
+function ShowLiEventner(totalArray, currentPage, perPage, onPageClick, type) {
+    
+    const totalPages = Math.ceil(totalArray / perPage);
+    let html = '';
 
-    const totalPages = Math.ceil(totalProArray , currnetPage , perPage , onPageClick); // totalPages 즉, 전체 페이지목록은 Math.ceil(계산해서 계산값 올림처리) , 총배열갯수 나누기 페이지당 배열갯수 ex) 21/10 == 2.1이면 3페이지 할당
-
-    const div = document.querySelector('#page-item');   // ul이라는 dom객체화하기
-    let html = '';                                          // html 지정해주기
-
-    const add = function(pageNumber){   // add이름을 가진 함수 (pageNumber은 이동하는 페이지넘버)
-        html += `<div ${pageNumber === stockCurrentPage ? 'class="active"' : ''}>   
-                    <a href = "#" onclick="clickPage(${(pageNumber)});return false;">
-                    ${pageNumber}
+    const add = function(pageNumber){
+        html += `<div ${pageNumber === currentPage ? 'class="active"' : ''}>   
+                    <a href="#" onclick="clickPage(${pageNumber}, '${onPageClick.name}'); return false;">
+                        ${pageNumber}
                     </a> 
-                </div>`// 어려워보이지만 <li><a herf ='#' onclick="clickpage(클릭할 페이지); return false(= 실제론 안들어가지는 return false 줌)> 실제로 뜰 페이지 <1 2 3>이런거  " </li> 라는 html을 그려줌
-    }               //  ${pageNumber === stockCurrentPage ? 'class="active"' : ''} 는 삼항연산자로서 클릭할 페이지가 현재 페이지라면 class에 active라는 css를 주라고 한거임 실제로 css에 active라는 클래스가 꾸며져있음
-                    // 여기서 active에 준 건 bold 굵게 강조한 것
+                </div>`;
+    };
 
+    for (let p = 1; p <= totalPages; p++) add(p);
 
-    for(let p = 1; p <= totalPages; p++) add(p);    // p를 전체 페이지목록수만큼 숫자로 준다. 
-
-    div.innerHTML = html;        // html 에 innerHTML해주기
-
-    // 이전 버튼과 다음 버튼을 활성화/비활성화
-    document.getElementById('prev-btn').disabled = stockCurrentPage === 1;              // 첫 페이지인 경우 이전 버튼 비활성화
-    document.getElementById('next-btn').disabled = stockCurrentPage === totalPages;     // 마지막 페이지인 경우 다음 버튼 비활성화
+    if (type === 'stock'){
+        document.querySelector('#stock-page-item').innerHTML = html;
+        document.getElementById('stock-prev-btn').disabled = (currentPage === 1);
+        document.getElementById('stock-next-btn').disabled = (currentPage === totalPages);
+    } else if (type === 'log'){
+        document.querySelector('#log-page-item').innerHTML = html;
+        document.getElementById('log-prev-btn').disabled = (currentPage === 1);
+        document.getElementById('log-next-btn').disabled = (currentPage === totalPages);
+    }
 }
 
 
-function clickPage(page){   // 클릭페이지(매개변수) 함수, 저기 위에 html에 그린 것중에 저게 있음, 약간 수정하는 함수에 매개변수 받아서 하는 그런 느낌
+function clickPage(page , onPageClick){   // 클릭페이지(매개변수) 함수, 저기 위에 html에 그린 것중에 저게 있음, 약간 수정하는 함수에 매개변수 받아서 하는 그런 느낌
     
     stockCurrentPage = page ;       // 현재 페이지 번호에 클릭한 페이지 번호로 바꿔주고
     logCurrentPage = page ;
-    stockList( keyword , page );    //  stockList 호출함, keyword는 당연히 검색값이랑 정렬값 유지한채 그 페이지를 보여주겠다는 뜻임
-    logListAdd( keyword, page );  
+    
+    if(onPageClick == 'stockList'){
+        stockList( keyword , page );    //  stockList 호출함, keyword는 당연히 검색값이랑 정렬값 유지한채 그 페이지를 보여주겠다는 뜻임
+    }
+    if(onPageClick == 'logListAdd'){
+        logListAdd( keyword, page );
+    }  
 }
 
 
@@ -325,7 +330,7 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
     // 페이지네이션 동적으로 페이지 그리는 부분
     const totalProArray = productList.length;                         // totalProArray는 제품리스트 총 배열 갯수임
     const ShowIndex = (page - 1)*stockPerPage ;        // 페이지마다 보여줄 배열들 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터 해야겠지?
-    const PageProducList = productList.splice(ShowIndex , ShowIndex + stockPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
+    const PageProducList = productList.slice(ShowIndex , ShowIndex + stockPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
 
     
     //const productList = document.querySelector('#productList');
@@ -351,8 +356,7 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
 
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
 
-    ShowLiEventner(totalProArray);            // 이건 페이지네이션 동적으로 productList갯수에 따라 페이지 <12345> 만들어줄 함수, 매개변수는 당연히 제품리스트 총 배열 갯수를 매개변수로 함 
-
+    ShowLiEventner( totalProArray , stockCurrentPage , stockPerPage , stockList , 'stock' );            // 이건 페이지네이션 동적으로 productList갯수에 따라 페이지 <12345> 만들어줄 함수, 매개변수는 당연히 제품리스트 총 배열 갯수를 매개변수로 함 
     //showProductList();
 }
 
