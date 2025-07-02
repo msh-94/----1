@@ -119,7 +119,7 @@ function productEdit(pno) {
 } // 제품 수정함수 끝
 
 // ============================= 페이지네이션 =================================== //
-let productList = getProduct();
+let productList = getProduct();  // 상품 목록을 가져오는 함수 호출
 const itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
 const pagesPerGroup = 10; // 한 페이지 그룹에 보여줄 페이지 수
 
@@ -129,69 +129,59 @@ let currentGroup = 1; // 현재 그룹
 const totalItems = productList.length; // 전체 아이템 수
 const totalPages = Math.ceil(totalItems / itemsPerPage); // 전체 페이지 수
 
-// 샘플 데이터를 로컬스토리지에 저장 (로컬스토리지에 데이터가 없을 때만)
-if (productList.length === 0) {
-    productList = Array.from({ length: 50 }, (_, i) => ({
-        pno: i + 1,
-        pname: `상품 ${i + 1}`,
-        pimg: `http://placehold.co/100x100`,
-        pprice: (i + 1) * 100,
-    }));
-    localStorage.setItem('productList', JSON.stringify(productList));
-}
 
 // 페이지 번호와 그룹을 동적으로 생성
 function renderPagination() {
-    const pageGroupElement = document.getElementById('page-group');
+    const pageGroupElement = document.getElementById('page-group');// 페이지 그룹을 표시할 DOM 요소 선택
     pageGroupElement.innerHTML = ''; // 기존 페이지 목록 초기화
 
-    const startPage = (currentGroup - 1) * pagesPerGroup + 1;
-    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
-
+    const startPage = (currentGroup - 1) * pagesPerGroup + 1; // 현재 그룹에서 시작하는 페이지 번호
+    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages); // 현재 그룹에서 끝나는 페이지 번호
+     // 페이지 번호를 동적으로 생성
     for (let i = startPage; i <= endPage; i++) {
-        const pageItem = document.createElement('div');
-        pageItem.classList.add('page-item');
-        pageItem.textContent = i;
+        const pageItem = document.createElement('div');   // 페이지 번호를 담을 div 요소 생성
+        pageItem.classList.add('page-item');  // 페이지 항목 클래스 추가
+        pageItem.textContent = i;  // 페이지 번호 텍스트 추가
 
-        if (i === currentPage) {
-            pageItem.classList.add('active');
+        if (i === currentPage) { // 현재 페이지에 해당하는 경우
+            pageItem.classList.add('active'); // 'active' 클래스를 추가하여 현재 페이지를 강조
         }
-
+        // 페이지 번호 클릭 시 동작
         pageItem.addEventListener('click', () => {
-            currentPage = i;
-            renderPagination();
-            renderItems();
+            currentPage = i;  // 클릭한 페이지 번호로 현재 페이지 업데이트
+            renderPagination();  // 페이지네이션 다시 렌더링
+            renderItems(); // 현재 페이지에 맞는 아이템을 렌더링
         });
 
-        pageGroupElement.appendChild(pageItem);
+        pageGroupElement.appendChild(pageItem);  // 페이지 항목을 페이지 그룹에 추가
     }
 
     // 이전 버튼과 다음 버튼을 활성화/비활성화
-    document.getElementById('prev-btn').disabled = currentPage === 1;
-    document.getElementById('next-btn').disabled = currentPage === totalPages;
+    document.getElementById('prev-btn').disabled = currentPage === 1;  // 첫 페이지인 경우 이전 버튼 비활성화
+    document.getElementById('next-btn').disabled = currentPage === totalPages;  // 마지막 페이지인 경우 다음 버튼 비활성화
 }
 
 // 페이지 변경 함수
 function changePage(direction) {
-    currentPage += direction;
+    currentPage += direction;   // 페이지 번호를 direction만큼 변경
 
     if (currentPage < 1) {
-        currentPage = 1;
+        currentPage = 1;     // 첫 페이지 이상으로 내려가지 않도록 제한
     } else if (currentPage > totalPages) {
-        currentPage = totalPages;
+        currentPage = totalPages;    // 마지막 페이지 이상으로 넘어가지 않도록 제한
     }
 
-    // 현재 그룹을 조정
-    const groupStartPage = (currentGroup - 1) * pagesPerGroup + 1;
-    const groupEndPage = Math.min(groupStartPage + pagesPerGroup - 1, totalPages);
+     // 현재 그룹을 조정 (현재 페이지가 새로운 그룹의 범위에 들어가면 그룹을 변경)
+    const groupStartPage = (currentGroup - 1) * pagesPerGroup + 1;   // 현재 그룹의 시작 페이지
+    const groupEndPage = Math.min(groupStartPage + pagesPerGroup - 1, totalPages);  // 현재 그룹의 끝 페이지
     if (currentPage > groupEndPage) {
-        currentGroup++;
+        currentGroup++;  // 현재 페이지가 그룹 끝을 넘어가면 그룹을 증가
     } else if (currentPage < groupStartPage) {
-        currentGroup--;
+        currentGroup--; // 현재 페이지가 그룹 시작을 넘지 않으면 그룹을 감소
     }
 
-    renderPagination();
-    renderItems();
+    renderPagination(); // 페이지네이션 다시 렌더링
+    renderItems();  // 현재 페이지에 맞는 아이템 렌더링
 }
 
 // 현재 페이지에 맞는 아이템을 테이블의 tbody에 출력하는 함수
@@ -199,11 +189,11 @@ function changePage(direction) {
 function renderItems() {
   const tableBody = document.getElementById('productTbody');  // id가 'productTbody'인 tbody를 선택
   tableBody.innerHTML = ''; // 기존 테이블 내용 초기화
-  
+  // 현재 페이지에 해당하는 상품 아이템들의 시작 인덱스와 끝 인덱스 계산
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-  const pageItems = productList.slice(startIndex, endIndex);
-
+  const pageItems = productList.slice(startIndex, endIndex);  // 해당 페이지의 상품 목록을 슬라이싱하여 추출
+  // 추출된 아이템들을 테이블에 추가
   pageItems.forEach(pro => {
     const row = document.createElement('tr'); // 새로운 테이블 행(tr) 생성
     
@@ -228,6 +218,6 @@ function renderItems() {
   });
 }
 
-// 페이지 초기화
+// 페이지 초기화: 페이지네이션과 아이템 렌더링 함수 호출
 renderPagination();
 renderItems();
