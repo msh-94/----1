@@ -6408,6 +6408,26 @@ function showChart(chartIdToShow) {
 
 }
 
+function dateFunc() {                // 시계함수
+    // 1. 현재 날짜/시간을 구하기 : new Date() 객체
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    const ss = String(now.getSeconds()).padStart(2, '0');
+    // 2. 
+    const nowDate = document.querySelector('#nowDate');// (1)
+    let html = `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+    nowDate.innerHTML = html; // (3)
+} // func end 
+
+// *** 1초 마다 시계함수 호출하기 ***
+setInterval(dateFunc, 1000);
+
+
+
 // 24년 1월 차트 출력하기
 jan24Chart();
 function jan24Chart() {
