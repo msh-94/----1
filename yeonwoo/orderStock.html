@@ -1,12 +1,105 @@
 <!DOCTYPE html>
+
 <head>
-<meta charset="UTF-8" />
-<title>재고 주문</title>
+    <meta charset="UTF-8" />
+    <title>재고 주문</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #Board {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #stockId {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #Board>div {
+            margin-bottom: 15px;
+        }
+
+        #Board>div>div {
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="number"],
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input#currentStock {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        textarea {
+            height: 60px;
+            resize: vertical;
+        }
+
+        .btn-box {
+            text-align: right;
+            margin-top: 25px;
+        }
+
+        .btn-box button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+
+        .btn-box button:first-child {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-box button:first-child:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-box button:last-child {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-box button:last-child:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
 </head>
+
 <body>
     <div id="Board">
         <div id="stockId">pno : 1 돼지바</div>
-    
+
         <div>
             현재 재고
             <input id="currentStock" type="number" readonly />
@@ -29,5 +122,6 @@
         </div>
     </div>
     <script src="orderStock.js"></script>
-</body> 
+</body>
+
 </html>

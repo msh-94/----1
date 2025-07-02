@@ -93,8 +93,8 @@ function boardEdit(){                                                           
     }
 
     if (window.opener){                                                                         // window.opener은 이창을 열게 해준 기존 재고로그 영역을 참조하는것 
-        window.opener.stockList?.(window.opener.keyword);                                      // ?.()는 이 함수가 있다면 실행해줘라 즉 렌더링 해줘 라는 뜻
-        window.opener.logListAdd?.();
+        window.opener.stockList?.(window.opener.keyword ,window.opener.stockCurrentPage);                                      // ?.()는 이 함수가 있다면 실행해줘라 즉 렌더링 해줘 라는 뜻
+        window.opener.logListAdd?.(window.opener.keyword , window.opener.);
         window.opener.LackBoard?.();                        
     }
 
