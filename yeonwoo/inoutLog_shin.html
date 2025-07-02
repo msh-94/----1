@@ -91,10 +91,10 @@
                         <h3> 입출고 로그 영역 </h3>
                         <input id="LogSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
                         <select name="" id="logSelect">                            
-                            <option value="nameAsc">로그 ▲</option>
-                            <option value="nameDesc">로그 ▼</option>
-                            <option value="stockDesc">날짜 ▼ </option>
-                            <option value="stockAsc">날짜 ▲</option>
+                            <option value="logDesc">로그 ▼</option>
+                            <option value="logAsc">로그 ▲</option>
+                            <option value="dateDesc">날짜 ▼ </option>
+                            <option value="dateAsc">날짜 ▲</option>
                         </select>
                         <thead>
                             <tr>
@@ -119,6 +119,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <button id="prev-btn" onclick="clickPage(stockCurrentPage -1)">이전</button>
+                    <div id="page-item" class="paginator"></div>
+                    <button id="next-btn" onclick="clickPage(stockCurrentPage + 1)">다음</button>
                 </div>
                 <div>
                     <table class="container">
@@ -149,9 +152,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button id="prev-btn" onclick="clickPage(stockCurrentPage -1)"></button>
-                    <ul id="page-item" class="paginator"></ul>
-                    <button id="next-btn" onclick="clickPage(stockCurrentPage + 1)"></button>
+                    <button id="prev-btn" onclick="clickPage(stockCurrentPage -1)">이전</button>
+                    <div id="page-item" class="paginator"></div>
+                    <button id="next-btn" onclick="clickPage(stockCurrentPage + 1)">다음</button>
                 </div>
             </div>
         </div>
