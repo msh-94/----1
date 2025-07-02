@@ -139,7 +139,7 @@ function logListAdd(searchTerm = ''){                                           
         html += `<tr>   
                         <td> ${Log.logco} </td> <td> ${Log.inOut} </td> <td> ${pro.pName} </td> 
                         <td> ${Log.amount} </td> <td> ${Log.date} </td> <td> ${Log.area} </td>
-                        <td><button onclick="inoutEdit(${Log.logco})"> 수정 </button>  
+                        <td><button class="btnEdit" onclick="inoutEdit(${Log.logco})"> 수정 </button>  
                 </tr>`                                                                  // 입력함수에서 받은 값 html 추가하기 
 
     }
