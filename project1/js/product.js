@@ -219,7 +219,7 @@ function renderItems() {
       <td> ${pro.pprice}원 </td>
       <td> 
         <button class="btnEdit" onclick="productEdit(${pro.pno})">수정</button>
-        <button class="btnDelete" onclick="productDelete(${pro.pno})">삭제</button>
+        <button class="btnDelete" onclick="productDelete(${pro.pno})">삭제</button> 
       </td>
     `;
     
