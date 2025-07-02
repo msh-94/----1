@@ -203,9 +203,9 @@ function renderItems() {
   // 현재 페이지에 해당하는 상품 아이템들의 시작 인덱스와 끝 인덱스 계산
   let productList = getProduct();
   productList.sort((a, b) => b.pno - a.pno);    // 제품코드 내림차순 정렬
-  const totalItems = productList.length; // 전체 아이템 수
-  const startIndex = (currentPage - 1) * itemsPerPage;  
-  const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+  const totalItems = productList.length;        // 전체 아이템 수
+  const startIndex = (currentPage - 1) * itemsPerPage;  // 시작 인덱스
+  const endIndex = Math.min(startIndex + itemsPerPage, totalItems); // 끝 인덱스
   const pageItems = productList.slice(startIndex, endIndex);  // 해당 페이지의 상품 목록을 슬라이싱하여 추출
   // 추출된 아이템들을 테이블에 추가
   pageItems.forEach(pro => {
