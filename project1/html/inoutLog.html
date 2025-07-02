@@ -73,7 +73,7 @@
             border: 1px solid #ddd;
         }
         .upSize{ margin-top: 20px;}
-        li{color: white;}
+        li{color: white; list-style-type: none; margin-top: 20px;}
         /*  출력 버튼  */
         .btnAdd {
             padding: 12px 25px;
@@ -104,6 +104,9 @@
             border: 1px solid #dee2e6;
             border-radius: 8px;
         }
+        .event{background-color: #020f59; text-align: center;}
+        .eventB{background-color: #0540f2; text-align: center;}
+        .sidebar-left{padding: 0;}
     </style>
 </head>
 
@@ -119,10 +122,10 @@
         <div class="container" style="display: flex;"> <!-- content-->
             <div class="row-4" style=" width: 250px; background-color: #1E2940; color: white;"> <!-- side bar -->
                 <span style="margin-left: 20px;"> 오늘날짜 : </span><span id="nowDate"></span>
-                <ul>
-                    <li><a href=""> 제품 관리 </a></li>
-                    <li><a href=""> 입출고 로그 </a></li>
-                    <li><a href=""> 제품 차트 </a></li>
+                <ul class="sidebar-left">
+                    <li class="eventB"><a href=""> 제품 관리 </a></li>
+                    <li class="event"><a href=""> 입출고 로그 </a></li>
+                    <li class="eventB"><a href=""> 제품 차트 </a></li>
                 </ul>
             </div>
             <div class="row-8" style="margin-top: 30px; margin-left: 50px; width: 1000px;"> <!-- main -->
@@ -135,9 +138,9 @@
                     <button class="btnAdd" onclick="outAdd()"> 출고 </button>
                 </div>
                 <div class="upSize">
-                    <table class="container"> <!-- 입출고 로그 목록 -->
+                    <table class="container table"> <!-- 입출고 로그 목록 -->
                         <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 입출고 로그 영역 </h3> </div>
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th> 로그번호 </th>
                                 <th> 입/출고 </th>
@@ -163,9 +166,9 @@
                     </div>
                 </div>
                 <div  class="upSize">
-                    <table class="container">
+                    <table class="container table">
                         <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 재고 확인 영역 </h3> </div>
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th> 제품코드 </th>
                                 <th> 제품명 </th>

@@ -75,7 +75,7 @@
             border: 1px solid #ddd;
         }
         .upSize{ margin-top: 20px;} /* div 간격*/
-        li{color: white;} /* 좌측 사이드바 리스트 색상 */
+        li{color: white;  list-style-type: none; margin-top: 20px;} /* 좌측 사이드바 리스트 색상 */
         /* 등록버튼 */
         .btnAdd {
             padding: 12px 25px;
@@ -115,7 +115,9 @@
             border: 1px solid #dee2e6;
             border-radius: 8px;
         }
-        
+        .event{background-color: #020f59; text-align: center;}
+        .eventB{background-color: #0540f2; text-align: center;}
+        .sidebar-left{padding: 0;}
         
     </style>
 </head>
@@ -130,10 +132,10 @@
         <div class="container" style="display: flex;"> <!-- content-->
             <div class="row-4" style="width: 250px; color: white;  background-color: #1E2940"> <!-- side bar -->
                 <span style="margin-left: 20px;"> 오늘날짜 : </span><span id="nowDate"></span>
-                <ul>
-                    <li><a href="#"> 제품 관리 </a></li>
-                    <li><a href="#"> 입출고 로그 </a></li>
-                    <li><a href="#"> 제품 차트 </a></li>
+                <ul class="sidebar-left">
+                    <li class="event"><a href="#"> 제품 관리 </a></li>
+                    <li class="eventB"><a href="#"> 입출고 로그 </a></li>
+                    <li class="eventB"><a href="#"> 제품 차트 </a></li>
                 </ul>
             </div>
             <div class="row-8" style="margin-top: 30px; margin-left: 50px; background-color: white;"> <!-- main -->
@@ -146,9 +148,9 @@
                     <button class="btnAdd" onclick="productAdd()"> 등록 </button>
                 </div>
                 <div  class="upSize">
-                    <table class="container"> <!-- 제품 목록 -->
+                    <table class="container table"> <!-- 제품 목록 -->
                         <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 제품 목록 영역 </h3> </div>
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th> 이미지 </th>
                                 <th> 제품코드 </th>
