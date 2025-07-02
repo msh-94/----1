@@ -78,7 +78,20 @@ function outAdd() {
             return;
         }// if end
     } // for end
+    document.querySelector('#pName').value = '';
+    document.querySelector('#amount').value = '';
+    document.querySelector('#date').value = '';
+    document.querySelector('#area').value = '';
 } // 출고 등록 함수
+
+function handleEnterKey(event){
+    if(event.key === 'Enter'){
+        outAdd()
+    }// if end
+}// for end
+document.querySelector('#pName').addEventListener('keydown' , handleEnterKey);
+document.querySelector('#amount').addEventListener('keydown' , handleEnterKey);
+document.querySelector('#area').addEventListener('keydown' , handleEnterKey);
 
 // 입출고 로그 출력 함수
 // logPrint()
@@ -148,6 +161,9 @@ const totalPages = Math.ceil(totalItems / itemsPerPage); // 전체 페이지 수
 function renderPagination() {
     const pageGroupElement = document.getElementById('page-group');
     pageGroupElement.innerHTML = ''; // 기존 페이지 목록 초기화
+    
+    const totalItems = inoutLog.length; // 전체 아이템 수
+    const totalPages = Math.ceil(totalItems / itemsPerPage); // 전체 페이지 수
 
     const startPage = (currentGroup - 1) * pagesPerGroup + 1;
     const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
@@ -203,6 +219,12 @@ renderInoutLogItems();
 function renderInoutLogItems() {
     const tableBody = document.getElementById('outTbody');
     tableBody.innerHTML = ''; // 기존 테이블 내용 초기화
+
+    let productList = getProduct();
+    let inoutLog = getInoutLog();
+
+    inoutLog.sort((a, b) => b.logco - a.logco); // 내림차순
+    const totalItems = inoutLog.length; // 전체 아이템 수
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
     const pageItems = inoutLog.slice(startIndex, endIndex);
@@ -230,8 +252,7 @@ function renderInoutLogItems() {
         // 행을 테이블에 추가
         tableBody.insertAdjacentHTML('beforeend', rowContent);
     });
-    today();
-
+    today();  
 }
 
 // 페이지 초기화

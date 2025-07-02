@@ -52,13 +52,24 @@ function productAdd() {
     };
     //
     productList.push(obj);
-    alert(`등록 되었습니다.`);
     setProduct(productList);
+    alert(`등록 되었습니다.`);
     // productPrint();
     renderItems();
     document.querySelector('#pName').value = '';
     document.querySelector('#pPrice').value = '';
 } // 제품 등록 함수 끝
+
+// 엔터 키 눌렀을 때 제품 등록 함수 실행 (공통 이벤트 리스너)
+function handleEnterKey(event) {
+    if (event.key === 'Enter') {  // 엔터 키가 눌렸을 때
+        productAdd();
+    }
+}
+
+// 입력 필드에 엔터키 이벤트 리스너 추가
+document.querySelector('#pName').addEventListener('keydown', handleEnterKey);
+document.querySelector('#pPrice').addEventListener('keydown', handleEnterKey);
 
 // 제품 출력 함수
 // productPrint();
@@ -190,7 +201,10 @@ function renderItems() {
   const tableBody = document.getElementById('productTbody');  // id가 'productTbody'인 tbody를 선택
   tableBody.innerHTML = ''; // 기존 테이블 내용 초기화
   // 현재 페이지에 해당하는 상품 아이템들의 시작 인덱스와 끝 인덱스 계산
-  const startIndex = (currentPage - 1) * itemsPerPage;
+  let productList = getProduct();
+  productList.sort((a, b) => b.pno - a.pno);    // 제품코드 내림차순 정렬
+  const totalItems = productList.length; // 전체 아이템 수
+  const startIndex = (currentPage - 1) * itemsPerPage;  
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
   const pageItems = productList.slice(startIndex, endIndex);  // 해당 페이지의 상품 목록을 슬라이싱하여 추출
   // 추출된 아이템들을 테이블에 추가
