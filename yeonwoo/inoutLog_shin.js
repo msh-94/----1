@@ -29,7 +29,7 @@ setInterval( dateFunc , 1000 );
 
 
 
-
+ 
 
 function outAdd(){                                          // 로그 배열 추가하는 함수 outAdd()
      // 마크업객체 가져오기
