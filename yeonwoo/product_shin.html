@@ -47,6 +47,13 @@
                 <div>
                     <table class="container"> <!-- 제품 목록 -->
                         <h3> 제품 목록 영역 </h3>
+                        <input id="productSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
+                        <select name="" id="productSelect">                            
+                            <option value="codeAsc">제품코드 ▲</option>
+                            <option value="codeDesc">제품코드 ▼</option>
+                            <option value="priceDesc">가격 ▼ </option>
+                            <option value="priceAsc">가격 ▲</option>
+                        </select>
                         <thead>
                             <tr>
                                 <th> 이미지 </th>
@@ -68,6 +75,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <button id="product-prev-btn" onclick="clickPage(productCurrentPage -1)">이전</button>
+                    <div id="product-page-item" class="paginator"></div>
+                    <button id="product-next-btn" onclick="clickPage(productCurrentPage + 1 )">다음</button>
                 </div>
             </div>
         </div>

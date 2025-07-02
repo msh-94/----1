@@ -19,7 +19,7 @@ function setBoard (){                                           // 재고 주문
     for(let i = 0; i < productList.length ; i++){                               // productList 배열 순회
         const pArray = productList[i] ;                                         // pArray로 간소화하기
         if(selectno == pArray.pno){                                             // selectno와 pno가 같다면
-            document.querySelector('#stockId').innerHTML = `pNo. ${pArray.pno} ${pArray.pName} `
+            document.querySelector('#stockId').innerHTML = `pNo. ${pArray.pno} ${pArray.pName} `;
             document.querySelector('#currentStock').value = pArray.pAmount ;
         }                                                                       // 그 pno에 알맞은 정보를 해당 쿼리스트링에 할당
     }
@@ -93,8 +93,8 @@ function boardEdit(){                                                           
     }
 
     if (window.opener){                                                                         // window.opener은 이창을 열게 해준 기존 재고로그 영역을 참조하는것 
-        window.opener.stockList?.(window.opener.keyword ,window.opener.stockCurrentPage);                                      // ?.()는 이 함수가 있다면 실행해줘라 즉 렌더링 해줘 라는 뜻
-        window.opener.logListAdd?.(window.opener.keyword , window.opener.logCurrentPage);
+        window.opener.stockList?.(window.opener.keywordStock ,window.opener.stockCurrentPage);                                      // ?.()는 이 함수가 있다면 실행해줘라 즉 렌더링 해줘 라는 뜻
+        window.opener.logListAdd?.(window.opener.keywordLog , window.opener.logCurrentPage);
         window.opener.LackBoard?.();                        
     }
 

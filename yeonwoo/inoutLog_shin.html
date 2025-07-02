@@ -84,11 +84,20 @@
                     수량 : <input type="number" id="amount" />
                     날짜 : <input type="date" id="date" />
                     출고 사유 : <textarea id="area"></textarea>
-                    <button onclick="outAdd()"> 출고 </button>
+                    <label>
+                        <input type="radio" name="outType" value="out" checked>
+                        출고
+                    </label>
+                    <label>
+                        <input type="radio" name="outType" value="sell">
+                        판매
+                    </label>
+                    <button onclick="outAdd()"> 등록 </button>
                 </div>
                 <div>
+                    <h3> 입출고 로그 영역 </h3>
                     <table class="container"> <!-- 입출고 로그 목록 -->
-                        <h3> 입출고 로그 영역 </h3>
+                        
                         <input id="LogSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
                         <select name="" id="logSelect">                            
                             <option value="logDesc">로그 ▼</option>

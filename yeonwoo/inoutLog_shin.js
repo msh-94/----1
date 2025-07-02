@@ -99,15 +99,18 @@ function outAdd(){                                          // 로그 배열 추
     amount.value = '';                                                              // value값 초기화
     date.value = '';                                                                // value값 초기화
     area.value = '';                                                                // value값 초기화
-    logListAdd();                                                                   // 입출고 로그 리스트 렌더링
+    logListAdd(keywordLog , logCurrentPage);                                        // 입출고 로그 리스트 렌더링
     LackBoard();                                                                    // 재고 부족 알림창 렌더링
     return;                                                                             // 함수종료
 
 }
 //==================================로그 출력 전역변수 ==================================//
+
 var logCurrentPage = 1;               // 현재 페이지 번호 (1부터 시작)
 const logPerPage   = 10;              // 페이지당 최대 행 수 
-let inoutOption = 'logDesc'; 
+let inoutOption = 'logDesc';
+var keywordLog = ''; 
+
 //=====================================================================================//
 
 
@@ -149,7 +152,7 @@ function logListAdd(searchTerm = '', page = 1){                                 
     // 페이지네이션 동적으로 페이지 그리는 부분
     const totalLogArray = inoutLog.length;                         // totalProArray는 제품리스트 총 배열 갯수임
     const ShowIndex = (page - 1)*logPerPage ;        // 페이지마다 보여줄 배열들 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터 해야겠지?
-    const PageinoutLog = inoutLog.slice(ShowIndex , ShowIndex + logPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
+    const PageinoutLog = inoutLog.slice(ShowIndex , ShowIndex + logPerPage);    // slice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
 
 
 
@@ -197,8 +200,11 @@ function inoutEdit(logco) {                                                     
                 alert('올바른 숫자를 입력하세요.');                                               // 정수 외 실수나 0 이하면 안됨 , 만약 잘못 입력했다면 alert값 주기
                 return inoutEdit(logco)                                                         // 같은 상품 다시 재호출 = 반환값 함수;
             }                                                                                                       
-            if(newAmount == inoutLog[i].amount){ alert('수량이 동일합니다');                        // 동일 수량을 입력했다면?
-                return inoutEdit(logco);                                                          // 같은 상품 다시 재호출 = 반환값 함수;
+            if(newAmount == inoutLog[i].amount){ 
+                if(!confirm('수량이 동일합니다 계속 수정하시겠습니까?')){                           // 동일 수량을 입력했다면?
+                    alert(' 로그 등록을 취소하였습니다. '); return;                                  // 수정한다고 하면 계속 수정, 아니라고 하면 함수종료
+                }                                                      
+                                                        
             }
               
             
@@ -236,8 +242,8 @@ function inoutEdit(logco) {                                                     
             localStorage.setItem('inoutLog', JSON.stringify(inoutLog));                             // localStorage에 inoutLog 넣어주기
             alert('[성공] 수정 되었습니다.');                                                         // 수정 성공 알림
             
-            stockList(keyword);                                                                            // 재고 리스트 렌더링
-            logListAdd();                                                                           // 입출고 로그 출력함수 렌더링
+            stockList(keywordStock , stockCurrentPage);                                              // 재고 리스트 렌더링
+            logListAdd(keywordLog , logCurrentPage);                                                 // 입출고 로그 출력함수 렌더링
             LackBoard();                                                                            // 재고 부족 알림 Board 렌더링            
             return;                                                                                 // 함수 종료하기
         }
@@ -248,6 +254,7 @@ function inoutEdit(logco) {                                                     
 function ShowLiEventner(totalArray, currentPage, perPage, onPageClick, type) {
     
     const totalPages = Math.ceil(totalArray / perPage);
+    
     let html = '';
 
     const add = function(pageNumber){
@@ -276,20 +283,20 @@ function ShowLiEventner(totalArray, currentPage, perPage, onPageClick, type) {
 function clickPage(page , onPageClick){   
     if(onPageClick == 'stockList'){
         stockCurrentPage = page;
-        stockList(keyword , page);    
+        stockList(keywordStock , page);    
     }
     if(onPageClick == 'logListAdd'){
         logCurrentPage = page;
-        logListAdd(keyword, page);
+        logListAdd(keywordLog, page);
     }  
 }
 
 
 
-//======================================= stockList 전역 변수 모음집 =======================================//
+//======================================= stockList 전역 변수 =======================================//
 
 
-var keyword = '';                       // 검색한 값 전역변수 - 이벤트리스너에서 활용 됨,       var를 쓴 이유 쿼리스트링 해야해서 통신을 해야하기 때문에 let 보다는 var가 좋다고 gpt가 말해줌 ,,
+var keywordStock = '';                       // 검색한 값 전역변수 - 이벤트리스너에서 활용 됨,       var를 쓴 이유 쿼리스트링 해야해서 통신을 해야하기 때문에 let 보다는 var가 좋다고 gpt가 말해줌 ,,
 let sortOption = 'nameAsc';            // 정렬 변수 초기값 정해주기 : nameDesc는 제품번호 내림차순임 -> html value값 확인해보면 됨
 var stockCurrentPage = 1;               // 현재 페이지 번호 (1부터 시작)
 const stockPerPage   = 5;              // 페이지당 최대 행 수   
@@ -329,7 +336,7 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
     // 페이지네이션 동적으로 페이지 그리는 부분
     const totalProArray = productList.length;                         // totalProArray는 제품리스트 총 배열 갯수임
     const ShowIndex = (page - 1)*stockPerPage ;        // 페이지마다 보여줄 배열들 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터 해야겠지?
-    const PageProducList = productList.slice(ShowIndex , ShowIndex + stockPerPage);    // splice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
+    const PageProducList = productList.slice(ShowIndex , ShowIndex + stockPerPage);    // slice를 값으로 정의해주면 자른 값이 나옴. (보여줄 배열들부터, 페이지당 보여줄 제품수 즉 10부터 시작하면 10인덱스부터 쫙 그만큼 보여줌) 
 
     
     //const productList = document.querySelector('#productList');
@@ -373,30 +380,31 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
     // stockList 검색창 뜨는 부분임
     if( searchInput ){                                                     // 만약 검색 input(value값) 요소가 존재한다면?
         searchInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
-        keyword = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
+        keywordStock = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
         stockCurrentPage = 1 ;                                              // 검색할 때 마다 페이지네이션 페이지 1로 새로고침
-        stockList(keyword , 1);                                        // 그런 input값과 페이지네이션 1값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
+        stockList(keywordStock , 1);                                        // 그런 input값과 페이지네이션 1값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
         });
     }
     
     // logListAdd 검색창 뜨는 부분임
     if( LogSearchInput ){                                                    // 만약 검색 input(value값) 요소가 존재한다면?
         LogSearchInput.addEventListener('input', e =>{                       // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
-        keyword = e.target.value.trim() ;                                    // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
+        keywordLog = e.target.value.trim() ;                                    // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
         logCurrentPage = 1 ;
-        logListAdd(keyword , 1 );                                            // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 //위랑 동일//
+        logListAdd(keywordLog , 1 );                                            // 그런 input값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 //위랑 동일//
         });
     }
     
     // 정렬 버튼 바뀌는 부분임
     const sortSelect = document.querySelector('#sortSelect');           // 정렬 버튼을 DOM 객체화 한 것
     const logSelect = document.querySelector('#logSelect');
+    
     if( sortSelect ){                                                    // 만약 sortSelect가 있다면? 즉 dom객체가 있다면? 
         
         sortSelect.addEventListener('change', e =>{                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             sortOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
             stockCurrentPage = 1 ;
-            stockList(keyword , 1 );                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
+            stockList(keywordStock , 1 );                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
         });
     } 
     if( logSelect ){                                                    // 만약 sortSelect가 있다면? 즉 dom객체가 있다면? 
@@ -404,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         logSelect.addEventListener('change', e =>{                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             inoutOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다.
             stockCurrentPage = 1 ; 
-            logListAdd(keyword , 1);                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
+            logListAdd(keywordLog , 1);                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
         });
     } 
 
