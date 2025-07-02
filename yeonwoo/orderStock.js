@@ -93,8 +93,8 @@ function boardEdit(){                                                           
     }
 
     if (window.opener){                                                                         // window.opener은 이창을 열게 해준 기존 재고로그 영역을 참조하는것 
-        window.opener.stockList?.(window.opener.keywordStock ,window.opener.stockCurrentPage);                                      // ?.()는 이 함수가 있다면 실행해줘라 즉 렌더링 해줘 라는 뜻
-        window.opener.logListAdd?.(window.opener.keywordLog , window.opener.logCurrentPage);
+        window.opener.stockList?.(window.opener.keywordStock ,window.opener.stockCurrentPage);  // ?.()는 이 함수가 있다면 실행해줘라 즉 렌더링 해줘 라는 뜻
+        window.opener.logListAdd?.(window.opener.keywordLog , window.opener.logCurrentPage);    // 근데 당연히 제품 하나 입고했다고 검색값이랑 정렬을 없앨 필요없으니 매개변수 그대로 전달
         window.opener.LackBoard?.();                        
     }
 

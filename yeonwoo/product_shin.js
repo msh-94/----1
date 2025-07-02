@@ -29,9 +29,6 @@ function dateFunc(){                // 시계함수
 
 // *** 1초 마다 시계함수 호출하기 ***
 setInterval( dateFunc , 1000 );
-
-
-
 // =============================================================== //
 
 
@@ -240,19 +237,19 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         productInput.addEventListener('input', e =>{                         // addEventListner() 실행하는데 input이벤트 즉, 값이 하나하나 입력될 때마다 e라는 객체에 대한 함수 실행함
         keywordProduct = e.target.value.trim() ;                             // e라는 객체에 .target은 이벤트발생요소를 지칭 즉, input이벤트, .trim()은 공백제거 즉, 입력값의 공백을 제거한 것을 keyword 상수에 대입
         productCurrentPage = 1 ;                                              // 검색할 때 마다 페이지네이션 페이지 1로 새로고침
-        productAddList(keywordProduct , 1);                                        // 그런 input값과 페이지네이션 1값은 stockList 즉 제품 재고 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
+        productAddList(keywordProduct , 1);                                        // 그런 input값과 페이지네이션 1값은 productAddList 즉 제품 리스트의 매개변수로 들어가서 함수 렌더링 즉, 재호출함
         });
     }
     
     // 정렬 버튼 바뀌는 부분임
     const productSelect = document.querySelector('#productSelect');           // 정렬 버튼을 DOM 객체화 한 것
     
-    if( productSelect ){                                                    // 만약 sortSelect가 있다면? 즉 dom객체가 있다면? 
+    if( productSelect ){                                                    // 만약 productSelect 있다면? 즉 dom객체가 있다면? 
         
-        productSelect.addEventListener('change', e =>{                    // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
-            productOption = e.target.value;                                // sortOption 이라는 전역 변수에 이벤트요소 즉 sortSelect 벨류값을 넣어준다. 
-            productCurrentPage = 1 ;
-            productAddList(keywordProduct , 1 );                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
+        productSelect.addEventListener('change', e =>{                      // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
+            productOption = e.target.value;                                 // productOption 이라는 전역 변수에 이벤트요소 즉 productSelect 벨류값을 넣어준다. 
+            productCurrentPage = 1 ;                                        // 검색할 때 마다 페이지네이션 페이지 1로 새로고침                    
+            productAddList(keywordProduct , 1 );                            // 검색했을 때 정렬하면 검색값이 풀리니 productAddList 검색창했던 keywordProduct 페이지네이션 1넣어줌 그리고 productAddList 매개변수로 다시 렌더링해준다.
         });
     } 
 
@@ -261,31 +258,31 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
 
 
 
-function ShowLiEventner(totalProArray) {
+function ShowLiEventner(totalProArray) {                //페이지네이션 html 그려주는 함수 productList의 총 배열수를 매개변수로 함
     
-    const totalPages = Math.ceil(totalProArray / productPerPage);
+    const totalPages = Math.ceil(totalProArray / productPerPage);   // Math.ceil 함수는 그 안의 값을 올림해줌, 총 배열수 / 페이지당 보여줄 배열수로 나눈후 1.7이라면 2로 해줌
     
-    let html = '';
+    let html = '';                                                  // html 그려줌
 
-    const add = function(pageNumber){
+    const add = function(pageNumber){                               // add함수는 페이지숫자를 매개변수로 함
         html += `<div ${pageNumber === productCurrentPage ? 'class="active"' : ''}>   
                     <a href="#" onclick="clickPage(${pageNumber}); return false;">
                         ${pageNumber}
                     </a> 
-                </div>`;
+                </div>`;    // 삼항연산자는 선택된 페이지에게 active 클래스를 html에 부여해준다는 뜻으로 css에서 .active에 글씨 강조효과등을 넣으면 됨
     };
 
-    for (let p = 1; p <= totalPages; p++) add(p);
+    for (let p = 1; p <= totalPages; p++) add(p);   // 실질적으로 매개변수에 그려줄 p, 총페이지만큼 증감해줘서 실질적으로 총페이지만큼 숫자를 만들어냄
 
 
-    document.querySelector('#product-page-item').innerHTML = html;
-    document.getElementById('product-prev-btn').disabled = (productCurrentPage === 1);
-    document.getElementById('product-next-btn').disabled = (productCurrentPage === totalPages);
+    document.querySelector('#product-page-item').innerHTML = html;          // div에 그린 html을 innerHTML해줌 
+    document.getElementById('product-prev-btn').disabled = (productCurrentPage === 1);  // 해당페이지가 1이라면 이전 버튼 disabled
+    document.getElementById('product-next-btn').disabled = (productCurrentPage === totalPages); // 해당페이지가 마지막 페이지라면 다음 버튼 disabled
 
 }
 
 
-function clickPage( page ){   
-    productCurrentPage = page;
-    productAddList(keywordProduct , page);    
+function clickPage( page ){   // 페이지네이션으로 hmtl 그린 애들을 실제로 해당 제품리스트 나타내는 곳에 호출해주는 함수 , 어디있냐고? html안에 재고량 수정함수마냥 들어가있음
+    productCurrentPage = page;  // 현재 페이지를 클릭한 page 매개변수로 넣어줌
+    productAddList(keywordProduct , page); // productAddList에 검색창을 유지한채 페이지 매개변수를 넘겨줌 
 }
