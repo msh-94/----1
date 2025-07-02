@@ -13,7 +13,24 @@ function showOnlyContainer(targetId) {
 // 2. 버튼 호버를 통해 차트 보여주는 함수
 function showChart(chartIdToShow) {
 
-    // 모든 차트 숨기기
+    // 1) 모든 차트(캔버스) 숨기기
     const canvases = document.querySelectorAll('#ChartContainer canvas , #branchChartContainer canvas');
     canvases.forEach(c => c.style.display = 'none');
+
+    // 2) 특정 차트만 보이게 하기
+    const target = document.querySelector(chartIdToShow);
+    if (target) { target.style.display = 'bloack'; }
 }
+
+// 3. 시계 함수
+function dateFunc() {
+    // 1) 현재 날짜/시간 구하기 : new Date() 객체
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    
+}
+
