@@ -27,6 +27,14 @@
             min-height: 80vh;
             /* 출력을 위한 최소높이 */
         }
+
+        #branchChartContainer {
+            /* 차트 안 보이는 게 기본값 */
+            display: none;
+            transition: all 0.3s ease;
+            min-height: 80vh;
+            /* 출력을 위한 최소높이 */
+        }
     </style>
 </head>
 
@@ -55,23 +63,26 @@
                         <button id="febToggleBtn">24년 2월 차트 보기</button>
                         <button id="marToggleBtn">24년 3월 차트 보기</button>
                         <button id="aprToggleBtn">24년 4월 차트 보기</button>
-                        <button id="junToggleBtn">24년 5월 차트 보기</button>
-                        <button id="julToggleBtn">24년 6월 차트 보기</button>
-                        <button id="augToggleBtn">24년 7월 차트 보기</button>
-                        <button id="sepToggleBtn">24년 8월 차트 보기</button>
-                        <button id="octToggleBtn">24년 9월 차트 보기</button>
-                        <button id="novToggleBtn">24년 10월 차트 보기</button>
+                        <button id="mayToggleBtn">24년 5월 차트 보기</button>
+                        <button id="junToggleBtn">24년 6월 차트 보기</button>
+                        <button id="julToggleBtn">24년 7월 차트 보기</button>
+                        <button id="augToggleBtn">24년 8월 차트 보기</button>
+                        <button id="sepToggleBtn">24년 9월 차트 보기</button>
+                        <button id="octToggleBtn">24년 10월 차트 보기</button>
                         <button id="novToggleBtn">24년 11월 차트 보기</button>
-                        <button id="novToggleBtn">24년 12월 차트 보기</button>
-                        <button id="novToggleBtn">25년 1월 차트 보기</button>
-                        <button id="novToggleBtn">24년 2월 차트 보기</button>
-                        <button id="novToggleBtn">24년 2월 차트 보기</button>
-                        <button id="novToggleBtn">24년 2월 차트 보기</button>
+                        <button id="decToggleBtn">24년 12월 차트 보기</button>
+                        <button id="jan25ToggleBtn">25년 1월 차트 보기</button>
+                        <button id="feb25ToggleBtn">25년 2월 차트 보기</button>
+                        <button id="mar25ToggleBtn">25년 3월 차트 보기</button>
+                        <button id="apr25ToggleBtn">24년 4월 차트 보기</button>
+                        <button id="may25ToggleBtn">24년 5월 차트 보기</button>
+                        <button id="jun25ToggleBtn">25년 6월 차트 보기</button>
                         <div id="ChartContainer">
                             <canvas id="jan24Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="feb24Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="mar24Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="apr24Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="may24Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="jun24Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="jul24Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="aug24Input" width="400" height="400" style="display: none;"></canvas>
@@ -82,8 +93,8 @@
                             <canvas id="jan25Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="feb25Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="mar25Input" width="400" height="400" style="display: none;"></canvas>
-                            <canvas id="mar25Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="apr25Input" width="400" height="400" style="display: none;"></canvas>
+                            <canvas id="may25Input" width="400" height="400" style="display: none;"></canvas>
                             <canvas id="jun25Input" width="400" height="400" style="display: none;"></canvas>
                         </div>
                     </div>
@@ -91,29 +102,25 @@
                 </div> <!-- 월별 판매 순위-->
 
                 <div> <!-- 차트 분기 시작 -->
-                    <table class="container"> <!-- 제품 목록 -->
+                    <div class="container"> <!-- 제품 목록 -->
                         <h3> 분기별 판매 순위 차트 </h3>
-                        <thead>
-                            <tr>
-                                <th> 이미지 </th>
-                                <th> 제품코드 </th>
-                                <th> 제품명 </th>
-                                <th> 가격 </th>
-                                <th> 비고 </th>
-                            </tr>
-                        </thead>
-                        <tbody id="productTbody">
-                            <tr>
-                                <td> <img src="http://placehold.co/100x100" /></td>
-                                <td> 1 </td>
-                                <td> 돼지바 </td>
-                                <td> 500 </td>
-                                <td> <button onclick="productEdit()"> 수정 </button>
-                                    <button onclick="productDelete()"> 삭제 </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="container">
+                            <button id="fst24ToggleBtn">24년 1분기 차트 보기</button>
+                            <button id="snd24ToggleBtn">24년 2분기 차트 보기</button>
+                            <button id="trd24ToggleBtn">24년 3분기 차트 보기</button>
+                            <button id="fth24ToggleBtn">24년 4분기 차트 보기</button>
+                            <button id="fst25ToggleBtn">25년 1분기 차트 보기</button>
+                            <button id="snd25ToggleBtn">25년 2분기 차트 보기</button>
+                            <div id="branchChartContainer">
+                                <canvas id="fst24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="snd24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="trd24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="fth24Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="fst25Input" width="400" height="400" style="display: none;"></canvas>
+                                <canvas id="snd25Input" width="400" height="400" style="display: none;"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
