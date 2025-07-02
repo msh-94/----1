@@ -15,7 +15,27 @@
             border: 1px solid red;
             width: 1910px;
         }
-        
+
+        .paginator {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .paginator li a {
+            display: block;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            text-decoration: none;
+        }
+
+        .paginator li.active a {
+            font-weight: bold;
+            background: #eee;
+        }
+        a{color: black;}
     </style>
 </head>
 
@@ -35,26 +55,26 @@
                     <li> 제품 차트 </li>
                 </ul>
                 <div>
-                <div id="lackStockList" > 부족 재고 알림창 </div>
-                <table id="" style="width: 290px;">  
-                    <thead id="">
-                        <tr>
-                            <th> 제품코드 </th>
-                            <th> 제품명 </th>
-                            <th> 총 수량 </th>
-                            <th> 비고 </th>
-                        </tr>
-                    </thead>
-                    <tbody id="lackTbody">
-                        <tr>
-                            <td> 1 </td>
-                            <td> 돼지바 </td>
-                            <td> 300 </td>
-                            <td> <button onclick=""> 주문 </button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div id="lackStockList"> 부족 재고 알림창 </div>
+                    <table id="" style="width: 290px;">
+                        <thead id="">
+                            <tr>
+                                <th> 제품코드 </th>
+                                <th> 제품명 </th>
+                                <th> 총 수량 </th>
+                                <th> 비고 </th>
+                            </tr>
+                        </thead>
+                        <tbody id="lackTbody">
+                            <tr>
+                                <td> 1 </td>
+                                <td> 돼지바 </td>
+                                <td> 300 </td>
+                                <td> <button onclick=""> 주문 </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="row-8" style="margin-top: 30px; margin-left: 100px; "> <!-- main -->
@@ -98,8 +118,11 @@
                     <table class="container">
                         <h3> 재고 확인 영역 </h3>
                         <input id="stockSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
-                        <select name="" id="sortSelect"> 
-                            <option value="nameDesc">제품코드 ▼</option><option value="nameAsc">제품코드 ▲</option><option value="stockDesc">재고량 ▼ </option><option value="stockAsc">재고량 ▲</option>
+                        <select name="" id="sortSelect">                            
+                            <option value="nameAsc">제품코드 ▲</option>
+                            <option value="nameDesc">제품코드 ▼</option>
+                            <option value="stockDesc">재고량 ▼ </option>
+                            <option value="stockAsc">재고량 ▲</option>
                         </select>
                         <thead>
                             <tr>
@@ -120,6 +143,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <ul id="stockPaginator" class="paginator"></ul>
                 </div>
             </div>
         </div>
