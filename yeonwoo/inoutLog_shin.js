@@ -473,3 +473,15 @@ function clickPage(page , onPageClick){   // html에 있던 ${}클릭 함수 클
     }  
 }
 //======================================================================================================//
+
+// 엔터 키 눌렀을 때 제품 등록 함수 실행 (공통 이벤트 리스너)
+function EnterKey(event) {
+    if (event.key === 'Enter') {  // 엔터 키가 눌렸을 때
+        outAdd();
+    }// if end
+}// func end
+
+// 입력 필드에 엔터키 이벤트 리스너 추가
+document.querySelector('#pName').addEventListener('keydown', EnterKey);
+document.querySelector('#amount').addEventListener('keydown', EnterKey);
+document.querySelector('#area').addEventListener('keydown', EnterKey);
