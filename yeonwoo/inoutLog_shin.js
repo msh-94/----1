@@ -44,7 +44,7 @@ var keywordLog = '';                  // 검색값 기본값은 ''
 
 
 
-
+ 
 
 //================================ stockList 전역 변수 ===================================//
 
@@ -107,8 +107,8 @@ function outAdd(){                                                              
             localStorage.setItem( 'productList', JSON.stringify(productList) ); // 유효성 검사가 끝났다면 productList 배열 다시 localStorage에 저장해주기
             stockList (keywordStock , stockCurrentPage);             // 재고 리스트 렌더링
             break;                                                              // break;
-        }
-    }
+        } 
+    }   
 
     if(error == true){ alert('현재 등록 되어 있는 상품이 아닙니다.'); return;}      // 유효성 검사 : 만약 로그에 입력한 제품명이 productList에 없었다면? 없다고 하고 함수 종료
     
@@ -192,9 +192,14 @@ function logListAdd(searchTerm = '', page = 1){                                 
         html += `<tr>   
                         <td> ${Log.logco} </td> <td> ${Log.inOut} </td> <td> ${pro.pName} </td> 
                         <td> ${Log.amount} </td> <td> ${Log.date} </td> <td> ${Log.area} </td>
-                        <td><button onclick="inoutEdit(${Log.logco})"> 수정 </button>  
+                        <td><button class="btnEdit" onclick="inoutEdit(${Log.logco})"> 수정 </button>  
                 </tr>`                                                                  // 입력함수에서 받은 값 html 추가하기 
 
+    }
+    const maxRows = logPerPage;
+    const emptyRows = maxRows - PageinoutLog.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 55.47px;"></td></tr>`;
     }
 
     inputLogTable.innerHTML = html;                                                  // inputLogTable html에 innerHTML 하기
@@ -329,6 +334,12 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
                     <td><strong style="color: ${color};">${amountAlert}</strong></td>
                     <td><button onclick="orderBtn(${proArray.pno})"> 주문 </button></td>
                 </tr>`                                                                  // html 추가하기 
+    }
+
+    const maxRows = stockPerPage;
+    const emptyRows = maxRows - PageProducList.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 47px;"></td></tr>`;
     }
 
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
@@ -473,3 +484,15 @@ function clickPage(page , onPageClick){   // html에 있던 ${}클릭 함수 클
     }  
 }
 //======================================================================================================//
+
+// 엔터 키 눌렀을 때 제품 등록 함수 실행 (공통 이벤트 리스너)
+function EnterKey(event) {
+    if (event.key === 'Enter') {  // 엔터 키가 눌렸을 때
+        outAdd();
+    }// if end
+}// func end
+
+// 입력 필드에 엔터키 이벤트 리스너 추가
+document.querySelector('#pName').addEventListener('keydown', EnterKey);
+document.querySelector('#amount').addEventListener('keydown', EnterKey);
+document.querySelector('#area').addEventListener('keydown', EnterKey);

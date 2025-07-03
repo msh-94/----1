@@ -149,19 +149,28 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
     // 페이지네이션 동적으로 페이지 그리는 부분
     const totalProArray = productList.length;                           // totalProArray = productList 배열 길이 즉, 제품 수
     const ShowIndex = (page - 1)*productPerPage ;                       // 페이지마다 보여줄 배열 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터
-    const PageProducList = productList.slice(ShowIndex , ShowIndex + productPerPage);    // slice를 값으로 정의해주면 자른 값이 나옴. 보여줄 배열은 그 배열부터 + 한 페이지당 보여줄 배열 수 
+    const PageProductList = productList.slice(ShowIndex , ShowIndex + productPerPage);    // slice를 값으로 정의해주면 자른 값이 나옴. 보여줄 배열은 그 배열부터 + 한 페이지당 보여줄 배열 수 
 
 
     const productListTable = document.querySelector('#productTbody');                    // productListTable 선언 후 productTbody dom객체화
 
     let html ='' ;                                                                       // html 선언
-    for(let i = 0 ; i < PageProducList.length ; i++){                                         // 페이지네이션으로 자른 배열인 PageProducList 배열 순회
-        const proArray = PageProducList[i];                                                // proArray로 간소화하기
+    for(let i = 0 ; i < PageProductList.length ; i++){                                         // 페이지네이션으로 자른 배열인 PageProductList 배열 순회
+        const proArray = PageProductList[i];                                                // proArray로 간소화하기
         html += `<tr>   
                         <td> <img src=${proArray.pImg} </td> <td> ${proArray.pno} </td> <td> ${proArray.pName} </td> 
-                        <td> ${proArray.pPrice}원 </td> <td><button onclick="productEdit(${proArray.pno})"> 수정 </button>  <button type="button" onclick="productDelete(${proArray.pno})"> 삭제 </button> </td>
+                        <td> ${proArray.pPrice}원 </td> <td><button onclick="productEdit(${proArray.pno})"> 수정 </button> 
+                         <button type="button" onclick="productDelete(${proArray.pno})"> 삭제 </button> </td>
                 </tr>`                                                                  // 추가하기 
 
+    }    
+
+    
+    
+    const maxRows = productPerPage;
+    const emptyRows = maxRows - PageProductList.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 91px;"></td></tr>`;
     }
 
     productListTable.innerHTML = html;                                                  // productListTable html에 넣기
@@ -286,3 +295,14 @@ function clickPage( page ){   // 페이지네이션으로 hmtl 그린 애들을 
     productCurrentPage = page;  // 현재 페이지를 클릭한 page 매개변수로 넣어줌
     productAddList(keywordProduct , page); // productAddList에 검색창을 유지한채 페이지 매개변수를 넘겨줌 
 }
+
+// 엔터 키 눌렀을 때 제품 등록 함수 실행 (공통 이벤트 리스너)
+function EnterKey(event) {
+    if (event.key === 'Enter') {  // 엔터 키가 눌렸을 때
+        productAdd();
+    }// if end
+}// func end
+
+// 입력 필드에 엔터키 이벤트 리스너 추가
+document.querySelector('#pName').addEventListener('keydown',EnterKey);
+document.querySelector('#pPrice').addEventListener('keydown', EnterKey);
