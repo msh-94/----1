@@ -155,7 +155,7 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
     const productListTable = document.querySelector('#productTbody');                    // productListTable 선언 후 productTbody dom객체화
 
     let html ='' ;                                                                       // html 선언
-    for(let i = 0 ; i < PageProductList.length ; i++){                                         // 페이지네이션으로 자른 배열인 PageProducList 배열 순회
+    for(let i = 0 ; i < PageProductList.length ; i++){                                         // 페이지네이션으로 자른 배열인 PageProductList 배열 순회
         const proArray = PageProductList[i];                                                // proArray로 간소화하기
         html += `<tr>   
                         <td> <img src=${proArray.pImg} </td> <td> ${proArray.pno} </td> <td> ${proArray.pName} </td> 
@@ -164,9 +164,6 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
                 </tr>`                                                                  // 추가하기 
 
     }    
-
-    }
-    
     const maxRows = productPerPage;
     const emptyRows = maxRows - PageProductList.length;
     for (let i = 0; i < emptyRows; i++) {
@@ -176,6 +173,9 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
     productListTable.innerHTML = html;                                                  // productListTable html에 넣기
     //showProductList();
     ShowLiEventner(totalProArray);                                                      // 페이지 네이션 html 쪽 그려줄 총 제품수( totalProArray )를 매개변수로 한 ShowLiEventer 함수 호출
+}
+    
+    
 
 
 
