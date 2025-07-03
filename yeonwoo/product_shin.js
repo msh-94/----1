@@ -287,3 +287,14 @@ function clickPage( page ){   // 페이지네이션으로 hmtl 그린 애들을 
     productCurrentPage = page;  // 현재 페이지를 클릭한 page 매개변수로 넣어줌
     productAddList(keywordProduct , page); // productAddList에 검색창을 유지한채 페이지 매개변수를 넘겨줌 
 }
+
+// 엔터 키 눌렀을 때 제품 등록 함수 실행 (공통 이벤트 리스너)
+function EnterKey(event) {
+    if (event.key === 'Enter') {  // 엔터 키가 눌렸을 때
+        productAdd();
+    }// if end
+}// func end
+
+// 입력 필드에 엔터키 이벤트 리스너 추가
+document.querySelector('#pName').addEventListener('keydown',EnterKey);
+document.querySelector('#pPrice').addEventListener('keydown', EnterKey);
