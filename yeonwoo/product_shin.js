@@ -163,6 +163,8 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
                          <button type="button" onclick="productDelete(${proArray.pno})"> 삭제 </button> </td>
                 </tr>`                                                                  // 추가하기 
 
+    }    
+
     }
     
     const maxRows = productPerPage;
@@ -174,7 +176,7 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
     productListTable.innerHTML = html;                                                  // productListTable html에 넣기
     //showProductList();
     ShowLiEventner(totalProArray);                                                      // 페이지 네이션 html 쪽 그려줄 총 제품수( totalProArray )를 매개변수로 한 ShowLiEventer 함수 호출
-}
+
 
 
 
