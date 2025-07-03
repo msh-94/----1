@@ -15,14 +15,14 @@
         }
 
         #wrap {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 20px auto;
             padding: 20px;
             background: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        
+
 
         .container {
             width: 100%;
@@ -179,7 +179,8 @@
         td button:last-of-type:hover {
             background-color: #bb2d3b;
         }
-         #pagination {
+
+        #pagination {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -199,13 +200,15 @@
         .pagination-btn:disabled {
             background-color: #ccc;
         }
+
         .paginator {
             display: flex;
             justify-content: center;
-            gap: 8px;            
+            gap: 8px;
             list-style: none;
             padding: 0;
         }
+
         .paginator div a {
             display: block;
             padding: 8px 12px;
@@ -271,7 +274,7 @@
                     <table class="container"> <!-- 제품 목록 -->
                         <h3> 제품 목록 영역 </h3>
                         <input id="productSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
-                        <select name="" id="productSelect">                            
+                        <select name="" id="productSelect">
                             <option value="codeAsc">제품코드 ▲</option>
                             <option value="codeDesc">제품코드 ▼</option>
                             <option value="priceDesc">가격 ▼ </option>
@@ -299,9 +302,11 @@
                         </tbody>
                     </table>
                     <div id="pagination">
-                        <button id="product-prev-btn" class="pagination-btn" onclick="clickPage(productCurrentPage -1)">이전</button>
+                        <button id="product-prev-btn" class="pagination-btn"
+                            onclick="clickPage(productCurrentPage -1)">이전</button>
                         <div id="product-page-item" class="paginator"></div>
-                        <button id="product-next-btn" class="pagination-btn" onclick="clickPage(productCurrentPage + 1 )">다음</button>
+                        <button id="product-next-btn" class="pagination-btn"
+                            onclick="clickPage(productCurrentPage + 1 )">다음</button>
                     </div>
                 </div>
             </div>

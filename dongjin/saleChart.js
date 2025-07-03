@@ -6395,7 +6395,7 @@ function showOnlyContainer(targetId) {
     if (target) target.style.display = 'block';
 }
 
-// 버튼 호버를 통해 차트 보여주는 함수
+// 버튼 클릭를 통해 차트 보여주는 함수
 function showChart(chartIdToShow) {
     // 모든 canvas 숨기기
     const canvases = document.querySelectorAll('#ChartContainer canvas , #branchChartContainer canvas');
@@ -6404,7 +6404,6 @@ function showChart(chartIdToShow) {
     // 특정 canvas만 보이기
     const target = document.getElementById(chartIdToShow);
     if (target) target.style.display = 'block';
-
 }
 
 function dateFunc() {                // 시계함수
@@ -6476,7 +6475,7 @@ function jan24Chart() {
     // 차트 출력할 위치 지정하기
     const ctx = document.querySelector('#jan24Input');      // 월 바꿔주기
 
-    // 차트 색상 바꾸는 상수
+    // 차트 색상 바꾸는 상수    -> 월 차트 색상
     const barColors = psell.map(value => {
         if (value >= 40) return 'rgb(0, 38, 255)';
         else if (value >= 30) return 'rgb(0, 30, 197)';
@@ -6488,7 +6487,7 @@ function jan24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6611,7 +6610,7 @@ function feb24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6736,7 +6735,7 @@ function mar24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6858,7 +6857,7 @@ function apr24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6979,7 +6978,7 @@ function may24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7099,7 +7098,7 @@ function jun24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7218,7 +7217,7 @@ function jul24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7337,7 +7336,7 @@ function aug24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7457,7 +7456,7 @@ function sep24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7576,7 +7575,7 @@ function oct24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7695,7 +7694,7 @@ function nov24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7814,7 +7813,7 @@ function dec24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7933,7 +7932,7 @@ function jan25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8052,7 +8051,7 @@ function feb25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8171,7 +8170,7 @@ function mar25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8290,11 +8289,11 @@ function apr25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
-                label: '8월 총 판매량',             // 월 바꿔주기
+                label: '25년 4월 총 판매량',             // 월 바꿔주기
                 data: psell,
                 backgroundColor: barColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -8409,7 +8408,7 @@ function may25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8528,7 +8527,7 @@ function jun25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8649,7 +8648,7 @@ function fst24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8768,7 +8767,7 @@ function snd24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8888,7 +8887,7 @@ function trd24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9008,7 +9007,7 @@ function fth24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9128,7 +9127,7 @@ function fst25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9248,7 +9247,7 @@ function snd25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9306,7 +9305,26 @@ function snd25Chart() {
 
 }
 
+// 로컬스토리지 기반으로 차트 만드는 함수
+jul25Chart();   // 7월 임의로 만든다
+function jul25Chart() {
 
+    // pno를 pName으로 변환
+    // pno 같으면 전부 하나의 객체로 모아주기
+    // area == '판매'여야함
+    // date "2025-07" 여야함
+    /*
+
+    1. 입출고 페이지 -> 차트 페이지가 동기화
+
+    입출고 관리에서 로컬스토리지로 판매 등록하면
+    제이슨 데이터 형식으로 변환하는 함수 만들어서, 세일차트.js에 등록
+    나는 7월 차트 만드는 함수 제작해서 바로 출력시키기.
+
+    */
+
+
+}
 
 
 
