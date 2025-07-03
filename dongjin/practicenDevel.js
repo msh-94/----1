@@ -37,9 +37,12 @@ function dateFunc() {
     nowDate.innerHTML = html;
 }
 
+// 1초 마다 시계함수 호출 
+setInterval(dateFunc, 1000);    // 문법 : 셋인터벌(함수명, 밀리초);
+
 // 4. 월간 차트 정보 입력 및 출력
 function jan24Chart() {
-    // saleData 속성값을 상수로 만들기
+    // saleData 속성값을 상수로 만들기  => 다른 함수화
     const keys = Object.keys(saleData);
     // 1월에 넣을 빈 객체 만들기
     const saleMap = {};
@@ -60,14 +63,14 @@ function jan24Chart() {
         }
     }
 
-    // saleMap -> pno, psell, pName 배열로 변환하기
+    // saleMap -> pno, psell, pName 배열로 변환하기 => 다른 함수화
     const pno = Object.keys(saleMap).map(Number);   // 문자열로 된 숫자를 숫자형으로 변환
     const psell = Object.values(saleMap);           // 합산 수량
 
     // pno(제품넘버)를 pName(제품명)으로 바꿔출력할 수 있도록 빈 배열을 생성
     const pName = [];
     // 2. 출력함수 : chartInfo의 pno가 productList의 pName과 같다면, pno 대신 pName을 출력한다.
-
+    // pno 대신 pName 출력해야하니까 for문으로 순회하며 찾기 => 찾는 함수화
 
 
 

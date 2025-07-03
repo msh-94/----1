@@ -6476,7 +6476,7 @@ function jan24Chart() {
     // 차트 출력할 위치 지정하기
     const ctx = document.querySelector('#jan24Input');      // 월 바꿔주기
 
-    // 차트 색상 바꾸는 상수
+    // 차트 색상 바꾸는 상수    -> 월 차트 색상
     const barColors = psell.map(value => {
         if (value >= 40) return 'rgb(0, 38, 255)';
         else if (value >= 30) return 'rgb(0, 30, 197)';
