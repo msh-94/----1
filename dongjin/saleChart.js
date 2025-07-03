@@ -9306,7 +9306,16 @@ function snd25Chart() {
 
 }
 
+// 로컬스토리지 기반으로 차트 만드는 함수
+jul25Chart();
+function jul25Chart() {
 
+    // pno를 pName으로 변환
+    //  area == '판매'
+    // date "2025-07"
+
+
+}
 
 
 
