@@ -68,7 +68,7 @@ function productAdd(){ console.log('productAdd');                               
     // localStorage에서 productList 배열 가져오기
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');              // productList JSON.parse해서 호출하기 || 없다면 '[]' 배열추가 
                                          
-    let lastPno = Number(localStorage.getItem('lastPno') || 0);                             // lastPno localStorage에서 호출하기 || 없다면 0으로 선언
+    let lastPno = Number(localStorage.getItem('lastPno') || productList.length - 1 );                             // lastPno localStorage에서 호출하기 || 없다면 0으로 선언
     const pno = ++lastPno                                                                   // pno 증감은 lastPno에서 가져옴
 
     // value값 가져온거 객체화 하기
