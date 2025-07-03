@@ -159,7 +159,8 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
         const proArray = PageProducList[i];                                                // proArray로 간소화하기
         html += `<tr>   
                         <td> <img src=${proArray.pImg} </td> <td> ${proArray.pno} </td> <td> ${proArray.pName} </td> 
-                        <td> ${proArray.pPrice}원 </td> <td><button onclick="productEdit(${proArray.pno})"> 수정 </button>  <button type="button" onclick="productDelete(${proArray.pno})"> 삭제 </button> </td>
+                        <td> ${proArray.pPrice}원 </td> <td><button onclick="productEdit(${proArray.pno})"> 수정 </button> 
+                         <button type="button" onclick="productDelete(${proArray.pno})"> 삭제 </button> </td>
                 </tr>`                                                                  // 추가하기 
 
     }

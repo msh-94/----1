@@ -226,6 +226,24 @@
         .row-4[style*="width: 300px;"] table th {
             white-space: nowrap;
         }
+        #pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pagination-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .pagination-btn:disabled {
+            background-color: #ccc;
+        }
         
     </style>
 </head>
@@ -313,9 +331,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button id="log-prev-btn" onclick="clickPage(logCurrentPage -1 , 'logListAdd')">이전</button>
-                    <div id="log-page-item" class="paginator"></div>
-                    <button id="log-next-btn" onclick="clickPage( logCurrentPage + 1 ,'logListAdd')">다음</button>
+                    <div id="pagination">
+                        <button id="log-prev-btn" class="pagination-btn" onclick="clickPage(logCurrentPage -1 , 'logListAdd')">이전</button>
+                        <div id="log-page-item" class="paginator"></div>
+                        <button id="log-next-btn" class="pagination-btn" onclick="clickPage( logCurrentPage + 1 ,'logListAdd')">다음</button>
+                    </div>
                 </div>
                 <div>
                     <table class="container">
@@ -346,9 +366,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button id="stock-prev-btn" onclick="clickPage(stockCurrentPage -1 ,'stockList')">이전</button>
-                    <div id="stock-page-item" class="paginator"></div>
-                    <button id="stock-next-btn" onclick="clickPage(stockCurrentPage + 1 ,'stockList')">다음</button>
+                    <div id="pagination">
+                        <button id="stock-prev-btn"class="pagination-btn" onclick="clickPage(stockCurrentPage -1 ,'stockList')">이전</button>
+                        <div id="stock-page-item" class="paginator"></div>
+                        <button id="stock-next-btn"class="pagination-btn" onclick="clickPage(stockCurrentPage + 1 ,'stockList')">다음</button>
+                    </div>
                 </div>
             </div>
         </div>

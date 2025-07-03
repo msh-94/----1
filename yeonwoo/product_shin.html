@@ -170,6 +170,25 @@
         td button:last-of-type:hover {
             background-color: #bb2d3b;
         }
+         #pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .pagination-btn:disabled {
+            background-color: #ccc;
+        }
     </style>
 </head>
 
@@ -230,9 +249,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button id="product-prev-btn" onclick="clickPage(productCurrentPage -1)">이전</button>
-                    <div id="product-page-item" class="paginator"></div>
-                    <button id="product-next-btn" onclick="clickPage(productCurrentPage + 1 )">다음</button>
+                    <div id="pagination">
+                        <button id="product-prev-btn" class="pagination-btn" onclick="clickPage(productCurrentPage -1)">이전</button>
+                        <div id="product-page-item" class="paginator"></div>
+                        <button id="product-next-btn" class="pagination-btn" onclick="clickPage(productCurrentPage + 1 )">다음</button>
+                    </div>
                 </div>
             </div>
         </div>
