@@ -467,9 +467,9 @@ function clickPage(page , onPageClick){   // html에 있던 ${}클릭 함수 클
         stockCurrentPage = page;          // 그 재고리스트 페이지 숫자를 바꿔줌
         stockList(keywordStock , page);   // 재고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
     }
-    if(onPageClick == 'logListAdd'){      // 클릭한 함수가 재고리스트라면?
-        logCurrentPage = page;            // 그 재고리스트 페이지 숫자를 바꿔줌
-        logListAdd(keywordLog, page);     // 재고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
+    if(onPageClick == 'logListAdd'){      // 클릭한 함수가 입출고리스트라면?
+        logCurrentPage = page;            // 그 입출고리스트 페이지 숫자를 바꿔줌
+        logListAdd(keywordLog, page);     // 입출고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
     }  
 }
 //======================================================================================================//
