@@ -196,6 +196,11 @@ function logListAdd(searchTerm = '', page = 1){                                 
                 </tr>`                                                                  // 입력함수에서 받은 값 html 추가하기 
 
     }
+    const maxRows = logPerPage;
+    const emptyRows = maxRows - PageinoutLog.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 55.47px;"></td></tr>`;
+    }
 
     inputLogTable.innerHTML = html;                                                  // inputLogTable html에 innerHTML 하기
     ShowLiEventner ( totalLogArray , logCurrentPage , logPerPage , logListAdd , 'log' );     // 페이지 네이션에 들어갈 매개변수들 다 넣어줌 (로그출력 페이지 전용) 그걸 재호출
@@ -329,6 +334,12 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
                     <td><strong style="color: ${color};">${amountAlert}</strong></td>
                     <td><button onclick="orderBtn(${proArray.pno})"> 주문 </button></td>
                 </tr>`                                                                  // html 추가하기 
+    }
+
+    const maxRows = stockPerPage;
+    const emptyRows = maxRows - PageProducList.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 47px;"></td></tr>`;
     }
 
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
