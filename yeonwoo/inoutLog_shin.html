@@ -14,8 +14,9 @@
         }
 
         a {
-            color: #0d6efd;
+            
             text-decoration: none;
+            
         }
 
         a:hover {
@@ -28,7 +29,7 @@
             padding: 20px;
             background: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
         }
 
         .container {
@@ -184,31 +185,33 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 25px;
+            margin-top: 0 5px;
             list-style: none;
             padding: 0;
         }
 
-        .paginator li a {
+        .paginator div a {
             display: block;
-            padding: 8px 12px;
+            padding: 10px;
             border: 1px solid #dee2e6;
             border-radius: 4px;
             text-decoration: none;
             color: #0d6efd;
             transition: all 0.3s;
+            
         }
 
-        .paginator li a:hover {
+        .paginator div a:hover {
             background-color: #e9ecef;
             border-color: #adb5bd;
         }
 
-        .paginator li.active a {
+        .paginator div.active a {
             font-weight: bold;
             background: #0d6efd;
             color: white;
             border-color: #0d6efd;
+            text-decoration: underline;
         }
 
         /* Sidebar Lack-Stock Table */
@@ -226,6 +229,26 @@
         .row-4[style*="width: 300px;"] table th {
             white-space: nowrap;
         }
+        #pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination-btn {
+            padding: 10px 20px; 
+            margin: 0 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .pagination-btn:disabled {
+            background-color: #ccc;
+        }
+        
     </style>
 </head>
 
@@ -237,7 +260,7 @@
             <div style="text-align: center;">
                 <strong style="font-size: 50px;"> 입출고 관리 페이지 </strong>
             </div>
-            today : <span id="nowDate"></span>
+            
         </div> <!-- title -->
         <div class="container" style="display: flex;"> <!-- content-->
             <div class="row-4" style="margin-top: 30px; width: 300px;"> <!-- side bar -->
@@ -269,18 +292,19 @@
                 </div>
             </div>
 
-            <div class="row-8" style="margin-top: 30px; margin-left: 100px; "> <!-- main -->
+            <div class="row-8" style="margin-top: 30px; margin-left: 50px; width: 1000px; "> <!-- main -->
                 <div class=""> <!-- 출고 등록  -->
-                    <h3> 출고 등록 영역 </h3>
+                    <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 입출고 등록 영역 </h3> </div>
                     제품명 : <input type="text" id="pName" />
                     수량 : <input type="number" id="amount" />
                     날짜 : <input type="date" id="date" />
                     출고 사유 : <textarea id="area"></textarea>
-                    <button onclick="outAdd()"> 출고 </button>
+                    <button class="btnAdd" onclick="outAdd()"> 출고 </button>
                 </div>
                 <div>
+                    <h3> 입출고 로그 영역 </h3>
                     <table class="container"> <!-- 입출고 로그 목록 -->
-                        <h3> 입출고 로그 영역 </h3>
+                        
                         <input id="LogSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
                         <select name="" id="logSelect">                            
                             <option value="logDesc">로그 ▼</option>
@@ -294,7 +318,7 @@
                                 <th> 입/출고 </th>
                                 <th> 제품명 </th>
                                 <th> 수량 </th>
-                                <th> 날짜 </th>
+                                <th> 날짜 </th> 
                                 <th> 입출고 사유 </th>
                                 <th> 비고 </th>
                             </tr>
@@ -311,13 +335,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button id="prev-btn" onclick="clickPage(stockCurrentPage -1)">이전</button>
-                    <div id="page-item" class="paginator"></div>
-                    <button id="next-btn" onclick="clickPage(stockCurrentPage + 1)">다음</button>
+                    <div id="pagination">
+                        <button id="log-prev-btn" class="pagination-btn" onclick="clickPage(logCurrentPage -1 , 'logListAdd')">이전</button>
+                        <div id="log-page-item" class="paginator"></div>
+                        <button id="log-next-btn" class="pagination-btn" onclick="clickPage( logCurrentPage + 1 ,'logListAdd')">다음</button>
+                    </div>
                 </div>
-                <div>
-                    <table class="container">
-                        <h3> 재고 확인 영역 </h3>
+                <div class="upSize">
+                    <table class="container table">
+                        <div style="border-bottom: 1px solid black; margin-bottom: 10px;"> <h3> 재고 확인 영역 </h3> </div>
                         <input id="stockSearchInput" type="text" placeholder="제품명을 입력하세요…" /> <!-- 검색창 -->
                         <select name="" id="sortSelect">
                             <option value="nameAsc">제품코드 ▲</option>
@@ -325,7 +351,7 @@
                             <option value="stockDesc">재고량 ▼ </option>
                             <option value="stockAsc">재고량 ▲</option>
                         </select>
-                        <thead>
+                        <thead class="table-light">
                             <tr>
                                 <th> 제품코드 </th>
                                 <th> 제품명 </th>
@@ -344,9 +370,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button id="prev-btn" onclick="clickPage(stockCurrentPage -1)">이전</button>
-                    <div id="page-item" class="paginator"></div>
-                    <button id="next-btn" onclick="clickPage(stockCurrentPage + 1)">다음</button>
+                    <div id="pagination">
+                        <button id="stock-prev-btn"class="pagination-btn" onclick="clickPage(stockCurrentPage -1 ,'stockList')">이전</button>
+                        <div id="stock-page-item" class="paginator"></div>
+                        <button id="stock-next-btn"class="pagination-btn" onclick="clickPage(stockCurrentPage + 1 ,'stockList')">다음</button>
+                    </div>
                 </div>
             </div>
         </div>
