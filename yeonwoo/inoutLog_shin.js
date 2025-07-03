@@ -130,7 +130,7 @@ function outAdd(){                                                              
             saleData[saleKey].push({                                                 // 새 객체 추가
             pno:pno, psell: Number(amountV) });}                                    // 그 배열 양식 그대로 저장~ 
 
-        localStorage.setItem(SALE_KEY, JSON.stringify(saleData));                   // 다시 저장
+        localStorage.setItem('saleData', JSON.stringify(saleData));                   // 다시 저장
     }
 
     // 객체 obj생성
@@ -282,9 +282,9 @@ function inoutEdit(logco) {                                                     
             
             //////////////////////////////////////////////////////
             
-            let sellDataEdit = false;
-            if(inoutLog[i].area == '판매'){
-                sellDataEdit = true;
+            let sellDataEdit = false;                                                           // 상품판매 리스트에 넣을 지 말지 정해두는걸 정해주는 sellDataEdit 변수
+            if(inoutLog[i].area == '판매'){                                                     // 만약에 판매 사유를 수정한다면?
+                sellDataEdit = true;                                                            // sellDataEdit 변수 true로 바꿈
             }
 
 
@@ -294,37 +294,56 @@ function inoutEdit(logco) {                                                     
             if (ReasonEdit.trim() === '') return;                                                   // 아무 것도 입력 안하면 함수 종료
             inoutLog[i].area = ReasonEdit.trim();                                                   // 함수의 입출사유 prompt 받은 값 넣기 .trim()은 공백 제거
             
-            if(sellDataEdit == true){
-                if(inoutLog[i].area != '판매'){
+            if(sellDataEdit == true){                                                               // 만약 판매 사유에서 변경한다면?
+                if(inoutLog[i].area != '판매'){                                                     // 판매 사유를 판매가 아닌 다른 사유로 변경한다면?
                     sellDataEdit = false;
                 
-                    const [yyyy, mm, dd] = inoutLog[i].date.split('-');                                  // split은 ()  기준으로 배열로 만들어줌 
+                    const [yyyy, mm, dd] = inoutLog[i].date.split('-');                                  // inoutLog의 i번째 배열에서 날짜따옴 , split은 ()  기준으로 배열로 만들어줌 
                     const saleKey = `d${yyyy.slice(2)}${mm}${dd}`;                                      // 'd' + 뒤 두 자리 연도 + 월 + 일
                 
-                    const rowIdx = saleData[saleKey].findIndex(row => row.pno === inoutLog[i].pno);// 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno가 있는지 확인, 없으면 -1 있으면 그 배열의 인덱스가 나옴
-                    saleData[saleKey][rowIdx].psell -= Number(oldAmount);                     // 판매수량 누적해줌
-                    if(saleData[saleKey][rowIdx].psell == 0){
-                        saleData[saleKey].splice(rowIdx , 1);
-                        localStorage.setItem('saleData', JSON.stringify(saleData));                   // 다시 저장
+                    const rowIdx = saleData[saleKey].findIndex(row => row.pno === inoutLog[i].pno); // 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno가 있는지 확인, 없으면 -1 있으면 그 배열의 인덱스가 나옴
+                    saleData[saleKey][rowIdx].psell -= Number(oldAmount);                     // 원래 있던 판매수량을 상품판매 표에서 빼줌 , 이유는 사유가 변경됐기 때문에 판매리스트에서 기존에 있던 값을 빼줘야 통계가 됨
+                    if(saleData[saleKey][rowIdx].psell == 0){                                   // 만약 이걸 뺀 후 그 상품의 판매량이 0이라면?
+                        saleData[saleKey].splice(rowIdx , 1);                                   // 그 판매량은 0이니 표시할 필요가 없으니 그 배열만 없애줌 splice
+                        localStorage.setItem('saleData', JSON.stringify(saleData));                   // 배열 저장
                     }
                 }
             }
-
+            
             localStorage.setItem('productList', JSON.stringify(productList));                       // localStorage에 productList 넣어주기
             localStorage.setItem('inoutLog', JSON.stringify(inoutLog));                             // localStorage에 inoutLog 넣어주기
             alert('[성공] 수정 되었습니다.');                                                         // 수정 성공 알림
             
-            if(sellDataEdit == true){
+            if(sellDataEdit == true ){                                                              // 만약 판매 사유에서 변경했는데 여전히 수량만 변경해준다면?
                 
-                const [yyyy, mm, dd] = inoutLog[i].date.split('-');                                  // split은 ()  기준으로 배열로 만들어줌 
-                const saleKey = `d${yyyy.slice(2)}${mm}${dd}`;                            // 'd' + 뒤 두 자리 연도 + 월 + 일
+                const [yyyy, mm, dd] = inoutLog[i].date.split('-');                                  // inoutLog의 i번째 배열에서 날짜따옴 , split은 ()  기준으로 배열로 만들어줌 
+                const saleKey = `d${yyyy.slice(2)}${mm}${dd}`;                                          // 'd' + 뒤 두 자리 연도 + 월 + 일
                 
-                const rowIdx = saleData[saleKey].findIndex(row => row.pno === inoutLog[i].pno);// 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno가 있는지 확인, 없으면 -1 있으면 그 배열의 인덱스가 나옴
-                saleData[saleKey][rowIdx].psell += Number(newAmount);                     // 판매수량 누적해줌
-                localStorage.setItem('saleData', JSON.stringify(saleData));                   // 다시 저장
+                const rowIdx = saleData[saleKey].findIndex(row => row.pno === inoutLog[i].pno);// 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno와 비교해서 넣어줄 값을 찾음
+                saleData[saleKey][rowIdx].psell += Number(newAmount - oldAmount);                     // 판매수량 누적해줌 단 새로추가할 값 - 기존 값 해서 넣어줘야함
+                localStorage.setItem('saleData', JSON.stringify(saleData));                             // 다시 저장
                 
             }
+            if(sellDataEdit == false){                                                              // 만약 기존에 판매 사유가 아니였을 경우에
+                if(ReasonEdit == '판매'){                                                           // 사유 변경으로 판매 사유가 되었을 경우에는?
+                    
+                    const [yyyy, mm, dd] = inoutLog[i].date.split('-');                            // inoutLog의 i번째 배열에서 날짜따옴 , split은 ()  기준으로 배열로 만들어줌
+                    const saleKey = `d${yyyy.slice(2)}${mm}${dd}`;                                  // 'd' + 뒤 두 자리 연도 + 월 + 일
+                    
+                    if (!saleData[saleKey]) saleData[saleKey] = [];                                 // 추가할 때 그 날짜에 배열이 존재하지 않는다면 새 배열 하나 만들어줌    
+                    
+                    const rowIdx = saleData[saleKey].findIndex(row => row.pno === inoutLog[i].pno);    // 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno가 있는지 확인, 없으면 -1 있으면 그 배열의 인덱스가 나옴 
+                       
+                    if (rowIdx > -1) {                                                          // 이미 pno가 있는경우
+                    saleData[saleKey][rowIdx].psell += Number(newAmount);                     // 판매수량 누적해줌 새로운 prompt 받은 값을~
+                    } 
+                    else {                                                                      // 처음 기록되는 상품이면 ?
+                    saleData[saleKey].push({                                                        // 그 해당 배열 pno와 새롭게 prompt 받은 수량을 판매 차트에 넣어줌
+                    pno:inoutLog[i].pno, psell: Number(newAmount) });}                              
 
+                    localStorage.setItem('saleData', JSON.stringify(saleData));                   // 그 배열 양식 그대로 저장~ 
+                }
+            }
 
             stockList(keywordStock , stockCurrentPage);                                              // 재고 리스트 렌더링 ,입력값과 정렬부분 수정시 초기화 안되게 매개변수도 넣어줌
             logListAdd(keywordLog , logCurrentPage);                                                 // 입출고 로그 출력함수 렌더링 ,입력값과 정렬부분 수정시 초기화 안되게 매개변수도 넣어줌
