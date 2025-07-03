@@ -6488,7 +6488,7 @@ function jan24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6611,7 +6611,7 @@ function feb24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6736,7 +6736,7 @@ function mar24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6858,7 +6858,7 @@ function apr24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -6979,7 +6979,7 @@ function may24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7099,7 +7099,7 @@ function jun24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7218,7 +7218,7 @@ function jul24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7337,7 +7337,7 @@ function aug24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7457,7 +7457,7 @@ function sep24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7576,7 +7576,7 @@ function oct24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7695,7 +7695,7 @@ function nov24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7814,7 +7814,7 @@ function dec24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -7933,7 +7933,7 @@ function jan25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8052,7 +8052,7 @@ function feb25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8171,7 +8171,7 @@ function mar25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8290,7 +8290,7 @@ function apr25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8409,7 +8409,7 @@ function may25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8528,7 +8528,7 @@ function jun25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8649,7 +8649,7 @@ function fst24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8768,7 +8768,7 @@ function snd24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -8888,7 +8888,7 @@ function trd24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9008,7 +9008,7 @@ function fth24Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9128,7 +9128,7 @@ function fst25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
@@ -9248,7 +9248,7 @@ function snd25Chart() {
 
     // 차트 그리기
     new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: pName,
             datasets: [{
