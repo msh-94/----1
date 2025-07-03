@@ -105,7 +105,7 @@ function outAdd(){                                                              
             }
 
             localStorage.setItem( 'productList', JSON.stringify(productList) ); // 유효성 검사가 끝났다면 productList 배열 다시 localStorage에 저장해주기
-            stockList (keyword);                                                // 재고 리스트 렌더링
+            stockList (keywordStock , stockCurrentPage);             // 재고 리스트 렌더링
             break;                                                              // break;
         }
     }
