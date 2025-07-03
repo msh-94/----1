@@ -105,7 +105,7 @@ function outAdd(){                                                              
             }
 
             localStorage.setItem( 'productList', JSON.stringify(productList) ); // 유효성 검사가 끝났다면 productList 배열 다시 localStorage에 저장해주기
-            stockList (keyword);                                                // 재고 리스트 렌더링
+            stockList (keywordStock , stockCurrentPage);             // 재고 리스트 렌더링
             break;                                                              // break;
         }
     }
@@ -467,9 +467,9 @@ function clickPage(page , onPageClick){   // html에 있던 ${}클릭 함수 클
         stockCurrentPage = page;          // 그 재고리스트 페이지 숫자를 바꿔줌
         stockList(keywordStock , page);   // 재고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
     }
-    if(onPageClick == 'logListAdd'){      // 클릭한 함수가 재고리스트라면?
-        logCurrentPage = page;            // 그 재고리스트 페이지 숫자를 바꿔줌
-        logListAdd(keywordLog, page);     // 재고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
+    if(onPageClick == 'logListAdd'){      // 클릭한 함수가 입출고리스트라면?
+        logCurrentPage = page;            // 그 입출고리스트 페이지 숫자를 바꿔줌
+        logListAdd(keywordLog, page);     // 입출고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
     }  
 }
 //======================================================================================================//
