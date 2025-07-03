@@ -149,14 +149,14 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
     // 페이지네이션 동적으로 페이지 그리는 부분
     const totalProArray = productList.length;                           // totalProArray = productList 배열 길이 즉, 제품 수
     const ShowIndex = (page - 1)*productPerPage ;                       // 페이지마다 보여줄 배열 // page가 1페이지면 (1-1)*stockPerPage(페이지당 보여줄 제품수) => 0*stockPerpage = 0인덱스부터 시작 ,, 1페이지니까 0인덱스부터
-    const PageProducList = productList.slice(ShowIndex , ShowIndex + productPerPage);    // slice를 값으로 정의해주면 자른 값이 나옴. 보여줄 배열은 그 배열부터 + 한 페이지당 보여줄 배열 수 
+    const PageProductList = productList.slice(ShowIndex , ShowIndex + productPerPage);    // slice를 값으로 정의해주면 자른 값이 나옴. 보여줄 배열은 그 배열부터 + 한 페이지당 보여줄 배열 수 
 
 
     const productListTable = document.querySelector('#productTbody');                    // productListTable 선언 후 productTbody dom객체화
 
     let html ='' ;                                                                       // html 선언
-    for(let i = 0 ; i < PageProducList.length ; i++){                                         // 페이지네이션으로 자른 배열인 PageProducList 배열 순회
-        const proArray = PageProducList[i];                                                // proArray로 간소화하기
+    for(let i = 0 ; i < PageProductList.length ; i++){                                         // 페이지네이션으로 자른 배열인 PageProducList 배열 순회
+        const proArray = PageProductList[i];                                                // proArray로 간소화하기
         html += `<tr>   
                         <td> <img src=${proArray.pImg} </td> <td> ${proArray.pno} </td> <td> ${proArray.pName} </td> 
                         <td> ${proArray.pPrice}원 </td> <td><button onclick="productEdit(${proArray.pno})"> 수정 </button> 
@@ -168,7 +168,7 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
     }
     
     const maxRows = productPerPage;
-    const emptyRows = maxRows - PageProducList.length;
+    const emptyRows = maxRows - PageProductList.length;
     for (let i = 0; i < emptyRows; i++) {
         html += `<tr><td colspan="7" style="height: 91px;"></td></tr>`;
     }
