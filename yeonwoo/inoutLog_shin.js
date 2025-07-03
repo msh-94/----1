@@ -107,7 +107,7 @@ function outAdd(){                                                              
             localStorage.setItem( 'productList', JSON.stringify(productList) ); // 유효성 검사가 끝났다면 productList 배열 다시 localStorage에 저장해주기
             stockList (keywordStock , stockCurrentPage);             // 재고 리스트 렌더링
             break;                                                              // break;
-        }
+        } 
     }
 
     if(error == true){ alert('현재 등록 되어 있는 상품이 아닙니다.'); return;}      // 유효성 검사 : 만약 로그에 입력한 제품명이 productList에 없었다면? 없다고 하고 함수 종료
