@@ -105,10 +105,10 @@ function outAdd(){                                                              
             }
 
             localStorage.setItem( 'productList', JSON.stringify(productList) ); // 유효성 검사가 끝났다면 productList 배열 다시 localStorage에 저장해주기
-            stockList (keyword);                                                // 재고 리스트 렌더링
+            stockList (keywordStock , stockCurrentPage);             // 재고 리스트 렌더링
             break;                                                              // break;
-        }
-    }
+        } 
+    }   
 
     if(error == true){ alert('현재 등록 되어 있는 상품이 아닙니다.'); return;}      // 유효성 검사 : 만약 로그에 입력한 제품명이 productList에 없었다면? 없다고 하고 함수 종료
     
@@ -195,6 +195,11 @@ function logListAdd(searchTerm = '', page = 1){                                 
                         <td><button class="btnEdit" onclick="inoutEdit(${Log.logco})"> 수정 </button>  
                 </tr>`                                                                  // 입력함수에서 받은 값 html 추가하기 
 
+    }
+    const maxRows = logPerPage;
+    const emptyRows = maxRows - PageinoutLog.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 55.47px;"></td></tr>`;
     }
 
     inputLogTable.innerHTML = html;                                                  // inputLogTable html에 innerHTML 하기
@@ -331,6 +336,12 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
                 </tr>`                                                                  // html 추가하기 
     }
 
+    const maxRows = stockPerPage;
+    const emptyRows = maxRows - PageProducList.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 47px;"></td></tr>`;
+    }
+
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
 
     ShowLiEventner( totalProArray , stockCurrentPage , stockPerPage , stockList , 'stock' );            // 이건 페이지네이션 동적으로 productList갯수에 따라 페이지 <12345> 만들어줄 함수, 매개변수는 당연히 제품리스트 총 배열 갯수를 매개변수로 함 
@@ -412,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => { // addEventListner(이벤�
         
         logSelect.addEventListener('change', e =>{                      // addEventLister는 특정 이벤트가 실행될 때 즉 change 교체 이벤트가 실행될 때 함수를 실행 
             inoutOption = e.target.value;                                // inoutOption 이라는 전역 변수에 이벤트요소 즉 logSelect 벨류값을 넣어준다.
-            stockCurrentPage = 1 ;                                          // 정렬할 때 마다 페이지네이션 페이지 1로 새로고침
+            logCurrentPage = 1 ;                                          // 정렬할 때 마다 페이지네이션 페이지 1로 새로고침
             logListAdd(keywordLog , 1);                                  // 검색했을 때 정렬하면 검색값이 풀리니 stockList에는 검색창했던 keyword랑 페이지네이션 1넣어줌 그리고 stockList 매개변수로 다시 렌더링해준다.
         });
     } 
@@ -467,9 +478,21 @@ function clickPage(page , onPageClick){   // html에 있던 ${}클릭 함수 클
         stockCurrentPage = page;          // 그 재고리스트 페이지 숫자를 바꿔줌
         stockList(keywordStock , page);   // 재고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
     }
-    if(onPageClick == 'logListAdd'){      // 클릭한 함수가 재고리스트라면?
-        logCurrentPage = page;            // 그 재고리스트 페이지 숫자를 바꿔줌
-        logListAdd(keywordLog, page);     // 재고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
+    if(onPageClick == 'logListAdd'){      // 클릭한 함수가 입출고리스트라면?
+        logCurrentPage = page;            // 그 입출고리스트 페이지 숫자를 바꿔줌
+        logListAdd(keywordLog, page);     // 입출고리스트 렌더링해주면서 검색한 부분과 그 페이지매개변수를 넣어 호출해줌
     }  
 }
 //======================================================================================================//
+
+// 엔터 키 눌렀을 때 제품 등록 함수 실행 (공통 이벤트 리스너)
+function EnterKey(event) {
+    if (event.key === 'Enter') {  // 엔터 키가 눌렸을 때
+        outAdd();
+    }// if end
+}// func end
+
+// 입력 필드에 엔터키 이벤트 리스너 추가
+document.querySelector('#pName').addEventListener('keydown', EnterKey);
+document.querySelector('#amount').addEventListener('keydown', EnterKey);
+document.querySelector('#area').addEventListener('keydown', EnterKey);
