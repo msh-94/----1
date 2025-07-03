@@ -164,6 +164,12 @@ function productAddList(searchTerm = '' , page = 1 ){       //제품 출력함�
                 </tr>`                                                                  // 추가하기 
 
     }
+    
+    const maxRows = productPerPage;
+    const emptyRows = maxRows - PageProducList.length;
+    for (let i = 0; i < emptyRows; i++) {
+        html += `<tr><td colspan="7" style="height: 91px;"></td></tr>`;
+    }
 
     productListTable.innerHTML = html;                                                  // productListTable html에 넣기
     //showProductList();
