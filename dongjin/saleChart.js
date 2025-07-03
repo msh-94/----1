@@ -8294,7 +8294,7 @@ function apr25Chart() {
         data: {
             labels: pName,
             datasets: [{
-                label: '8월 총 판매량',             // 월 바꿔주기
+                label: '25년 4월 총 판매량',             // 월 바꿔주기
                 data: psell,
                 backgroundColor: barColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
