@@ -14,8 +14,9 @@
         }
 
         a {
-            color: #0d6efd;
+            
             text-decoration: none;
+            
         }
 
         a:hover {
@@ -184,31 +185,33 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 25px;
+            margin-top: 0 5px;
             list-style: none;
             padding: 0;
         }
 
-        .paginator li a {
+        .paginator div a {
             display: block;
-            padding: 8px 12px;
+            padding: 10px;
             border: 1px solid #dee2e6;
             border-radius: 4px;
             text-decoration: none;
             color: #0d6efd;
             transition: all 0.3s;
+            
         }
 
-        .paginator li a:hover {
+        .paginator div a:hover {
             background-color: #e9ecef;
             border-color: #adb5bd;
         }
 
-        .paginator li.active a {
+        .paginator div.active a {
             font-weight: bold;
             background: #0d6efd;
             color: white;
             border-color: #0d6efd;
+            text-decoration: underline;
         }
 
         /* Sidebar Lack-Stock Table */
@@ -230,6 +233,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: 20px;
         }
         .pagination-btn {
             padding: 10px 20px;
