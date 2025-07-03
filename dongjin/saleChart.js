@@ -6395,7 +6395,7 @@ function showOnlyContainer(targetId) {
     if (target) target.style.display = 'block';
 }
 
-// 버튼 호버를 통해 차트 보여주는 함수
+// 버튼 클릭를 통해 차트 보여주는 함수
 function showChart(chartIdToShow) {
     // 모든 canvas 숨기기
     const canvases = document.querySelectorAll('#ChartContainer canvas , #branchChartContainer canvas');
@@ -6404,7 +6404,6 @@ function showChart(chartIdToShow) {
     // 특정 canvas만 보이기
     const target = document.getElementById(chartIdToShow);
     if (target) target.style.display = 'block';
-
 }
 
 function dateFunc() {                // 시계함수
@@ -9307,12 +9306,22 @@ function snd25Chart() {
 }
 
 // 로컬스토리지 기반으로 차트 만드는 함수
-jul25Chart();
+jul25Chart();   // 7월 임의로 만든다
 function jul25Chart() {
 
     // pno를 pName으로 변환
-    //  area == '판매'
-    // date "2025-07"
+    // pno 같으면 전부 하나의 객체로 모아주기
+    // area == '판매'여야함
+    // date "2025-07" 여야함
+    /*
+
+    1. 입출고 페이지 -> 차트 페이지가 동기화
+
+    입출고 관리에서 로컬스토리지로 판매 등록하면
+    제이슨 데이터 형식으로 변환하는 함수 만들어서, 세일차트.js에 등록
+    나는 7월 차트 만드는 함수 제작해서 바로 출력시키기.
+
+    */
 
 
 }
