@@ -189,6 +189,35 @@
         .pagination-btn:disabled {
             background-color: #ccc;
         }
+        .paginator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 25px;
+            list-style: none;
+            padding: 0;
+        }
+        .paginator li a {
+            display: block;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #0d6efd;
+            transition: all 0.3s;
+        }
+
+        .paginator li a:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .paginator li.active a {
+            font-weight: bold;
+            background: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
     </style>
 </head>
 
