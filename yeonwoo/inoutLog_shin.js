@@ -112,6 +112,29 @@ function outAdd(){                                                              
 
     if(error == true){ alert('현재 등록 되어 있는 상품이 아닙니다.'); return;}      // 유효성 검사 : 만약 로그에 입력한 제품명이 productList에 없었다면? 없다고 하고 함수 종료
     
+    
+    if(areaV === '판매') {                                                        //출고 사유가 ‘판매’인 경우에만 차트 데이터에 반영되게 함
+        const [yyyy, mm, dd] = dateV.split('-');                                  // split은 ()  기준으로 배열로 만들어줌 
+        const saleKey = `d${yyyy.slice(2)}${mm}${dd}`;                            // 'd' + 뒤 두 자리 연도 + 월 + 일
+
+       
+        const SALE_KEY = 'saleData';                                                // 차트 데이터가 저장된 key
+        
+        const saleData = JSON.parse(localStorage.getItem(SALE_KEY) || '{}');       // SALE KEY 가져오고 없으면 빈배열 추가한 걸 saleData로 지정
+
+
+        if (!saleData[saleKey]) saleData[saleKey] = [];                             // 추가할 때 그 날짜에 배열이 존재하지 않는다면 새 배열 하나 만들어줌
+
+        const rowIdx = saleData[saleKey].findIndex(row => row.pno === pno);         // 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno가 있는지 확인, 없으면 -1 있으면 그 배열의 인덱스가 나옴
+        if (rowIdx > -1) {                                                          // 이미 pno가 있는경우
+            saleData[saleKey][rowIdx].psell += Number(amountV);                     // 판매수량 누적해줌
+        } 
+        else {                                                                      // 처음 기록되는 상품이면 ?
+            saleData[saleKey].push({                                                 // 새 객체 추가
+            pno:pno, psell: Number(amountV) });}                                    // 그 배열 양식 그대로 저장~ 
+
+        localStorage.setItem(SALE_KEY, JSON.stringify(saleData));                   // 다시 저장
+    }
 
     // 객체 obj생성
     const obj = { logco , pno : pno , inOut : '출고' , amount : Number(amountV) , area : areaV , date : dateV }          // obj 객체에 value값 넣기
