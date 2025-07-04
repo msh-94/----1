@@ -1,17 +1,17 @@
+// ===================== 날짜전역변수 ======================== //
+
+
+const now = new Date();
+const y = now.getFullYear();              
+const m = String(now.getMonth()+1).padStart(2,'0'); 
+const d = String(now.getDate()).padStart(2,'0'); 
+
+const currentDate = `${y}-${m}-${d}`;
+  
+//================================================================//
+
+
 // ===================== 시계함수 부분 시작 ======================== //
-
-
-/*
-const y = now.getFullYear();              // 2025
-const m = String(now.getMonth()+1).padStart(2,'0');  // 06
-const d = String(now.getDate()).padStart(2,'0');     // 26
-const hh = String(now.getHours()).padStart(2,'0');   // 15
-const mm = String(now.getMinutes()).padStart(2,'0'); // 14
-const ss = String(now.getSeconds()).padStart(2,'0'); // 07
-
-const stamp = `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
-console.log(stamp);   // "2025-06-26 15:14:07" */
-
 function dateFunc(){                // 시계함수
     // 1. 현재 날짜/시간을 구하기 : new Date() 객체
     const now = new Date();
@@ -88,7 +88,11 @@ function outAdd(){                                                              
         alert('항목을 모두 입력해주십시오');                                  // 제품 등록에 실패 알림창 띄우기
         return;                                                             // 함수 종료
     }
-    
+    if ( dateV > currentDate ){
+        if(!confirm("출고 예정일이 현재 날짜보다 늦습니다.\n이대로 출고를 확정하시겠습니까?")){ return; } 
+    }
+
+
     let error = true;                                                       // error 변수 정의
     let pno = '';                                                           // pno 정의
 
@@ -120,15 +124,15 @@ function outAdd(){                                                              
         const saleData = JSON.parse(localStorage.getItem('saleData') || '{}');       // saleData 가져오고 없으면 빈배열 추가한 걸 saleData로 지정
 
 
-        if (!saleData[saleKey]) saleData[saleKey] = [];                             // 추가할 때 그 날짜에 배열이 존재하지 않는다면 새 배열 하나 만들어줌
+        if(!saleData[saleKey]) saleData[saleKey] = [];                             // 추가할 때 그 날짜에 배열이 존재하지 않는다면 새 배열 하나 만들어줌
 
         const rowIdx = saleData[saleKey].findIndex(row => row.pno === pno);         // 존재 여부 확인 판매배열을  findIndex해서 로그추가할 pno와 거기 판매배열에 있는 pno가 있는지 확인, 없으면 -1 있으면 그 배열의 인덱스가 나옴
-        if (rowIdx > -1) {                                                          // 이미 pno가 있는경우
+        if(rowIdx > -1) {                                                          // 이미 pno가 있는경우
             saleData[saleKey][rowIdx].psell += Number(amountV);                     // 판매수량 누적해줌
         } 
-        else {                                                                      // 처음 기록되는 상품이면 ?
-            saleData[saleKey].push({                                                 // 새 객체 추가
-            pno:pno, psell: Number(amountV) });}                                    // 그 배열 양식 그대로 저장~ 
+        else{                                                                      // 처음 기록되는 상품이면 ?
+            saleData[saleKey].push({                                               // 새 객체 배열에 푸시
+            pno:pno, psell: Number(amountV) });}                                  
 
         localStorage.setItem('saleData', JSON.stringify(saleData));                   // 다시 저장
     }
@@ -410,10 +414,10 @@ function stockList(searchTerm = '' , page = 1){                        // 제품
                 </tr>`                                                                  // html 추가하기 
     }
 
-    const maxRows = stockPerPage;
-    const emptyRows = maxRows - PageProducList.length;
+    const maxRows = stockPerPage;                                                       // 페이지 네이션 최대 페이지 칸수는 stockPerPage 즉 페이지당 보여줄 인덱스들
+    const emptyRows = maxRows - PageProducList.length;                                  // 빈 것들은 다 그당시 페이지네이션으로 보여줄 PageProductList 배열에서 최대 페이지 칸수를 뺀 것들
     for (let i = 0; i < emptyRows; i++) {
-        html += `<tr><td colspan="7" style="height: 47px;"></td></tr>`;
+        html += `<tr><td colspan="7" style="height: 47px;"></td></tr>`;                 // 밴 배열로 나머지 채우기
     }
 
     stockTable.innerHTML = html;                                                  // stockTable에 innerHTML해서 html에 넣기
