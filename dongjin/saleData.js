@@ -6447,6 +6447,8 @@ const seedProd = [
 ];
 
 
+
+
   // LocalStorage 초기화 (최초 방문 시에만 seed 저장)
   if (!localStorage.getItem(SALE_KEY)) {
     localStorage.setItem(SALE_KEY, JSON.stringify(seedSale));
