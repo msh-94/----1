@@ -68,7 +68,7 @@ function productAdd(){ console.log('productAdd');                               
     // localStorage에서 productList 배열 가져오기
     let productList = JSON.parse(localStorage.getItem('productList') || '[]');              // productList JSON.parse해서 호출하기 || 없다면 '[]' 배열추가 
                                          
-    let lastPno = Number(localStorage.getItem('lastPno') || 0);                             // lastPno localStorage에서 호출하기 || 없다면 0으로 선언
+    let lastPno = Number(localStorage.getItem('lastPno') || productList.length);                             // lastPno localStorage에서 호출하기 || 없다면 0으로 선언
     const pno = ++lastPno                                                                   // pno 증감은 lastPno에서 가져옴
 
     // value값 가져온거 객체화 하기
@@ -109,7 +109,7 @@ function productAdd(){ console.log('productAdd');                               
     pImg.value = '';                                                                    // value값 초기화
 
     productAddList( keywordProduct , productCurrentPage );                              // 제품 표시줄 렌더링 매개변수 넣어서 배열이랑 검색값 안 초기화 되도록 함
-    stockList ();                                                                       // 재고 리스트 렌더링
+
     
     return;                                                                             // 함수종료
 }

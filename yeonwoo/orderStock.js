@@ -50,6 +50,7 @@ function boardEdit(){                                                           
         (error[0] === '수량' ? quantity : reason).focus();                      // error 배열 첫번째가 수량이라면 수량에 focus 아니라면 배열에 focus해줌 , focus는 그 쪽을 강조해줌 !
         return;                                                                 // 함수 종료!
     }
+    if(reasonV == '판매'){ alert("'판매' 사유는 입력할 수 없습니다."); return; } // 사유가 판매일시 판매는 안된다고 명시
 
     const qtyTotal = Number(quantityV);                 // 입력한 입고수량을 정수화 한 것을 qtyTotal로 지정
 
