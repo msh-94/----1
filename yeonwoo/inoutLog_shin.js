@@ -1,14 +1,4 @@
-// ===================== 날짜전역변수 ======================== //
 
-
-
-const y = now.getFullYear();              
-const m = String(now.getMonth()+1).padStart(2,'0'); 
-const d = String(now.getDate()).padStart(2,'0'); 
-
-const currentDate = `${y}-${m}-${d}`;
-
-//================================================================//
 
 
 // ===================== 시계함수 부분 시작 ======================== //
@@ -87,10 +77,6 @@ function outAdd(){                                                              
     if( nameV == '' || amountV == '' || dateV == '' || areaV == '' ){       // 유효성 검사 : name, amountV , dateV areaV가 공백이라면? 비어있다면?
         alert('항목을 모두 입력해주십시오');                                  // 제품 등록에 실패 알림창 띄우기
         return;                                                             // 함수 종료
-    }
-
-    if ( dateV > currentDate ){
-        if(!confirm("출고 예정일이 현재 날짜보다 늦습니다.\n이대로 출고를 확정하시겠습니까?")){ return; } 
     }
 
 
